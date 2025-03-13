@@ -10,8 +10,6 @@ This project generates a synthetic TPC-DS–like dataset to simulate a realistic
 - [Running the Data Generation Script](#running-the-data-generation-script)
 - [Data Validation](#data-validation)
 - [Dependencies](#dependencies)
-- [Future Work](#future-work)
-- [License](#license)
 
 ## Overview
 
