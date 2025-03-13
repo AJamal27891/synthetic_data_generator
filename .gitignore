@@ -1,0 +1,27 @@
+# Exclude all CSV files
+*.csv
+
+# Exclude the data folder (and all files within)
+data/
+
+# Exclude large temporary or output files
+*.log
+*.tmp
+output.pdf
+
+# Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Conda or virtual environments
+env/
+venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# System-specific files
+.DS_Store
+Thumbs.db

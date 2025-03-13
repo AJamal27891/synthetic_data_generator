@@ -1,0 +1,66 @@
+steps:
+- name: generate_dimensions
+  description: 'Generate base dimension tables using Faker: customers, products, stores,
+    promotions, and dates.'
+  outputs:
+  - data/customers.csv
+  - data/products.csv
+  - data/stores.csv
+  - data/promotions.csv
+  - data/dates.csv
+- name: generate_raw_orders
+  description: Generate raw orders data by randomly selecting customer, store, and
+    date values.
+  inputs:
+  - data/customers.csv
+  - data/stores.csv
+  - data/dates.csv
+  output: data/raw_orders.csv
+- name: generate_raw_transactions
+  description: "For each order, generate 1\u20135 raw transactions referencing products\
+    \ and promotions."
+  inputs:
+  - data/raw_orders.csv
+  - data/products.csv
+  - data/promotions.csv
+  output: data/transactions_raw.csv
+- name: aggregate_transactions
+  description: Aggregate transactions to compute order totals.
+  inputs:
+  - data/transactions_raw.csv
+  output: data/order_aggregates.csv
+- name: process_orders
+  description: Merge raw orders with aggregated totals and assign order statuses.
+  inputs:
+  - data/raw_orders.csv
+  - data/order_aggregates.csv
+  output: data/orders.csv
+- name: update_inventory
+  description: Update inventory based on sales data.
+  inputs:
+  - data/stores.csv
+  - data/products.csv
+  - data/transactions_raw.csv
+  output: data/inventory.csv
+- name: generate_returns
+  description: Generate returns for a subset of orders.
+  inputs:
+  - data/orders.csv
+  - data/transactions_raw.csv
+  - data/products.csv
+  output: data/returns.csv
+- name: compile_full_lineage
+  description: Compile all steps into a comprehensive ETL lineage document.
+  inputs:
+  - data/customers.csv
+  - data/products.csv
+  - data/stores.csv
+  - data/promotions.csv
+  - data/dates.csv
+  - data/raw_orders.csv
+  - data/transactions_raw.csv
+  - data/order_aggregates.csv
+  - data/orders.csv
+  - data/inventory.csv
+  - data/returns.csv
+  output: metadata/generation_lineage.yaml
