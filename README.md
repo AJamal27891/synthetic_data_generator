@@ -71,19 +71,20 @@ enhanced\_generated\_data.py # YAML-driven generator
 ## Prerequisites & Setup
 
 1. **Clone the repo** and navigate to its root:
-   ```bash
+   
+```bash
    git clone <repo_url>
    cd synthetic_data_generator
-````
+```
 
 2. **Create & activate Conda environment**:
 
-   ```batch
+```batch
    setup_project.bat
    conda activate synthetic_data_project
-   ```
+```
 
-   This installs Python 3.11 and all packages in `requirements.txt`.
+  This installs Python 3.11 and all packages in `requirements.txt`.
 
 3. **Populate `.env`** in project root with any secrets (e.g. Snowflake credentials for validation):
 
@@ -185,13 +186,26 @@ See `requirements.txt`:
 
 ## Future Directions
 
-* Expand row counts and time ranges.
-* Integrate SDV multi-table synthesizers.
-* Add CI/CD to automate generation and validation.
-* Expose dataset to other platforms (DuckDB, Spark).
+These enhancements are driven by the core goals of this thesis—developing and evaluating a hybrid GNN+LLM framework for data-warehouse lineage, silo discovery, and subgraph recovery:
 
----
+1. **Scale & Temporal Depth**  
+   - Expand the synthetic dataset from tens of thousands to millions of rows and span multiple years of dates.  
+   - **Benefit:** Study how embedding quality, lineage-detection AUC/precision-recall, and clustering stability evolve as you add volume and long-range temporal patterns.
 
-Enjoy your fully-configurable synthetic data warehouse generator!
+2. **Realistic Joint Distributions (SDV Integration)**  
+   - Plug in SDV’s multi-table synthesizers to generate correlated customer-order-transaction data.  
+   - **Benefit:** Compare GNN+LLM performance when trained on rule-based vs. statistically realistic data, and assess transferability to real enterprise pipelines.
 
-```
+3. **End-to-End CI/CD for Model Workflows**  
+   - Automate the full cycle: YAML→CSV→metadata→PyG graph→GNN training→LLM lineage Q/A→evaluation dashboards.  
+   - **Benefit:** Ensure any adjustment to table definitions or lineage steps triggers immediate retraining and metric reporting, supporting reproducible research and rapid iteration.
+
+4. **Cross-Engine Benchmarking**  
+   - Publish the same synthetic dataset to DuckDB, Spark, and Snowflake and measure how query planning differences impact downstream graph construction and LLM parsing.  
+   - **Benefit:** Quantify the robustness of your hybrid pipeline across different data-warehouse backends.
+
+5. **New Lineage & Anomaly Scenarios**  
+   - Introduce more complex ETL patterns (e.g., branching merges, multi-stage transforms, schema drift) and anomaly types (e.g., delayed writes, partial joins).  
+   - **Benefit:** Stress-test the GNN’s ability to detect subtle lineage errors and the LLM’s capacity to explain them in natural language.
+
+By aligning each direction explicitly with your thesis tasks—**lineage detection**, **silo discovery**, and **lineage subgraph recovery**—you’ll build a comprehensive, reproducible suite of experiments that push the boundaries of GNN+LLM integration for data-warehouse intelligence.  
