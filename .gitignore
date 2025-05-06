@@ -18,6 +18,7 @@ __pycache__/
 # Conda or virtual environments
 env/
 venv/
+.env
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/

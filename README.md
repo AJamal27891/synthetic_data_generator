@@ -1,139 +1,197 @@
-# Synthetic Data Warehouse Experimentation
+# Synthetic Data Generation
 
-This project generates a synthetic TPC-DS–like dataset to simulate a realistic data warehouse. The synthetic dataset is used to experiment with advanced data processing techniques, including integration with Graph Neural Networks (GNNs) and Large Language Models (LLMs) for enhancing natural language query responses and data lineage tracking.
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Project Structure](#project-structure)
-- [Setup Instructions](#setup-instructions)
-- [Running the Data Generation Script](#running-the-data-generation-script)
-- [Data Validation](#data-validation)
-- [Dependencies](#dependencies)
-
-## Overview
-
-The goal of this project is to create a synthetic dataset that mimics a data warehouse based on the TPC-DS schema. This dataset includes:
-- **Dimension Tables:** Customers, Products, Stores, Promotions, and Dates.
-- **Fact Tables:** Orders, Transactions, Inventory, and Returns.
-- **Metadata Files:** 
-  - `schema_metadata.json` documents the schema, including table columns, data types, primary keys, and foreign key relationships.
-  - `generation_lineage.yaml` details the ETL process, documenting each step from dimension generation to the final data output.
-
-This synthetic data is designed to be used for experimentation with a hybrid GNN+LLM model for natural language query enhancement and data lineage tracking.
-
-## Project Structure
-
-```
-synthetic_data_project/
-├── README.md                 # Project overview and instructions
-├── setup_project.bat         # Windows batch script for project setup and Conda environment creation
-├── requirements.txt          # List of required Python libraries
-├── config.yaml               # Optional configuration file for data generation parameters
-├── data/                     # Folder for generated CSV files (customers.csv, orders.csv, etc.)
-├── metadata/                 # Folder for schema metadata and ETL lineage files (JSON and YAML)
-├── src/                      # Source code for data generation
-│   ├── generate_data.py      # Main script to generate synthetic data and export CSV, JSON, and YAML
-├── notebooks/                # Jupyter notebooks for data exploration and validation
-│   └── data_validation.ipynb # Notebook to validate generated data and metadata
-└── docs/                     # Additional project documentation
-    └── project_documentation.md
-```
-
-## Setup Instructions
-
-### Using the Batch Script (Windows)
-
-1. **Open Command Prompt** in your main project directory.
-2. **Run the setup script:**
-
-```batch
-   setup_project.bat
-```
-
-   This script will:
-   - Create the required directory structure (`data/`, `metadata/`, `src/`, `notebooks/`, `docs/`).
-   - Create placeholder files (`README.md`, `requirements.txt`, `config.yaml`).
-   - Set up a Conda environment named `synthetic_data_project` with Python 3.11.
-   - Install the required packages as specified in `requirements.txt`.
-
-### Manual Setup (Alternative)
-
-1. Create the directory structure manually as described in the **Project Structure** section.
-2. Ensure you have Conda installed, then create and activate the environment:
-
-   ```batch
-   conda create -y -n synthetic_data_project python=3.11
-   conda activate synthetic_data_project
-   pip install -r requirements.txt
-   ```
-
-## Running the Data Generation Script
-
-1. **Activate the Conda Environment:**
-
-   ```batch
-   conda activate synthetic_data_project
-   ```
-
-2. **Run the Python Script:**
-
-   From the root directory, run:
-
-   ```batch
-   python src\generate_data.py
-   ```
-
-   This script will:
-   - Generate synthetic data for dimension and fact tables.
-   - Export CSV files to the `data/` folder.
-   - Create a JSON file (`metadata/schema_metadata.json`) documenting the schema.
-   - Create a YAML file (`metadata/generation_lineage.yaml`) detailing the ETL lineage.
-
-3. **Verify the Output:**
-   - Check the `data/` folder for CSV files.
-   - Check the `metadata/` folder for JSON and YAML files.
-
-## Data Validation
-
-A Jupyter Notebook (`notebooks/data_validation.ipynb`) is provided to validate the integrity and consistency of the generated data.
-
-### To Run the Notebook:
-
-1. Launch Jupyter Notebook:
-
-   ```batch
-   jupyter notebook
-   ```
-
-2. Open the `data_validation.ipynb` file in the `notebooks/` folder.
-3. Run all cells to perform the following checks:
-   - Loading CSV files.
-   - Primary key uniqueness.
-   - Foreign key consistency.
-   - Order total consistency.
-   - Displaying schema metadata and ETL lineage.
-
-## Dependencies
-
-The project requires the following libraries (see `requirements.txt` for version details):
-
-- **pandas**
-- **numpy**
-- **Faker**
-- **PyYAML**
-- **sdv**
-- **snowflake-snowpark-python**
-- **pyspark**
-- **duckdb**
-- **matplotlib** (optional)
-- **seaborn** (optional)
-- **scikit-learn** (optional)
-- **jupyter**
-
-These packages ensure that synthetic data generation, metadata documentation, and further experiments (including integration with Snowpark, PySpark, and DuckDB) can be conducted seamlessly with Python 3.11.
-
+A fully-configurable synthetic TPC-DS–like dataset generator, complete with schema metadata and ETL lineage documentation. This repository produces CSV files and accompanying JSON/YAML metadata for downstream analytics or data-warehouse experiments.
 
 ---
 
-This README provides a comprehensive overview of your project, instructions for setup and running the scripts, and details on how the repository is organized. Feel free to customize and expand it as your project evolves.
+## Table of Contents
+
+- [Overview](#overview)  
+- [Folder Structure](#folder-structure)  
+- [Prerequisites & Setup](#prerequisites--setup)  
+- [Configuration](#configuration)  
+- [Data Generation](#data-generation)  
+- [Data Validation & Snowflake Load](#data-validation--snowflake-load)  
+- [Source Code](#source-code)  
+- [Dependencies](#dependencies)  
+- [Future Directions](#future-directions)  
+
+---
+
+## Overview
+
+This project generates a relational synthetic dataset modeled on TPC-DS, including:
+
+- **Dimension tables** (e.g. customers, products, stores, promotions, dates, suppliers, employees, legacy_customers)  
+- **Fact tables** (e.g. orders, transactions, inventory, returns, sales_targets)  
+- **Schema metadata** (`schema_metadata.json`)  
+- **ETL lineage** (`generation_lineage.yaml`, `labels.json`)  
+
+All tables, domains, column types, and lineage steps are driven by YAML configs under `data_generation_config/`.
+
+---
+
+## Folder Structure
+
+```
+
+synthetic\_data\_generator/
+│   .env
+│   .gitignore
+│   config.yaml
+│   README.md
+│   requirements.txt
+│   setup\_project.bat
+│
+├── data/                     # Generated CSVs (varies per run)
+│
+├── data\_generation\_config/   # YAML configs for tables & lineage
+│       tables.yml
+│       lineage.yml
+│
+├── docs/                     # Project documentation
+│       project\_documentation.md
+│
+├── metadata/                 # Generated metadata files
+│       schema\_metadata.json
+│       generation\_lineage.yaml
+│       labels.json
+│
+├── notebooks/                # Notebooks for validation & exploration
+│       data\_validation.ipynb
+│
+└── src/                      # Python source
+generate\_data.py           # Legacy generator
+enhanced\_generated\_data.py # YAML-driven generator
+
+````
+
+---
+
+## Prerequisites & Setup
+
+1. **Clone the repo** and navigate to its root:
+   ```bash
+   git clone <repo_url>
+   cd synthetic_data_generator
+````
+
+2. **Create & activate Conda environment**:
+
+   ```batch
+   setup_project.bat
+   conda activate synthetic_data_project
+   ```
+
+   This installs Python 3.11 and all packages in `requirements.txt`.
+
+3. **Populate `.env`** in project root with any secrets (e.g. Snowflake credentials for validation):
+
+   ```ini
+   SNOWFLAKE_USER=...
+   SNOWFLAKE_PASSWORD=...
+   SNOWFLAKE_ACCOUNT=...
+   SNOWFLAKE_ROLE=...
+   SNOWFLAKE_WAREHOUSE=...
+   SNOWFLAKE_DATABASE=...
+   SNOWFLAKE_SCHEMA=...
+   ```
+
+---
+
+## Configuration
+
+* **`data_generation_config/tables.yml`**
+  Defines each table’s row count, domain, column definitions (`int`, `float`, `faker`, `lookup`, `derived`, etc.), and anomaly settings.
+
+* **`data_generation_config/lineage.yml`**
+  Lists ETL steps with their inputs, outputs, and labels (e.g. `normal`, `job_failure`, `partial_write`, `mixed_operation`).
+
+* **`config.yaml`** (optional)
+  Override global parameters such as random seed or output directories.
+
+---
+
+## Data Generation
+
+Two scripts:
+
+* **Legacy** (hand-coded):
+
+  ```bash
+  python src/generate_data.py
+  ```
+* **Enhanced** (recommended, YAML-driven):
+
+  ```bash
+  python src/enhanced_generated_data.py
+  ```
+
+Both produce:
+
+1. CSV files in `data/`
+2. `metadata/schema_metadata.json`
+3. `metadata/generation_lineage.yaml`
+4. `metadata/labels.json`
+
+---
+
+## Data Validation & Snowflake Load
+
+Run the Jupyter notebook:
+
+```bash
+jupyter notebook notebooks/data_validation.ipynb
+```
+
+It will:
+
+1. Load CSVs (auto-detecting only `_date` columns)
+2. Check primary key uniqueness
+3. Check foreign key consistency (with date normalization)
+4. Stage CSVs to Snowflake (using `.env` secrets)
+5. Load tables into Snowflake according to `schema_metadata.json`
+
+No secrets are hard-coded.
+
+---
+
+## Source Code
+
+* **`src/generate_data.py`**
+  A step-by-step, fixed-schema data generator.
+
+* **`src/enhanced_generated_data.py`**
+  A generic, YAML-driven generator supporting custom tables, columns, and lineage.
+
+* **`notebooks/data_validation.ipynb`**
+  Validates generated data integrity and loads into Snowflake.
+
+* **`docs/project_documentation.md`**
+  In-depth design, diagrams, and rationale.
+
+---
+
+## Dependencies
+
+See `requirements.txt`:
+
+* `pandas`, `numpy`, `Faker`, `PyYAML`
+* `python-dotenv`
+* `snowflake-connector-python`, `snowflake-snowpark-python`
+* `jupyter`
+
+---
+
+## Future Directions
+
+* Expand row counts and time ranges.
+* Integrate SDV multi-table synthesizers.
+* Add CI/CD to automate generation and validation.
+* Expose dataset to other platforms (DuckDB, Spark).
+
+---
+
+Enjoy your fully-configurable synthetic data warehouse generator!
+
+```

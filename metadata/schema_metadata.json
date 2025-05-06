@@ -1,359 +1,435 @@
 {
-    "tables": {
-        "customers": {
-            "row_count": 10000,
-            "columns": {
-                "customer_id": {
-                    "type": "INTEGER",
-                    "description": "Unique customer identifier"
-                },
-                "first_name": {
-                    "type": "VARCHAR(50)",
-                    "description": "First name"
-                },
-                "last_name": {
-                    "type": "VARCHAR(50)",
-                    "description": "Last name"
-                },
-                "email": {
-                    "type": "VARCHAR(100)",
-                    "description": "Email address"
-                },
-                "phone": {
-                    "type": "VARCHAR(20)",
-                    "description": "Phone number"
-                },
-                "address": {
-                    "type": "VARCHAR(100)",
-                    "description": "Address"
-                },
-                "city": {
-                    "type": "VARCHAR(50)",
-                    "description": "City name"
-                },
-                "state": {
-                    "type": "CHAR(2)",
-                    "description": "State code"
-                },
-                "zip_code": {
-                    "type": "VARCHAR(10)",
-                    "description": "ZIP code"
-                },
-                "loyalty_status": {
-                    "type": "VARCHAR(10)",
-                    "description": "Loyalty status"
-                }
-            },
-            "primary_key": "customer_id"
-        },
-        "products": {
-            "row_count": 1000,
-            "columns": {
-                "product_id": {
-                    "type": "INTEGER",
-                    "description": "Unique product identifier"
-                },
-                "product_name": {
-                    "type": "VARCHAR(100)",
-                    "description": "Product name"
-                },
-                "category": {
-                    "type": "VARCHAR(50)",
-                    "description": "Product category"
-                },
-                "sub_category": {
-                    "type": "VARCHAR(50)",
-                    "description": "Product sub-category"
-                },
-                "price": {
-                    "type": "DECIMAL(7,2)",
-                    "description": "Product price"
-                },
-                "cost": {
-                    "type": "DECIMAL(7,2)",
-                    "description": "Product cost"
-                }
-            },
-            "primary_key": "product_id"
-        },
-        "stores": {
-            "row_count": 100,
-            "columns": {
-                "store_id": {
-                    "type": "INTEGER",
-                    "description": "Unique store identifier"
-                },
-                "store_name": {
-                    "type": "VARCHAR(100)",
-                    "description": "Store name"
-                },
-                "address": {
-                    "type": "VARCHAR(100)",
-                    "description": "Store address"
-                },
-                "city": {
-                    "type": "VARCHAR(50)",
-                    "description": "City name"
-                },
-                "state": {
-                    "type": "CHAR(2)",
-                    "description": "State code"
-                },
-                "zip_code": {
-                    "type": "VARCHAR(10)",
-                    "description": "ZIP code"
-                },
-                "region": {
-                    "type": "VARCHAR(10)",
-                    "description": "Store region"
-                }
-            },
-            "primary_key": "store_id"
-        },
-        "promotions": {
-            "row_count": 100,
-            "columns": {
-                "promo_id": {
-                    "type": "INTEGER",
-                    "description": "Unique promotion identifier"
-                },
-                "promo_name": {
-                    "type": "VARCHAR(50)",
-                    "description": "Promotion name"
-                },
-                "discount_rate": {
-                    "type": "DECIMAL(3,2)",
-                    "description": "Discount rate"
-                },
-                "start_date": {
-                    "type": "DATE",
-                    "description": "Promotion start date"
-                },
-                "end_date": {
-                    "type": "DATE",
-                    "description": "Promotion end date"
-                }
-            },
-            "primary_key": "promo_id"
-        },
-        "dates": {
-            "row_count": 365,
-            "columns": {
-                "date_id": {
-                    "type": "INTEGER",
-                    "description": "Unique date identifier"
-                },
-                "full_date": {
-                    "type": "DATE",
-                    "description": "Full date in YYYY-MM-DD format"
-                },
-                "day": {
-                    "type": "INTEGER",
-                    "description": "Day of month"
-                },
-                "month": {
-                    "type": "INTEGER",
-                    "description": "Month number"
-                },
-                "year": {
-                    "type": "INTEGER",
-                    "description": "Year"
-                },
-                "weekday": {
-                    "type": "VARCHAR(10)",
-                    "description": "Weekday name"
-                }
-            },
-            "primary_key": "date_id"
-        },
-        "orders": {
-            "row_count": 10000,
-            "columns": {
-                "order_id": {
-                    "type": "INTEGER",
-                    "description": "Unique order identifier"
-                },
-                "order_date": {
-                    "type": "DATE",
-                    "description": "Order date"
-                },
-                "customer_id": {
-                    "type": "INTEGER",
-                    "description": "Customer who placed the order"
-                },
-                "store_id": {
-                    "type": "INTEGER",
-                    "description": "Store fulfilling the order"
-                },
-                "order_total": {
-                    "type": "DECIMAL(10,2)",
-                    "description": "Total order amount"
-                },
-                "order_status": {
-                    "type": "VARCHAR(20)",
-                    "description": "Order status"
-                }
-            },
-            "primary_key": "order_id",
-            "foreign_keys": {
-                "customer_id": {
-                    "references": "customers.customer_id"
-                },
-                "store_id": {
-                    "references": "stores.store_id"
-                }
-            }
-        },
-        "transactions": {
-            "row_count": 30023,
-            "columns": {
-                "transaction_id": {
-                    "type": "INTEGER",
-                    "description": "Unique transaction identifier"
-                },
-                "order_id": {
-                    "type": "INTEGER",
-                    "description": "Order to which this transaction belongs"
-                },
-                "product_id": {
-                    "type": "INTEGER",
-                    "description": "Product sold"
-                },
-                "quantity": {
-                    "type": "INTEGER",
-                    "description": "Quantity purchased"
-                },
-                "price": {
-                    "type": "DECIMAL(7,2)",
-                    "description": "Line price (after discount)"
-                },
-                "promo_id": {
-                    "type": "INTEGER",
-                    "description": "Promotion applied (if any)"
-                }
-            },
-            "primary_key": "transaction_id",
-            "foreign_keys": {
-                "order_id": {
-                    "references": "orders.order_id"
-                },
-                "product_id": {
-                    "references": "products.product_id"
-                },
-                "promo_id": {
-                    "references": "promotions.promo_id"
-                }
-            }
-        },
-        "inventory": {
-            "row_count": 10000,
-            "columns": {
-                "store_id": {
-                    "type": "INTEGER",
-                    "description": "Store identifier"
-                },
-                "product_id": {
-                    "type": "INTEGER",
-                    "description": "Product identifier"
-                },
-                "inventory_date": {
-                    "type": "DATE",
-                    "description": "Date of inventory snapshot"
-                },
-                "stock_quantity": {
-                    "type": "INTEGER",
-                    "description": "Available stock quantity"
-                }
-            },
-            "foreign_keys": {
-                "store_id": {
-                    "references": "stores.store_id"
-                },
-                "product_id": {
-                    "references": "products.product_id"
-                }
-            }
-        },
-        "returns": {
-            "row_count": 1000,
-            "columns": {
-                "return_id": {
-                    "type": "INTEGER",
-                    "description": "Unique return identifier"
-                },
-                "order_id": {
-                    "type": "INTEGER",
-                    "description": "Associated order"
-                },
-                "product_id": {
-                    "type": "INTEGER",
-                    "description": "Returned product"
-                },
-                "return_date": {
-                    "type": "DATE",
-                    "description": "Date of return"
-                },
-                "return_reason": {
-                    "type": "VARCHAR(50)",
-                    "description": "Reason for return"
-                }
-            },
-            "primary_key": "return_id",
-            "foreign_keys": {
-                "order_id": {
-                    "references": "orders.order_id"
-                },
-                "product_id": {
-                    "references": "products.product_id"
-                }
-            }
-        }
+  "tables": {
+    "customers": {
+      "row_count": 10000,
+      "domain": "sales",
+      "columns": {
+        "customer_id": "int64",
+        "first_name": "object",
+        "last_name": "object",
+        "email": "object",
+        "phone": "object",
+        "city": "object",
+        "state": "object",
+        "loyalty_status": "object"
+      },
+      "distinct_counts": {
+        "customer_id": 10000,
+        "first_name": 651,
+        "last_name": 992,
+        "email": 9777,
+        "phone": 10000,
+        "city": 7676,
+        "state": 59,
+        "loyalty_status": 3
+      },
+      "null_rates": {
+        "customer_id": 0.0,
+        "first_name": 0.0,
+        "last_name": 0.0,
+        "email": 0.0,
+        "phone": 0.0,
+        "city": 0.0,
+        "state": 0.0,
+        "loyalty_status": 0.0
+      }
     },
-    "relationships": [
-        {
-            "table": "orders",
-            "column": "customer_id",
-            "references": "customers.customer_id"
-        },
-        {
-            "table": "orders",
-            "column": "store_id",
-            "references": "stores.store_id"
-        },
-        {
-            "table": "transactions",
-            "column": "order_id",
-            "references": "orders.order_id"
-        },
-        {
-            "table": "transactions",
-            "column": "product_id",
-            "references": "products.product_id"
-        },
-        {
-            "table": "transactions",
-            "column": "promo_id",
-            "references": "promotions.promo_id"
-        },
-        {
-            "table": "inventory",
-            "column": "store_id",
-            "references": "stores.store_id"
-        },
-        {
-            "table": "inventory",
-            "column": "product_id",
-            "references": "products.product_id"
-        },
-        {
-            "table": "returns",
-            "column": "order_id",
-            "references": "orders.order_id"
-        },
-        {
-            "table": "returns",
-            "column": "product_id",
-            "references": "products.product_id"
-        }
-    ]
+    "products": {
+      "row_count": 1000,
+      "domain": "catalog",
+      "columns": {
+        "product_id": "int64",
+        "product_name": "object",
+        "category": "object",
+        "sub_category": "object",
+        "price": "float64",
+        "cost": "float64"
+      },
+      "distinct_counts": {
+        "product_id": 1000,
+        "product_name": 1000,
+        "category": 5,
+        "sub_category": 15,
+        "price": 988,
+        "cost": 986
+      },
+      "null_rates": {
+        "product_id": 0.0,
+        "product_name": 0.0,
+        "category": 0.0,
+        "sub_category": 0.0,
+        "price": 0.0,
+        "cost": 0.0
+      }
+    },
+    "stores": {
+      "row_count": 100,
+      "domain": "ops",
+      "columns": {
+        "store_id": "int64",
+        "store_name": "object",
+        "city": "object",
+        "state": "object",
+        "region": "object"
+      },
+      "distinct_counts": {
+        "store_id": 100,
+        "store_name": 100,
+        "city": 99,
+        "state": 50,
+        "region": 4
+      },
+      "null_rates": {
+        "store_id": 0.0,
+        "store_name": 0.0,
+        "city": 0.0,
+        "state": 0.0,
+        "region": 0.0
+      }
+    },
+    "promotions": {
+      "row_count": 100,
+      "domain": "ops",
+      "columns": {
+        "promo_id": "int64",
+        "discount_rate": "float64",
+        "start_date": "object",
+        "end_date": "object",
+        "promo_name": "object"
+      },
+      "distinct_counts": {
+        "promo_id": 100,
+        "discount_rate": 43,
+        "start_date": 89,
+        "end_date": 84,
+        "promo_name": 60
+      },
+      "null_rates": {
+        "promo_id": 0.0,
+        "discount_rate": 0.0,
+        "start_date": 0.0,
+        "end_date": 0.0,
+        "promo_name": 0.0
+      }
+    },
+    "dates": {
+      "row_count": 365,
+      "domain": "ops",
+      "columns": {
+        "date_id": "int64",
+        "full_date": "object",
+        "day": "int64",
+        "month": "int64",
+        "year": "int64",
+        "weekday": "object"
+      },
+      "distinct_counts": {
+        "date_id": 365,
+        "full_date": 365,
+        "day": 31,
+        "month": 12,
+        "year": 2,
+        "weekday": 7
+      },
+      "null_rates": {
+        "date_id": 0.0,
+        "full_date": 0.0,
+        "day": 0.0,
+        "month": 0.0,
+        "year": 0.0,
+        "weekday": 0.0
+      }
+    },
+    "suppliers": {
+      "row_count": 50,
+      "domain": "ops",
+      "columns": {
+        "supplier_id": "int64",
+        "supplier_name": "object",
+        "contact_email": "object"
+      },
+      "distinct_counts": {
+        "supplier_id": 50,
+        "supplier_name": 49,
+        "contact_email": 50
+      },
+      "null_rates": {
+        "supplier_id": 0.0,
+        "supplier_name": 0.0,
+        "contact_email": 0.0
+      }
+    },
+    "employees": {
+      "row_count": 200,
+      "domain": "ops",
+      "columns": {
+        "employee_id": "int64",
+        "first_name": "object",
+        "last_name": "object",
+        "hire_date": "object",
+        "store_id": "int64"
+      },
+      "distinct_counts": {
+        "employee_id": 200,
+        "first_name": 131,
+        "last_name": 148,
+        "hire_date": 190,
+        "store_id": 83
+      },
+      "null_rates": {
+        "employee_id": 0.0,
+        "first_name": 0.0,
+        "last_name": 0.0,
+        "hire_date": 0.0,
+        "store_id": 0.0
+      }
+    },
+    "orders": {
+      "row_count": 10000,
+      "domain": "sales",
+      "columns": {
+        "order_id": "int64",
+        "order_date": "object",
+        "customer_id": "int64",
+        "store_id": "int64",
+        "status": "object",
+        "order_total": "float64"
+      },
+      "distinct_counts": {
+        "order_id": 10000,
+        "order_date": 366,
+        "customer_id": 6326,
+        "store_id": 100,
+        "status": 3,
+        "order_total": 9495
+      },
+      "null_rates": {
+        "order_id": 0.0,
+        "order_date": 0.0,
+        "customer_id": 0.0,
+        "store_id": 0.0,
+        "status": 0.0,
+        "order_total": 0.0
+      }
+    },
+    "transactions": {
+      "row_count": 30000,
+      "domain": "sales",
+      "columns": {
+        "transaction_id": "int64",
+        "order_id": "int64",
+        "product_id": "int64",
+        "quantity": "int64",
+        "promo_id": "float64",
+        "supplier_id": "int64",
+        "price": "float64"
+      },
+      "distinct_counts": {
+        "transaction_id": 30000,
+        "order_id": 9487,
+        "product_id": 1000,
+        "quantity": 30000,
+        "promo_id": 100,
+        "supplier_id": 50,
+        "price": 30000
+      },
+      "null_rates": {
+        "transaction_id": 0.0,
+        "order_id": 0.0,
+        "product_id": 0.0,
+        "quantity": 0.0,
+        "promo_id": 0.7975,
+        "supplier_id": 0.0,
+        "price": 0.0
+      }
+    },
+    "inventory": {
+      "row_count": 10000,
+      "domain": "ops",
+      "columns": {
+        "store_id": "int64",
+        "product_id": "int64",
+        "inventory_date": "object",
+        "stock_quantity": "int64"
+      },
+      "distinct_counts": {
+        "store_id": 100,
+        "product_id": 1000,
+        "inventory_date": 30,
+        "stock_quantity": 10000
+      },
+      "null_rates": {
+        "store_id": 0.0,
+        "product_id": 0.0,
+        "inventory_date": 0.0,
+        "stock_quantity": 0.0
+      }
+    },
+    "returns": {
+      "row_count": 1000,
+      "domain": "sales",
+      "columns": {
+        "return_id": "int64",
+        "order_id": "int64",
+        "product_id": "int64",
+        "return_reason": "object",
+        "return_date": "object"
+      },
+      "distinct_counts": {
+        "return_id": 1000,
+        "order_id": 952,
+        "product_id": 635,
+        "return_reason": 3,
+        "return_date": 269
+      },
+      "null_rates": {
+        "return_id": 0.0,
+        "order_id": 0.0,
+        "product_id": 0.0,
+        "return_reason": 0.0,
+        "return_date": 0.0
+      }
+    },
+    "sales_targets": {
+      "row_count": 1200,
+      "domain": "sales",
+      "columns": {
+        "store_id": "int64",
+        "target_amount": "float64",
+        "month": "int64",
+        "year": "int64"
+      },
+      "distinct_counts": {
+        "store_id": 101,
+        "target_amount": 1200,
+        "month": 12,
+        "year": 1
+      },
+      "null_rates": {
+        "store_id": 0.0,
+        "target_amount": 0.0,
+        "month": 0.0,
+        "year": 0.0
+      }
+    },
+    "legacy_customers": {
+      "row_count": 500,
+      "domain": "sales",
+      "columns": {
+        "customer_id": "int64",
+        "first_name": "object",
+        "last_name": "object",
+        "email": "object",
+        "phone": "object",
+        "city": "object",
+        "state": "object",
+        "loyalty_status": "object",
+        "legacy_flag": "bool"
+      },
+      "distinct_counts": {
+        "customer_id": 488,
+        "first_name": 246,
+        "last_name": 326,
+        "email": 500,
+        "phone": 500,
+        "city": 493,
+        "state": 59,
+        "loyalty_status": 3,
+        "legacy_flag": 1
+      },
+      "null_rates": {
+        "customer_id": 0.0,
+        "first_name": 0.0,
+        "last_name": 0.0,
+        "email": 0.0,
+        "phone": 0.0,
+        "city": 0.0,
+        "state": 0.0,
+        "loyalty_status": 0.0,
+        "legacy_flag": 0.0
+      }
+    }
+  },
+  "relationships": [
+    {
+      "table": "orders",
+      "column": "customer_id",
+      "references": "customers.customer_id"
+    },
+    {
+      "table": "orders",
+      "column": "store_id",
+      "references": "stores.store_id"
+    },
+    {
+      "table": "transactions",
+      "column": "order_id",
+      "references": "orders.order_id"
+    },
+    {
+      "table": "transactions",
+      "column": "product_id",
+      "references": "products.product_id"
+    },
+    {
+      "table": "transactions",
+      "column": "supplier_id",
+      "references": "suppliers.supplier_id"
+    },
+    {
+      "table": "inventory",
+      "column": "store_id",
+      "references": "stores.store_id"
+    },
+    {
+      "table": "inventory",
+      "column": "product_id",
+      "references": "products.product_id"
+    },
+    {
+      "table": "returns",
+      "column": "order_id",
+      "references": "orders.order_id"
+    },
+    {
+      "table": "returns",
+      "column": "product_id",
+      "references": "products.product_id"
+    },
+    {
+      "table": "sales_targets",
+      "column": "store_id",
+      "references": "stores.store_id"
+    },
+    {
+      "table": "employees",
+      "column": "store_id",
+      "references": "stores.store_id"
+    },
+    {
+      "table": "orders",
+      "column": "order_date",
+      "references": "dates.full_date"
+    },
+    {
+      "table": "inventory",
+      "column": "inventory_date",
+      "references": "dates.full_date"
+    },
+    {
+      "table": "returns",
+      "column": "return_date",
+      "references": "dates.full_date"
+    },
+    {
+      "table": "sales_targets",
+      "column": "month",
+      "references": "dates.month"
+    },
+    {
+      "table": "sales_targets",
+      "column": "year",
+      "references": "dates.year"
+    }
+  ]
 }

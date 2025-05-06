@@ -1,0 +1,81 @@
+{
+  "step_labels": [
+    {
+      "name": "extract_customers",
+      "label": "normal"
+    },
+    {
+      "name": "extract_products",
+      "label": "normal"
+    },
+    {
+      "name": "extract_stores",
+      "label": "normal"
+    },
+    {
+      "name": "extract_promotions",
+      "label": "normal"
+    },
+    {
+      "name": "extract_dates",
+      "label": "normal"
+    },
+    {
+      "name": "extract_suppliers",
+      "label": "normal"
+    },
+    {
+      "name": "extract_employees",
+      "label": "normal"
+    },
+    {
+      "name": "load_orders",
+      "label": "normal"
+    },
+    {
+      "name": "load_transactions",
+      "label": "normal"
+    },
+    {
+      "name": "transform_inventory",
+      "label": "normal"
+    },
+    {
+      "name": "load_returns",
+      "label": "normal"
+    },
+    {
+      "name": "load_sales_targets",
+      "label": "normal"
+    },
+    {
+      "name": "archive_orders",
+      "label": "partial_write"
+    },
+    {
+      "name": "transform_sales_data",
+      "label": "job_failure"
+    },
+    {
+      "name": "merge_legacy_customers",
+      "label": "mixed_operation"
+    }
+  ],
+  "anomalies": [
+    {
+      "type": "missing_fk",
+      "table": "transactions",
+      "column": "order_id"
+    },
+    {
+      "type": "missing_fk",
+      "table": "sales_targets",
+      "column": "store_id"
+    },
+    {
+      "type": "ghost_output",
+      "step": "archive_orders",
+      "output": "ghost.csv"
+    }
+  ]
+}

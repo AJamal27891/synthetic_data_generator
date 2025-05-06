@@ -1,0 +1,392 @@
+seed: 123
+
+domains:
+  sales:
+    - customers
+    - orders
+    - transactions
+    - returns
+    - sales_targets
+    - legacy_customers
+  catalog:
+    - products
+  ops:
+    - stores
+    - inventory
+    - promotions
+    - suppliers
+    - employees
+    - dates
+
+tables:
+  customers:
+    row_count: 10000
+    domain: sales
+    columns:
+      customer_id:
+        type: int
+        range: [1, 10000]
+      first_name:
+        type: faker
+        method: first_name
+      last_name:
+        type: faker
+        method: last_name
+      email:
+        type: faker
+        method: email
+      phone:
+        type: faker
+        method: phone_number
+      city:
+        type: faker
+        method: city
+      state:
+        type: faker
+        method: state_abbr
+      loyalty_status:
+        type: choice
+        choices: ["Bronze", "Silver", "Gold"]
+
+  products:
+    row_count: 1000
+    domain: catalog
+    columns:
+      product_id:
+        type: int
+        range: [1, 1000]
+      product_name:
+        type: faker
+        method: catch_phrase
+      category:
+        type: choice
+        choices: ["Electronics", "Clothing", "Home", "Sports", "Toys"]
+      sub_category:
+        type: lookup
+        from: category
+        map:
+          Electronics: ["Mobile", "Laptop", "Camera"]
+          Clothing:   ["Men", "Women", "Kids"]
+          Home:       ["Furniture", "Kitchen", "Decor"]
+          Sports:     ["Fitness", "Outdoor", "Team"]
+          Toys:       ["Educational", "Action", "Puzzle"]
+      price:
+        type: float
+        range: [5.0, 500.0]
+        precision: 2
+      cost:
+        type: derived
+        expr: "price * random.uniform(0.5, 0.9)"
+        precision: 2
+
+  stores:
+    row_count: 100
+    domain: ops
+    columns:
+      store_id:
+        type: int
+        range: [1, 100]
+      store_name:
+        type: faker
+        method: company
+      city:
+        type: faker
+        method: city
+      state:
+        type: faker
+        method: state_abbr
+      region:
+        type: choice
+        choices: ["North", "South", "East", "West"]
+
+  promotions:
+    row_count: 100
+    domain: ops
+    columns:
+      promo_id:
+        type: int
+        range: [1, 100]
+      promo_name:
+        type: derived
+        expr: '"Promo %d" % random.randint(1, 100)'
+      discount_rate:
+        type: float
+        range: [0.05, 0.5]
+        precision: 2
+      start_date:
+        type: faker
+        method: date_between
+        args: ["-1y", "today"]
+      end_date:
+        type: faker
+        method: date_between
+        args: ["today", "+1y"]
+
+  dates:
+    row_count: 365
+    domain: ops
+    columns:
+      date_id:
+        type: int
+        range: [1, 365]
+      full_date:
+        type: derived
+        expr: "(base_date + timedelta(days=i)).date()"
+      day:
+        type: derived
+        expr: "(base_date + timedelta(days=i)).day"
+      month:
+        type: derived
+        expr: "(base_date + timedelta(days=i)).month"
+      year:
+        type: derived
+        expr: "(base_date + timedelta(days=i)).year"
+      weekday:
+        type: derived
+        expr: "(base_date + timedelta(days=i)).strftime('%A')"
+
+  suppliers:
+    row_count: 50
+    domain: ops
+    columns:
+      supplier_id:
+        type: int
+        range: [1, 50]
+      supplier_name:
+        type: faker
+        method: company
+      contact_email:
+        type: faker
+        method: company_email
+
+  employees:
+    row_count: 200
+    domain: ops
+    columns:
+      employee_id:
+        type: int
+        range: [1, 200]
+      first_name:
+        type: faker
+        method: first_name
+      last_name:
+        type: faker
+        method: last_name
+      hire_date:
+        type: faker
+        method: date_between
+        args: ["-5y", "today"]
+      store_id:
+        type: lookup
+        reference: stores.store_id
+
+  orders:
+    row_count: 10000
+    domain: sales
+    columns:
+      order_id:
+        type: int
+        range: [1, 10000]
+      order_date:
+        type: faker
+        method: date_between
+        args: ["-1y", "today"]
+      customer_id:
+        type: lookup
+        reference: customers.customer_id
+      store_id:
+        type: lookup
+        reference: stores.store_id
+      # ← use our helper, not .loc
+      order_total:
+        type: derived
+        expr: "group_sum(transactions, 'order_id', 'price').get(order_id, 0)"
+      status:
+        type: choice
+        choices: ["Completed", "Pending", "Cancelled"]
+        weights: [0.8, 0.15, 0.05]
+
+  transactions:
+    row_count: 30000
+    domain: sales
+    columns:
+      transaction_id:
+        type: int
+        range: [1, 30000]
+      order_id:
+        type: lookup
+        reference: orders.order_id
+      product_id:
+        type: lookup
+        reference: products.product_id
+      quantity:
+        type: int
+        range: [1, 5]
+      price:
+        type: derived
+        # quantity × product price
+        expr: "quantity * lookup_value(products, 'product_id', 'price', product_id)"
+      promo_id:
+        type: choice
+        include_null: true
+        range: [1, 100]
+        weight_null: 0.8
+        weight_rest: 0.2
+      supplier_id:
+        type: lookup
+        reference: suppliers.supplier_id
+
+  inventory:
+    row_count: 10000
+    domain: ops
+    columns:
+      store_id:
+        type: lookup
+        reference: stores.store_id
+      product_id:
+        type: lookup
+        reference: products.product_id
+      inventory_date:
+        type: faker
+        method: date_between
+        args: ["-30d", "today"]
+      stock_quantity:
+        type: int
+        range: [0, 1000]
+
+  returns:
+    row_count: 1000
+    domain: sales
+    columns:
+      return_id:
+        type: int
+        range: [1, 1000]
+      order_id:
+        type: lookup
+        reference: orders.order_id
+      product_id:
+        type: lookup
+        reference: products.product_id
+      # ← derive using lookup_value
+      return_date:
+        type: derived
+        expr: "fake.date_between(lookup_value(orders, 'order_id', 'order_date', order_id), 'today')"
+      return_reason:
+        type: choice
+        choices: ["Defective", "Wrong Item", "Dissatisfied"]
+
+  sales_targets:
+    row_count: 1200
+    domain: sales
+    columns:
+      store_id:
+        type: lookup
+        reference: stores.store_id
+      month:
+        type: derived
+        expr: "random.randint(1, 12)"
+      year:
+        type: derived
+        expr: "current_year"
+      target_amount:
+        type: float
+        range: [50000, 200000]
+        precision: 2
+
+  legacy_customers:
+    row_count: 500
+    domain: sales
+    columns:
+      customer_id:
+        type: lookup
+        reference: customers.customer_id
+      first_name:
+        type: faker
+        method: first_name
+      last_name:
+        type: faker
+        method: last_name
+      email:
+        type: faker
+        method: email
+      phone:
+        type: faker
+        method: phone_number
+      city:
+        type: faker
+        method: city
+      state:
+        type: faker
+        method: state_abbr
+      loyalty_status:
+        type: choice
+        choices: ["Bronze", "Silver", "Gold"]
+      legacy_flag:
+        type: constant
+        value: true
+
+relationships:
+  - table: orders
+    column: customer_id
+    references: customers.customer_id
+  - table: orders
+    column: store_id
+    references: stores.store_id
+  - table: transactions
+    column: order_id
+    references: orders.order_id
+  - table: transactions
+    column: product_id
+    references: products.product_id
+  - table: transactions
+    column: supplier_id
+    references: suppliers.supplier_id
+  - table: inventory
+    column: store_id
+    references: stores.store_id
+  - table: inventory
+    column: product_id
+    references: products.product_id
+  - table: returns
+    column: order_id
+    references: orders.order_id
+  - table: returns
+    column: product_id
+    references: products.product_id
+  - table: sales_targets
+    column: store_id
+    references: stores.store_id
+  - table: employees
+    column: store_id
+    references: stores.store_id
+  - table: orders
+    column: order_date
+    references: dates.full_date
+  - table: inventory
+    column: inventory_date
+    references: dates.full_date
+  - table: returns
+    column: return_date
+    references: dates.full_date
+  - table: sales_targets
+    column: month
+    references: dates.month
+  - table: sales_targets
+    column: year
+    references: dates.year
+
+anomalies:
+  missing_fk:
+    transactions.order_id: 0.005
+    sales_targets.store_id: 0.01
+
+anomalies_list:
+  - type: missing_fk
+    table: transactions
+    column: order_id
+  - type: missing_fk
+    table: sales_targets
+    column: store_id
+  - type: ghost_output
+    step: archive_orders
+    output: ghost.csv

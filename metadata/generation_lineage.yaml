@@ -1,66 +1,71 @@
 steps:
-- name: generate_dimensions
-  description: 'Generate base dimension tables using Faker: customers, products, stores,
-    promotions, and dates.'
+- name: extract_customers
   outputs:
-  - data/customers.csv
-  - data/products.csv
-  - data/stores.csv
-  - data/promotions.csv
-  - data/dates.csv
-- name: generate_raw_orders
-  description: Generate raw orders data by randomly selecting customer, store, and
-    date values.
+  - customers.csv
+- name: extract_products
+  outputs:
+  - products.csv
+- name: extract_stores
+  outputs:
+  - stores.csv
+- name: extract_promotions
+  outputs:
+  - promotions.csv
+- name: extract_dates
+  outputs:
+  - dates.csv
+- name: extract_suppliers
+  outputs:
+  - suppliers.csv
+- name: extract_employees
+  outputs:
+  - employees.csv
+- name: load_orders
   inputs:
-  - data/customers.csv
-  - data/stores.csv
-  - data/dates.csv
-  output: data/raw_orders.csv
-- name: generate_raw_transactions
-  description: "For each order, generate 1\u20135 raw transactions referencing products\
-    \ and promotions."
+  - customers.csv
+  - stores.csv
+  - dates.csv
+  outputs:
+  - orders.csv
+- name: load_transactions
   inputs:
-  - data/raw_orders.csv
-  - data/products.csv
-  - data/promotions.csv
-  output: data/transactions_raw.csv
-- name: aggregate_transactions
-  description: Aggregate transactions to compute order totals.
+  - orders.csv
+  - products.csv
+  - promotions.csv
+  outputs:
+  - transactions.csv
+- name: transform_inventory
   inputs:
-  - data/transactions_raw.csv
-  output: data/order_aggregates.csv
-- name: process_orders
-  description: Merge raw orders with aggregated totals and assign order statuses.
+  - stores.csv
+  - products.csv
+  - transactions.csv
+  outputs:
+  - inventory.csv
+- name: load_returns
   inputs:
-  - data/raw_orders.csv
-  - data/order_aggregates.csv
-  output: data/orders.csv
-- name: update_inventory
-  description: Update inventory based on sales data.
+  - orders.csv
+  - transactions.csv
+  outputs:
+  - returns.csv
+- name: load_sales_targets
   inputs:
-  - data/stores.csv
-  - data/products.csv
-  - data/transactions_raw.csv
-  output: data/inventory.csv
-- name: generate_returns
-  description: Generate returns for a subset of orders.
+  - stores.csv
+  - dates.csv
+  outputs:
+  - sales_targets.csv
+- name: archive_orders
   inputs:
-  - data/orders.csv
-  - data/transactions_raw.csv
-  - data/products.csv
-  output: data/returns.csv
-- name: compile_full_lineage
-  description: Compile all steps into a comprehensive ETL lineage document.
+  - orders.csv
+  outputs:
+  - orders_backup.csv
+  - transactions_backup.csv
+  - ghost.csv
+- name: transform_sales_data
   inputs:
-  - data/customers.csv
-  - data/products.csv
-  - data/stores.csv
-  - data/promotions.csv
-  - data/dates.csv
-  - data/raw_orders.csv
-  - data/transactions_raw.csv
-  - data/order_aggregates.csv
-  - data/orders.csv
-  - data/inventory.csv
-  - data/returns.csv
-  output: metadata/generation_lineage.yaml
+  - transactions.csv
+  - sales_targets.csv
+- name: merge_legacy_customers
+  inputs:
+  - legacy_customers.csv
+  outputs:
+  - customers.csv

@@ -1,0 +1,71 @@
+steps:
+  - name: extract_customers
+    outputs: ["customers.csv"]
+
+  - name: extract_products
+    outputs: ["products.csv"]
+
+  - name: extract_stores
+    outputs: ["stores.csv"]
+
+  - name: extract_promotions
+    outputs: ["promotions.csv"]
+
+  - name: extract_dates
+    outputs: ["dates.csv"]
+
+  - name: extract_suppliers
+    outputs: ["suppliers.csv"]
+
+  - name: extract_employees
+    outputs: ["employees.csv"]
+
+  - name: load_orders
+    inputs: ["customers.csv", "stores.csv", "dates.csv"]
+    outputs: ["orders.csv"]
+
+  - name: load_transactions
+    inputs: ["orders.csv", "products.csv", "promotions.csv"]
+    outputs: ["transactions.csv"]
+
+  - name: transform_inventory
+    inputs: ["stores.csv", "products.csv", "transactions.csv"]
+    outputs: ["inventory.csv"]
+
+  - name: load_returns
+    inputs: ["orders.csv", "transactions.csv"]
+    outputs: ["returns.csv"]
+
+  - name: load_sales_targets
+    inputs: ["stores.csv", "dates.csv"]
+    outputs: ["sales_targets.csv"]
+
+  - name: archive_orders
+    inputs: ["orders.csv"]
+    outputs: ["orders_backup.csv", "transactions_backup.csv", "ghost.csv"]
+
+  - name: transform_sales_data
+    inputs: ["transactions.csv", "sales_targets.csv"]
+    # no outputs → job_failure
+
+  - name: merge_legacy_customers
+    inputs: ["legacy_customers.csv"]
+    outputs: ["customers.csv"]
+
+# Labels for each step (for labels.json)
+labels:
+  extract_customers:      normal
+  extract_products:       normal
+  extract_stores:         normal
+  extract_promotions:     normal
+  extract_dates:          normal
+  extract_suppliers:      normal
+  extract_employees:      normal
+  load_orders:            normal
+  load_transactions:      normal
+  transform_inventory:    normal
+  load_returns:           normal
+  load_sales_targets:     normal
+  archive_orders:         partial_write
+  transform_sales_data:   job_failure
+  merge_legacy_customers: mixed_operation
