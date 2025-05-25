@@ -2,70 +2,1834 @@ steps:
 - name: extract_customers
   outputs:
   - customers.csv
+- name: clean_customers
+  inputs:
+  - customers.csv
+  outputs:
+  - customers_clean.csv
+- name: enrich_customers
+  inputs:
+  - customers_clean.csv
+  outputs:
+  - customers_enriched.csv
+- name: load_customers_dw
+  inputs:
+  - customers_enriched.csv
+  outputs:
+  - customers_dw.csv
+- name: extract_orders
+  inputs:
+  - customers_dw.csv
+  - stores.csv
+  - dates.csv
+  outputs:
+  - orders.csv
+- name: clean_orders
+  inputs:
+  - orders.csv
+  outputs:
+  - orders_clean.csv
+- name: enrich_orders
+  inputs:
+  - orders_clean.csv
+  outputs:
+  - orders_enriched.csv
+- name: load_orders_dw
+  inputs:
+  - orders_enriched.csv
+  outputs:
+  - orders_dw.csv
+- name: extract_order_items
+  inputs:
+  - orders_dw.csv
+  - products.csv
+  outputs:
+  - order_items.csv
+- name: clean_order_items
+  inputs:
+  - order_items.csv
+  outputs:
+  - order_items_clean.csv
+- name: enrich_order_items
+  inputs:
+  - order_items_clean.csv
+  outputs:
+  - order_items_enriched.csv
+- name: load_order_items_dw
+  inputs:
+  - order_items_enriched.csv
+  outputs:
+  - order_items_dw.csv
+- name: extract_invoices
+  inputs:
+  - orders_dw.csv
+  - payments.csv
+  outputs:
+  - invoices.csv
+- name: clean_invoices
+  inputs:
+  - invoices.csv
+  outputs:
+  - invoices_clean.csv
+- name: enrich_invoices
+  inputs:
+  - invoices_clean.csv
+  outputs:
+  - invoices_enriched.csv
+- name: load_invoices_dw
+  inputs:
+  - invoices_enriched.csv
+  outputs:
+  - invoices_dw.csv
+- name: extract_payments
+  inputs:
+  - invoices_dw.csv
+  outputs:
+  - payments.csv
+- name: clean_payments
+  inputs:
+  - payments.csv
+  outputs:
+  - payments_clean.csv
+- name: enrich_payments
+  inputs:
+  - payments_clean.csv
+  outputs:
+  - payments_enriched.csv
+- name: load_payments_dw
+  inputs:
+  - payments_enriched.csv
+  outputs:
+  - payments_dw.csv
+- name: extract_refunds
+  inputs:
+  - orders_dw.csv
+  - payments_dw.csv
+  outputs:
+  - refunds.csv
+- name: clean_refunds
+  inputs:
+  - refunds.csv
+  outputs:
+  - refunds_clean.csv
+- name: enrich_refunds
+  inputs:
+  - refunds_clean.csv
+  outputs:
+  - refunds_enriched.csv
+- name: load_refunds_dw
+  inputs:
+  - refunds_enriched.csv
+  outputs:
+  - refunds_dw.csv
+- name: extract_sales_pipeline
+  outputs:
+  - sales_pipeline.csv
+- name: clean_sales_pipeline
+  inputs:
+  - sales_pipeline.csv
+  outputs:
+  - sales_pipeline_clean.csv
+- name: enrich_sales_pipeline
+  inputs:
+  - sales_pipeline_clean.csv
+  outputs:
+  - sales_pipeline_enriched.csv
+- name: load_sales_pipeline_dw
+  inputs:
+  - sales_pipeline_enriched.csv
+  outputs:
+  - sales_pipeline_dw.csv
+- name: extract_leads
+  outputs:
+  - leads.csv
+- name: clean_leads
+  inputs:
+  - leads.csv
+  outputs:
+  - leads_clean.csv
+- name: enrich_leads
+  inputs:
+  - leads_clean.csv
+  outputs:
+  - leads_enriched.csv
+- name: load_leads_dw
+  inputs:
+  - leads_enriched.csv
+  outputs:
+  - leads_dw.csv
+- name: extract_opportunities
+  outputs:
+  - opportunities.csv
+- name: clean_opportunities
+  inputs:
+  - opportunities.csv
+  outputs:
+  - opportunities_clean.csv
+- name: enrich_opportunities
+  inputs:
+  - opportunities_clean.csv
+  outputs:
+  - opportunities_enriched.csv
+- name: load_opportunities_dw
+  inputs:
+  - opportunities_enriched.csv
+  outputs:
+  - opportunities_dw.csv
+- name: extract_commissions
+  outputs:
+  - commissions.csv
+- name: clean_commissions
+  inputs:
+  - commissions.csv
+  outputs:
+  - commissions_clean.csv
+- name: enrich_commissions
+  inputs:
+  - commissions_clean.csv
+  outputs:
+  - commissions_enriched.csv
+- name: load_commissions_dw
+  inputs:
+  - commissions_enriched.csv
+  outputs:
+  - commissions_dw.csv
+- name: extract_sales_forecast
+  outputs:
+  - sales_forecast.csv
+- name: clean_sales_forecast
+  inputs:
+  - sales_forecast.csv
+  outputs:
+  - sales_forecast_clean.csv
+- name: enrich_sales_forecast
+  inputs:
+  - sales_forecast_clean.csv
+  outputs:
+  - sales_forecast_enriched.csv
+- name: load_sales_forecast_dw
+  inputs:
+  - sales_forecast_enriched.csv
+  outputs:
+  - sales_forecast_dw.csv
+- name: extract_sales_targets
+  inputs:
+  - stores.csv
+  - dates.csv
+  outputs:
+  - sales_targets.csv
+- name: clean_sales_targets
+  inputs:
+  - sales_targets.csv
+  outputs:
+  - sales_targets_clean.csv
+- name: enrich_sales_targets
+  inputs:
+  - sales_targets_clean.csv
+  outputs:
+  - sales_targets_enriched.csv
+- name: load_sales_targets_dw
+  inputs:
+  - sales_targets_enriched.csv
+  outputs:
+  - sales_targets_dw.csv
+- name: extract_sales_regions
+  outputs:
+  - sales_regions.csv
+- name: clean_sales_regions
+  inputs:
+  - sales_regions.csv
+  outputs:
+  - sales_regions_clean.csv
+- name: enrich_sales_regions
+  inputs:
+  - sales_regions_clean.csv
+  outputs:
+  - sales_regions_enriched.csv
+- name: load_sales_regions_dw
+  inputs:
+  - sales_regions_enriched.csv
+  outputs:
+  - sales_regions_dw.csv
+- name: extract_sales_channels
+  outputs:
+  - sales_channels.csv
+- name: clean_sales_channels
+  inputs:
+  - sales_channels.csv
+  outputs:
+  - sales_channels_clean.csv
+- name: enrich_sales_channels
+  inputs:
+  - sales_channels_clean.csv
+  outputs:
+  - sales_channels_enriched.csv
+- name: load_sales_channels_dw
+  inputs:
+  - sales_channels_enriched.csv
+  outputs:
+  - sales_channels_dw.csv
+- name: extract_customer_segments
+  outputs:
+  - customer_segments.csv
+- name: clean_customer_segments
+  inputs:
+  - customer_segments.csv
+  outputs:
+  - customer_segments_clean.csv
+- name: enrich_customer_segments
+  inputs:
+  - customer_segments_clean.csv
+  outputs:
+  - customer_segments_enriched.csv
+- name: load_customer_segments_dw
+  inputs:
+  - customer_segments_enriched.csv
+  outputs:
+  - customer_segments_dw.csv
 - name: extract_products
   outputs:
   - products.csv
+- name: clean_products
+  inputs:
+  - products.csv
+  outputs:
+  - products_clean.csv
+- name: enrich_products
+  inputs:
+  - products_clean.csv
+  outputs:
+  - products_enriched.csv
+- name: load_products_dw
+  inputs:
+  - products_enriched.csv
+  outputs:
+  - products_dw.csv
+- name: extract_categories
+  outputs:
+  - categories.csv
+- name: clean_categories
+  inputs:
+  - categories.csv
+  outputs:
+  - categories_clean.csv
+- name: enrich_categories
+  inputs:
+  - categories_clean.csv
+  outputs:
+  - categories_enriched.csv
+- name: load_categories_dw
+  inputs:
+  - categories_enriched.csv
+  outputs:
+  - categories_dw.csv
+- name: extract_subcategories
+  outputs:
+  - subcategories.csv
+- name: clean_subcategories
+  inputs:
+  - subcategories.csv
+  outputs:
+  - subcategories_clean.csv
+- name: enrich_subcategories
+  inputs:
+  - subcategories_clean.csv
+  outputs:
+  - subcategories_enriched.csv
+- name: load_subcategories_dw
+  inputs:
+  - subcategories_enriched.csv
+  outputs:
+  - subcategories_dw.csv
+- name: extract_product_reviews
+  inputs:
+  - products_dw.csv
+  - customers_dw.csv
+  outputs:
+  - product_reviews.csv
+- name: clean_product_reviews
+  inputs:
+  - product_reviews.csv
+  outputs:
+  - product_reviews_clean.csv
+- name: enrich_product_reviews
+  inputs:
+  - product_reviews_clean.csv
+  outputs:
+  - product_reviews_enriched.csv
+- name: load_product_reviews_dw
+  inputs:
+  - product_reviews_enriched.csv
+  outputs:
+  - product_reviews_dw.csv
+- name: extract_product_images
+  inputs:
+  - products_dw.csv
+  outputs:
+  - product_images.csv
+- name: clean_product_images
+  inputs:
+  - product_images.csv
+  outputs:
+  - product_images_clean.csv
+- name: enrich_product_images
+  inputs:
+  - product_images_clean.csv
+  outputs:
+  - product_images_enriched.csv
+- name: load_product_images_dw
+  inputs:
+  - product_images_enriched.csv
+  outputs:
+  - product_images_dw.csv
+- name: extract_pricing_tiers
+  outputs:
+  - pricing_tiers.csv
+- name: clean_pricing_tiers
+  inputs:
+  - pricing_tiers.csv
+  outputs:
+  - pricing_tiers_clean.csv
+- name: enrich_pricing_tiers
+  inputs:
+  - pricing_tiers_clean.csv
+  outputs:
+  - pricing_tiers_enriched.csv
+- name: load_pricing_tiers_dw
+  inputs:
+  - pricing_tiers_enriched.csv
+  outputs:
+  - pricing_tiers_dw.csv
+- name: extract_inventory_levels
+  inputs:
+  - product_images_dw.csv
+  outputs:
+  - inventory_levels.csv
+- name: clean_inventory_levels
+  inputs:
+  - inventory_levels.csv
+  outputs:
+  - inventory_levels_clean.csv
+- name: enrich_inventory_levels
+  inputs:
+  - inventory_levels_clean.csv
+  outputs:
+  - inventory_levels_enriched.csv
+- name: load_inventory_levels_dw
+  inputs:
+  - inventory_levels_enriched.csv
+  outputs:
+  - inventory_levels_dw.csv
+- name: extract_product_attributes
+  outputs:
+  - product_attributes.csv
+- name: clean_product_attributes
+  inputs:
+  - product_attributes.csv
+  outputs:
+  - product_attributes_clean.csv
+- name: enrich_product_attributes
+  inputs:
+  - product_attributes_clean.csv
+  outputs:
+  - product_attributes_enriched.csv
+- name: load_product_attributes_dw
+  inputs:
+  - product_attributes_enriched.csv
+  outputs:
+  - product_attributes_dw.csv
+- name: extract_brand_partners
+  outputs:
+  - brand_partners.csv
+- name: clean_brand_partners
+  inputs:
+  - brand_partners.csv
+  outputs:
+  - brand_partners_clean.csv
+- name: enrich_brand_partners
+  inputs:
+  - brand_partners_clean.csv
+  outputs:
+  - brand_partners_enriched.csv
+- name: load_brand_partners_dw
+  inputs:
+  - brand_partners_enriched.csv
+  outputs:
+  - brand_partners_dw.csv
+- name: extract_related_products
+  inputs:
+  - products_dw.csv
+  - product_attributes_dw.csv
+  outputs:
+  - related_products.csv
+- name: clean_related_products
+  inputs:
+  - related_products.csv
+  outputs:
+  - related_products_clean.csv
+- name: enrich_related_products
+  inputs:
+  - related_products_clean.csv
+  outputs:
+  - related_products_enriched.csv
+- name: load_related_products_dw
+  inputs:
+  - related_products_enriched.csv
+  outputs:
+  - related_products_dw.csv
 - name: extract_stores
   outputs:
   - stores.csv
-- name: extract_promotions
+- name: clean_stores
+  inputs:
+  - stores.csv
   outputs:
-  - promotions.csv
-- name: extract_dates
+  - stores_clean.csv
+- name: enrich_stores
+  inputs:
+  - stores_clean.csv
   outputs:
-  - dates.csv
-- name: extract_suppliers
+  - stores_enriched.csv
+- name: load_stores_dw
+  inputs:
+  - stores_enriched.csv
   outputs:
-  - suppliers.csv
+  - stores_dw.csv
+- name: extract_warehouse_locations
+  outputs:
+  - warehouse_locations.csv
+- name: clean_warehouse_locations
+  inputs:
+  - warehouse_locations.csv
+  outputs:
+  - warehouse_locations_clean.csv
+- name: enrich_warehouse_locations
+  inputs:
+  - warehouse_locations_clean.csv
+  outputs:
+  - warehouse_locations_enriched.csv
+- name: load_warehouse_locations_dw
+  inputs:
+  - warehouse_locations_enriched.csv
+  outputs:
+  - warehouse_locations_dw.csv
+- name: extract_inventory_snapshots
+  inputs:
+  - warehouse_locations_dw.csv
+  - products_dw.csv
+  outputs:
+  - inventory_snapshots.csv
+- name: clean_inventory_snapshots
+  inputs:
+  - inventory_snapshots.csv
+  outputs:
+  - inventory_snapshots_clean.csv
+- name: enrich_inventory_snapshots
+  inputs:
+  - inventory_snapshots_clean.csv
+  outputs:
+  - inventory_snapshots_enriched.csv
+- name: load_inventory_snapshots_dw
+  inputs:
+  - inventory_snapshots_enriched.csv
+  outputs:
+  - inventory_snapshots_dw.csv
+- name: extract_shipments
+  inputs:
+  - inventory_snapshots_dw.csv
+  - order_items_dw.csv
+  outputs:
+  - shipments.csv
+- name: clean_shipments
+  inputs:
+  - shipments.csv
+  outputs:
+  - shipments_clean.csv
+- name: enrich_shipments
+  inputs:
+  - shipments_clean.csv
+  outputs:
+  - shipments_enriched.csv
+- name: load_shipments_dw
+  inputs:
+  - shipments_enriched.csv
+  outputs:
+  - shipments_dw.csv
+- name: extract_carriers
+  outputs:
+  - carriers.csv
+- name: clean_carriers
+  inputs:
+  - carriers.csv
+  outputs:
+  - carriers_clean.csv
+- name: enrich_carriers
+  inputs:
+  - carriers_clean.csv
+  outputs:
+  - carriers_enriched.csv
+- name: load_carriers_dw
+  inputs:
+  - carriers_enriched.csv
+  outputs:
+  - carriers_dw.csv
+- name: extract_logistics_routes
+  outputs:
+  - logistics_routes.csv
+- name: clean_logistics_routes
+  inputs:
+  - logistics_routes.csv
+  outputs:
+  - logistics_routes_clean.csv
+- name: enrich_logistics_routes
+  inputs:
+  - logistics_routes_clean.csv
+  outputs:
+  - logistics_routes_enriched.csv
+- name: load_logistics_routes_dw
+  inputs:
+  - logistics_routes_enriched.csv
+  outputs:
+  - logistics_routes_dw.csv
+- name: extract_maintenance_requests
+  inputs:
+  - stores_dw.csv
+  outputs:
+  - maintenance_requests.csv
+- name: clean_maintenance_requests
+  inputs:
+  - maintenance_requests.csv
+  outputs:
+  - maintenance_requests_clean.csv
+- name: enrich_maintenance_requests
+  inputs:
+  - maintenance_requests_clean.csv
+  outputs:
+  - maintenance_requests_enriched.csv
+- name: load_maintenance_requests_dw
+  inputs:
+  - maintenance_requests_enriched.csv
+  outputs:
+  - maintenance_requests_dw.csv
+- name: extract_store_staffing
+  inputs:
+  - stores_dw.csv
+  outputs:
+  - store_staffing.csv
+- name: clean_store_staffing
+  inputs:
+  - store_staffing.csv
+  outputs:
+  - store_staffing_clean.csv
+- name: enrich_store_staffing
+  inputs:
+  - store_staffing_clean.csv
+  outputs:
+  - store_staffing_enriched.csv
+- name: load_store_staffing_dw
+  inputs:
+  - store_staffing_enriched.csv
+  outputs:
+  - store_staffing_dw.csv
+- name: extract_schedule_shifts
+  outputs:
+  - schedule_shifts.csv
+- name: clean_schedule_shifts
+  inputs:
+  - schedule_shifts.csv
+  outputs:
+  - schedule_shifts_clean.csv
+- name: enrich_schedule_shifts
+  inputs:
+  - schedule_shifts_clean.csv
+  outputs:
+  - schedule_shifts_enriched.csv
+- name: load_schedule_shifts_dw
+  inputs:
+  - schedule_shifts_enriched.csv
+  outputs:
+  - schedule_shifts_dw.csv
+- name: extract_facility_inspections
+  inputs:
+  - stores_dw.csv
+  outputs:
+  - facility_inspections.csv
+- name: clean_facility_inspections
+  inputs:
+  - facility_inspections.csv
+  outputs:
+  - facility_inspections_clean.csv
+- name: enrich_facility_inspections
+  inputs:
+  - facility_inspections_clean.csv
+  outputs:
+  - facility_inspections_enriched.csv
+- name: load_facility_inspections_dw
+  inputs:
+  - facility_inspections_enriched.csv
+  outputs:
+  - facility_inspections_dw.csv
+- name: extract_asset_management
+  inputs:
+  - equipment_logs.csv
+  - maintenance_requests_dw.csv
+  outputs:
+  - asset_management.csv
+- name: clean_asset_management
+  inputs:
+  - asset_management.csv
+  outputs:
+  - asset_management_clean.csv
+- name: enrich_asset_management
+  inputs:
+  - asset_management_clean.csv
+  outputs:
+  - asset_management_enriched.csv
+- name: load_asset_management_dw
+  inputs:
+  - asset_management_enriched.csv
+  outputs:
+  - asset_management_dw.csv
+- name: extract_equipment_logs
+  inputs:
+  - asset_management_dw.csv
+  outputs:
+  - equipment_logs.csv
+- name: clean_equipment_logs
+  inputs:
+  - equipment_logs.csv
+  outputs:
+  - equipment_logs_clean.csv
+- name: enrich_equipment_logs
+  inputs:
+  - equipment_logs_clean.csv
+  outputs:
+  - equipment_logs_enriched.csv
+- name: load_equipment_logs_dw
+  inputs:
+  - - equipment_logs_enriched.csv
+  outputs:
+  - - equipment_logs_dw.csv
+- name: extract_distribution_centers
+  outputs:
+  - distribution_centers.csv
+- name: clean_distribution_centers
+  inputs:
+  - distribution_centers.csv
+  outputs:
+  - distribution_centers_clean.csv
+- name: enrich_distribution_centers
+  inputs:
+  - distribution_centers_clean.csv
+  outputs:
+  - distribution_centers_enriched.csv
+- name: load_distribution_centers_dw
+  inputs:
+  - distribution_centers_enriched.csv
+  outputs:
+  - distribution_centers_dw.csv
+- name: extract_transfer_orders
+  inputs:
+  - distribution_centers_dw.csv
+  outputs:
+  - transfer_orders.csv
+- name: clean_transfer_orders
+  inputs:
+  - transfer_orders.csv
+  outputs:
+  - transfer_orders_clean.csv
+- name: enrich_transfer_orders
+  inputs:
+  - transfer_orders_clean.csv
+  outputs:
+  - transfer_orders_enriched.csv
+- name: load_transfer_orders_dw
+  inputs:
+  - transfer_orders_enriched.csv
+  outputs:
+  - transfer_orders_dw.csv
+- name: extract_packaging
+  inputs:
+  - equipment_logs_dw.csv
+  outputs:
+  - packaging.csv
+- name: clean_packaging
+  inputs:
+  - packaging.csv
+  outputs:
+  - packaging_clean.csv
+- name: enrich_packaging
+  inputs:
+  - packaging_clean.csv
+  outputs:
+  - packaging_enriched.csv
+- name: load_packaging_dw
+  inputs:
+  - packaging_enriched.csv
+  outputs:
+  - packaging_dw.csv
+- name: extract_invoices_fin
+  inputs:
+  - customers_dw.csv
+  - orders_dw.csv
+  outputs:
+  - invoices_fin.csv
+- name: clean_invoices_fin
+  inputs:
+  - invoices_fin.csv
+  outputs:
+  - invoices_fin_clean.csv
+- name: enrich_invoices_fin
+  inputs:
+  - invoices_fin_clean.csv
+  outputs:
+  - invoices_fin_enriched.csv
+- name: load_invoices_fin_dw
+  inputs:
+  - invoices_fin_enriched.csv
+  outputs:
+  - invoices_fin_dw.csv
+- name: extract_payments_fin
+  inputs:
+  - invoices_fin_dw.csv
+  outputs:
+  - payments_fin.csv
+- name: clean_payments_fin
+  inputs:
+  - payments_fin.csv
+  outputs:
+  - payments_fin_clean.csv
+- name: enrich_payments_fin
+  inputs:
+  - payments_fin_clean.csv
+  outputs:
+  - payments_fin_enriched.csv
+- name: load_payments_fin_dw
+  inputs:
+  - payments_fin_enriched.csv
+  outputs:
+  - payments_fin_dw.csv
+- name: extract_billing_cycles
+  outputs:
+  - billing_cycles.csv
+- name: clean_billing_cycles
+  inputs:
+  - billing_cycles.csv
+  outputs:
+  - billing_cycles_clean.csv
+- name: enrich_billing_cycles
+  inputs:
+  - billing_cycles_clean.csv
+  outputs:
+  - billing_cycles_enriched.csv
+- name: load_billing_cycles_dw
+  inputs:
+  - billing_cycles_enriched.csv
+  outputs:
+  - billing_cycles_dw.csv
+- name: extract_expense_reports
+  inputs:
+  - employees_dw.csv
+  - payments_fin_dw.csv
+  outputs:
+  - expense_reports.csv
+- name: clean_expense_reports
+  inputs:
+  - expense_reports.csv
+  outputs:
+  - expense_reports_clean.csv
+- name: enrich_expense_reports
+  inputs:
+  - expense_reports_clean.csv
+  outputs:
+  - expense_reports_enriched.csv
+- name: load_expense_reports_dw
+  inputs:
+  - expense_reports_enriched.csv
+  outputs:
+  - expense_reports_dw.csv
+- name: extract_budgets_fin
+  outputs:
+  - budgets_fin.csv
+- name: clean_budgets_fin
+  inputs:
+  - budgets_fin.csv
+  outputs:
+  - budgets_fin_clean.csv
+- name: enrich_budgets_fin
+  inputs:
+  - budgets_fin_clean.csv
+  outputs:
+  - budgets_fin_enriched.csv
+- name: load_budgets_fin_dw
+  inputs:
+  - budgets_fin_enriched.csv
+  outputs:
+  - budgets_fin_dw.csv
+- name: extract_ledgers
+  outputs:
+  - ledgers.csv
+- name: clean_ledgers
+  inputs:
+  - ledgers.csv
+  outputs:
+  - ledgers_clean.csv
+- name: enrich_ledgers
+  inputs:
+  - ledgers_clean.csv
+  outputs:
+  - ledgers_enriched.csv
+- name: load_ledgers_dw
+  inputs:
+  - ledgers_enriched.csv
+  outputs:
+  - ledgers_dw.csv
+- name: extract_tax_records
+  outputs:
+  - tax_records.csv
+- name: clean_tax_records
+  inputs:
+  - tax_records.csv
+  outputs:
+  - tax_records_clean.csv
+- name: enrich_tax_records
+  inputs:
+  - tax_records_clean.csv
+  outputs:
+  - tax_records_enriched.csv
+- name: load_tax_records_dw
+  inputs:
+  - tax_records_enriched.csv
+  outputs:
+  - tax_records_dw.csv
+- name: extract_financial_statements
+  inputs:
+  - ledgers_dw.csv
+  - tax_records_dw.csv
+  outputs:
+  - financial_statements.csv
+- name: clean_financial_statements
+  inputs:
+  - financial_statements.csv
+  outputs:
+  - financial_statements_clean.csv
+- name: enrich_financial_statements
+  inputs:
+  - financial_statements_clean.csv
+  outputs:
+  - financial_statements_enriched.csv
+- name: load_financial_statements_dw
+  inputs:
+  - financial_statements_enriched.csv
+  outputs:
+  - financial_statements_dw.csv
+- name: extract_accounts_receivable
+  inputs:
+  - invoices_fin_dw.csv
+  outputs:
+  - accounts_receivable.csv
+- name: clean_accounts_receivable
+  inputs:
+  - accounts_receivable.csv
+  outputs:
+  - accounts_receivable_clean.csv
+- name: enrich_accounts_receivable
+  inputs:
+  - accounts_receivable_clean.csv
+  outputs:
+  - accounts_receivable_enriched.csv
+- name: load_accounts_receivable_dw
+  inputs:
+  - accounts_receivable_enriched.csv
+  outputs:
+  - accounts_receivable_dw.csv
+- name: extract_accounts_payable
+  inputs:
+  - expense_reports_dw.csv
+  outputs:
+  - accounts_payable.csv
+- name: clean_accounts_payable
+  inputs:
+  - accounts_payable.csv
+  outputs:
+  - accounts_payable_clean.csv
+- name: enrich_accounts_payable
+  inputs:
+  - accounts_payable_clean.csv
+  outputs:
+  - accounts_payable_enriched.csv
+- name: load_accounts_payable_dw
+  inputs:
+  - accounts_payable_enriched.csv
+  outputs:
+  - accounts_payable_dw.csv
+- name: extract_cost_centers
+  outputs:
+  - cost_centers.csv
+- name: clean_cost_centers
+  inputs:
+  - cost_centers.csv
+  outputs:
+  - cost_centers_clean.csv
+- name: enrich_cost_centers
+  inputs:
+  - cost_centers_clean.csv
+  outputs:
+  - cost_centers_enriched.csv
+- name: load_cost_centers_dw
+  inputs:
+  - cost_centers_enriched.csv
+  outputs:
+  - cost_centers_dw.csv
+- name: extract_profit_centers
+  outputs:
+  - profit_centers.csv
+- name: clean_profit_centers
+  inputs:
+  - profit_centers.csv
+  outputs:
+  - profit_centers_clean.csv
+- name: enrich_profit_centers
+  inputs:
+  - profit_centers_clean.csv
+  outputs:
+  - profit_centers_enriched.csv
+- name: load_profit_centers_dw
+  inputs:
+  - profit_centers_enriched.csv
+  outputs:
+  - profit_centers_dw.csv
+- name: extract_currency_rates
+  outputs:
+  - currency_rates.csv
+- name: clean_currency_rates
+  inputs:
+  - currency_rates.csv
+  outputs:
+  - currency_rates_clean.csv
+- name: enrich_currency_rates
+  inputs:
+  - currency_rates_clean.csv
+  outputs:
+  - currency_rates_enriched.csv
+- name: load_currency_rates_dw
+  inputs:
+  - currency_rates_enriched.csv
+  outputs:
+  - currency_rates_dw.csv
+- name: extract_bank_reconciliations
+  inputs:
+  - currency_rates_dw.csv
+  outputs:
+  - bank_reconciliations.csv
+- name: clean_bank_reconciliations
+  inputs:
+  - bank_reconciliations.csv
+  outputs:
+  - bank_reconciliations_clean.csv
+- name: enrich_bank_reconciliations
+  inputs:
+  - bank_reconciliations_clean.csv
+  outputs:
+  - bank_reconciliations_enriched.csv
+- name: load_bank_reconciliations_dw
+  inputs:
+  - bank_reconciliations_enriched.csv
+  outputs:
+  - bank_reconciliations_dw.csv
+- name: extract_credit_notes
+  inputs:
+  - invoices_fin_dw.csv
+  outputs:
+  - credit_notes.csv
+- name: clean_credit_notes
+  inputs:
+  - credit_notes.csv
+  outputs:
+  - credit_notes_clean.csv
+- name: enrich_credit_notes
+  inputs:
+  - credit_notes_clean.csv
+  outputs:
+  - credit_notes_enriched.csv
+- name: load_credit_notes_dw
+  inputs:
+  - credit_notes_enriched.csv
+  outputs:
+  - credit_notes_dw.csv
+- name: extract_campaigns
+  outputs:
+  - campaigns.csv
+- name: clean_campaigns
+  inputs:
+  - campaigns.csv
+  outputs:
+  - campaigns_clean.csv
+- name: enrich_campaigns
+  inputs:
+  - campaigns_clean.csv
+  outputs:
+  - campaigns_enriched.csv
+- name: load_campaigns_dw
+  inputs:
+  - campaigns_enriched.csv
+  outputs:
+  - campaigns_dw.csv
+- name: extract_ad_spend
+  inputs:
+  - campaigns_dw.csv
+  outputs:
+  - ad_spend.csv
+- name: clean_ad_spend
+  inputs:
+  - ad_spend.csv
+  outputs:
+  - ad_spend_clean.csv
+- name: enrich_ad_spend
+  inputs:
+  - ad_spend_clean.csv
+  outputs:
+  - ad_spend_enriched.csv
+- name: load_ad_spend_dw
+  inputs:
+  - ad_spend_enriched.csv
+  outputs:
+  - ad_spend_dw.csv
+- name: extract_social_media_metrics
+  inputs:
+  - web_traffic.csv
+  outputs:
+  - social_media_metrics.csv
+- name: clean_social_media_metrics
+  inputs:
+  - social_media_metrics.csv
+  outputs:
+  - social_media_metrics_clean.csv
+- name: enrich_social_media_metrics
+  inputs:
+  - social_media_metrics_clean.csv
+  outputs:
+  - social_media_metrics_enriched.csv
+- name: load_social_media_metrics_dw
+  inputs:
+  - social_media_metrics_enriched.csv
+  outputs:
+  - social_media_metrics_dw.csv
+- name: extract_seo_keywords
+  outputs:
+  - seo_keywords.csv
+- name: clean_seo_keywords
+  inputs:
+  - seo_keywords.csv
+  outputs:
+  - seo_keywords_clean.csv
+- name: enrich_seo_keywords
+  inputs:
+  - seo_keywords_clean.csv
+  outputs:
+  - seo_keywords_enriched.csv
+- name: load_seo_keywords_dw
+  inputs:
+  - seo_keywords_enriched.csv
+  outputs:
+  - seo_keywords_dw.csv
+- name: extract_email_campaigns
+  inputs:
+  - campaigns_dw.csv
+  outputs:
+  - email_campaigns.csv
+- name: clean_email_campaigns
+  inputs:
+  - email_campaigns.csv
+  outputs:
+  - email_campaigns_clean.csv
+- name: enrich_email_campaigns
+  inputs:
+  - email_campaigns_clean.csv
+  outputs:
+  - email_campaigns_enriched.csv
+- name: load_email_campaigns_dw
+  inputs:
+  - email_campaigns_enriched.csv
+  outputs:
+  - email_campaigns_dw.csv
+- name: extract_web_traffic
+  inputs:
+  - email_campaigns_dw.csv
+  outputs:
+  - web_traffic.csv
+- name: clean_web_traffic
+  inputs:
+  - web_traffic.csv
+  outputs:
+  - web_traffic_clean.csv
+- name: enrich_web_traffic
+  inputs:
+  - web_traffic_clean.csv
+  outputs:
+  - web_traffic_enriched.csv
+- name: load_web_traffic_dw
+  inputs:
+  - web_traffic_enriched.csv
+  outputs:
+  - web_traffic_dw.csv
+- name: extract_customer_segments_marketing
+  inputs:
+  - leads_dw.csv
+  - transactions_dw.csv
+  outputs:
+  - customer_segments_marketing.csv
+- name: clean_customer_segments_marketing
+  inputs:
+  - customer_segments_marketing.csv
+  outputs:
+  - customer_segments_marketing_clean.csv
+- name: enrich_customer_segments_marketing
+  inputs:
+  - customer_segments_marketing_clean.csv
+  outputs:
+  - customer_segments_marketing_enriched.csv
+- name: load_customer_segments_marketing_dw
+  inputs:
+  - customer_segments_marketing_enriched.csv
+  outputs:
+  - customer_segments_marketing_dw.csv
+- name: extract_loyalty_programs
+  inputs:
+  - customers_dw.csv
+  outputs:
+  - loyalty_programs.csv
+- name: clean_loyalty_programs
+  inputs:
+  - loyalty_programs.csv
+  outputs:
+  - loyalty_programs_clean.csv
+- name: enrich_loyalty_programs
+  inputs:
+  - loyalty_programs_clean.csv
+  outputs:
+  - loyalty_programs_enriched.csv
+- name: load_loyalty_programs_dw
+  inputs:
+  - loyalty_programs_enriched.csv
+  outputs:
+  - loyalty_programs_dw.csv
+- name: extract_survey_responses
+  inputs:
+  - email_campaigns_dw.csv
+  outputs:
+  - survey_responses.csv
+- name: clean_survey_responses
+  inputs:
+  - survey_responses.csv
+  outputs:
+  - survey_responses_clean.csv
+- name: enrich_survey_responses
+  inputs:
+  - survey_responses_clean.csv
+  outputs:
+  - survey_responses_enriched.csv
+- name: load_survey_responses_dw
+  inputs:
+  - survey_responses_enriched.csv
+  outputs:
+  - survey_responses_dw.csv
+- name: extract_marketing_targets
+  inputs:
+  - web_traffic_dw.csv
+  outputs:
+  - marketing_targets.csv
+- name: clean_marketing_targets
+  inputs:
+  - marketing_targets.csv
+  outputs:
+  - marketing_targets_clean.csv
+- name: enrich_marketing_targets
+  inputs:
+  - marketing_targets_clean.csv
+  outputs:
+  - marketing_targets_enriched.csv
+- name: load_marketing_targets_dw
+  inputs:
+  - marketing_targets_enriched.csv
+  outputs:
+  - marketing_targets_dw.csv
 - name: extract_employees
   outputs:
   - employees.csv
-- name: load_orders
+- name: clean_employees
   inputs:
-  - customers.csv
-  - stores.csv
-  - dates.csv
+  - employees.csv
   outputs:
-  - orders.csv
-- name: load_transactions
+  - employees_clean.csv
+- name: enrich_employees
   inputs:
-  - orders.csv
-  - products.csv
-  - promotions.csv
+  - employees_clean.csv
   outputs:
-  - transactions.csv
-- name: transform_inventory
+  - employees_enriched.csv
+- name: load_employees_dw
   inputs:
-  - stores.csv
-  - products.csv
-  - transactions.csv
+  - employees_enriched.csv
   outputs:
-  - inventory.csv
-- name: load_returns
+  - employees_dw.csv
+- name: extract_attendance_records
   inputs:
-  - orders.csv
-  - transactions.csv
+  - employees_dw.csv
   outputs:
-  - returns.csv
-- name: load_sales_targets
+  - attendance_records.csv
+- name: clean_attendance_records
   inputs:
-  - stores.csv
-  - dates.csv
+  - attendance_records.csv
   outputs:
-  - sales_targets.csv
-- name: archive_orders
+  - attendance_records_clean.csv
+- name: enrich_attendance_records
   inputs:
-  - orders.csv
+  - attendance_records_clean.csv
   outputs:
-  - orders_backup.csv
-  - transactions_backup.csv
-  - ghost.csv
-- name: transform_sales_data
+  - attendance_records_enriched.csv
+- name: load_attendance_records_dw
   inputs:
-  - transactions.csv
-  - sales_targets.csv
-- name: merge_legacy_customers
-  inputs:
-  - legacy_customers.csv
+  - attendance_records_enriched.csv
   outputs:
-  - customers.csv
+  - attendance_records_dw.csv
+- name: extract_payroll
+  inputs:
+  - employees_dw.csv
+  outputs:
+  - payroll.csv
+- name: clean_payroll
+  inputs:
+  - payroll.csv
+  outputs:
+  - payroll_clean.csv
+- name: enrich_payroll
+  inputs:
+  - payroll_clean.csv
+  outputs:
+  - payroll_enriched.csv
+- name: load_payroll_dw
+  inputs:
+  - payroll_enriched.csv
+  outputs:
+  - payroll_dw.csv
+- name: extract_benefits_enrollment
+  inputs:
+  - employees_dw.csv
+  outputs:
+  - benefits_enrollment.csv
+- name: clean_benefits_enrollment
+  inputs:
+  - benefits_enrollment.csv
+  outputs:
+  - benefits_enrollment_clean.csv
+- name: enrich_benefits_enrollment
+  inputs:
+  - benefits_enrollment_clean.csv
+  outputs:
+  - benefits_enrollment_enriched.csv
+- name: load_benefits_enrollment_dw
+  inputs:
+  - benefits_enrollment_enriched.csv
+  outputs:
+  - benefits_enrollment_dw.csv
+- name: extract_performance_reviews
+  inputs:
+  - employees_dw.csv
+  outputs:
+  - performance_reviews.csv
+- name: clean_performance_reviews
+  inputs:
+  - performance_reviews.csv
+  outputs:
+  - performance_reviews_clean.csv
+- name: enrich_performance_reviews
+  inputs:
+  - performance_reviews_clean.csv
+  outputs:
+  - performance_reviews_enriched.csv
+- name: load_performance_reviews_dw
+  inputs:
+  - performance_reviews_enriched.csv
+  outputs:
+  - performance_reviews_dw.csv
+- name: extract_training_sessions
+  inputs:
+  - employees_dw.csv
+  outputs:
+  - training_sessions.csv
+- name: clean_training_sessions
+  inputs:
+  - training_sessions.csv
+  outputs:
+  - training_sessions_clean.csv
+- name: enrich_training_sessions
+  inputs:
+  - training_sessions_clean.csv
+  outputs:
+  - training_sessions_enriched.csv
+- name: load_training_sessions_dw
+  inputs:
+  - training_sessions_enriched.csv
+  outputs:
+  - training_sessions_dw.csv
+- name: extract_recruitment_applications
+  inputs:
+  - job_postings.csv
+  outputs:
+  - recruitment_applications.csv
+- name: clean_recruitment_applications
+  inputs:
+  - recruitment_applications.csv
+  outputs:
+  - recruitment_applications_clean.csv
+- name: enrich_recruitment_applications
+  inputs:
+  - recruitment_applications_clean.csv
+  outputs:
+  - recruitment_applications_enriched.csv
+- name: load_recruitment_applications_dw
+  inputs:
+  - recruitment_applications_enriched.csv
+  outputs:
+  - recruitment_applications_dw.csv
+- name: extract_job_postings
+  outputs:
+  - job_postings.csv
+- name: clean_job_postings
+  inputs:
+  - job_postings.csv
+  outputs:
+  - job_postings_clean.csv
+- name: enrich_job_postings
+  inputs:
+  - job_postings_clean.csv
+  outputs:
+  - job_postings_enriched.csv
+- name: load_job_postings_dw
+  inputs:
+  - job_postings_enriched.csv
+  outputs:
+  - job_postings_dw.csv
+- name: extract_org_chart
+  inputs:
+  - employees_dw.csv
+  outputs:
+  - org_chart.csv
+- name: clean_org_chart
+  inputs:
+  - org_chart.csv
+  outputs:
+  - org_chart_clean.csv
+- name: enrich_org_chart
+  inputs:
+  - org_chart_clean.csv
+  outputs:
+  - org_chart_enriched.csv
+- name: load_org_chart_dw
+  inputs:
+  - org_chart_enriched.csv
+  outputs:
+  - org_chart_dw.csv
+- name: extract_compensation_bands
+  outputs:
+  - compensation_bands.csv
+- name: clean_compensation_bands
+  inputs:
+  - compensation_bands.csv
+  outputs:
+  - compensation_bands_clean.csv
+- name: enrich_compensation_bands
+  inputs:
+  - compensation_bands_clean.csv
+  outputs:
+  - compensation_bands_enriched.csv
+- name: load_compensation_bands_dw
+  inputs:
+  - compensation_bands_enriched.csv
+  outputs:
+  - compensation_bands_dw.csv
+- name: extract_dashboard_views
+  inputs:
+  - web_traffic_dw.csv
+  outputs:
+  - dashboard_views.csv
+- name: clean_dashboard_views
+  inputs:
+  - dashboard_views.csv
+  outputs:
+  - dashboard_views_clean.csv
+- name: enrich_dashboard_views
+  inputs:
+  - dashboard_views_clean.csv
+  outputs:
+  - dashboard_views_enriched.csv
+- name: load_dashboard_views_dw
+  inputs:
+  - dashboard_views_enriched.csv
+  outputs:
+  - dashboard_views_dw.csv
+- name: extract_kpi_definitions
+  outputs:
+  - kpi_definitions.csv
+- name: clean_kpi_definitions
+  inputs:
+  - kpi_definitions.csv
+  outputs:
+  - kpi_definitions_clean.csv
+- name: enrich_kpi_definitions
+  inputs:
+  - kpi_definitions_clean.csv
+  outputs:
+  - kpi_definitions_enriched.csv
+- name: load_kpi_definitions_dw
+  inputs:
+  - kpi_definitions_enriched.csv
+  outputs:
+  - kpi_definitions_dw.csv
+- name: extract_event_logs
+  outputs:
+  - event_logs.csv
+- name: clean_event_logs
+  inputs:
+  - event_logs.csv
+  outputs:
+  - event_logs_clean.csv
+- name: enrich_event_logs
+  inputs:
+  - event_logs_clean.csv
+  outputs:
+  - event_logs_enriched.csv
+- name: load_event_logs_dw
+  inputs:
+  - event_logs_enriched.csv
+  outputs:
+  - event_logs_dw.csv
+- name: extract_session_data
+  outputs:
+  - session_data.csv
+- name: clean_session_data
+  inputs:
+  - session_data.csv
+  outputs:
+  - session_data_clean.csv
+- name: enrich_session_data
+  inputs:
+  - session_data_clean.csv
+  outputs:
+  - session_data_enriched.csv
+- name: load_session_data_dw
+  inputs:
+  - session_data_enriched.csv
+  outputs:
+  - session_data_dw.csv
+- name: extract_data_quality_metrics
+  inputs:
+  - event_logs_dw.csv
+  outputs:
+  - data_quality_metrics.csv
+- name: clean_data_quality_metrics
+  inputs:
+  - data_quality_metrics.csv
+  outputs:
+  - data_quality_metrics_clean.csv
+- name: enrich_data_quality_metrics
+  inputs:
+  - data_quality_metrics_clean.csv
+  outputs:
+  - data_quality_metrics_enriched.csv
+- name: load_data_quality_metrics_dw
+  inputs:
+  - data_quality_metrics_enriched.csv
+  outputs:
+  - data_quality_metrics_dw.csv
+- name: extract_anomaly_detections
+  inputs:
+  - data_quality_metrics_dw.csv
+  outputs:
+  - anomaly_detections.csv
+- name: clean_anomaly_detections
+  inputs:
+  - anomaly_detections.csv
+  outputs:
+  - anomaly_detections_clean.csv
+- name: enrich_anomaly_detections
+  inputs:
+  - anomaly_detections_clean.csv
+  outputs:
+  - anomaly_detections_enriched.csv
+- name: load_anomaly_detections_dw
+  inputs:
+  - anomaly_detections_enriched.csv
+  outputs:
+  - anomaly_detections_dw.csv
+- name: extract_predictive_models
+  outputs:
+  - predictive_models.csv
+- name: clean_predictive_models
+  inputs:
+  - predictive_models.csv
+  outputs:
+  - predictive_models_clean.csv
+- name: enrich_predictive_models
+  inputs:
+  - predictive_models_clean.csv
+  outputs:
+  - predictive_models_enriched.csv
+- name: load_predictive_models_dw
+  inputs:
+  - predictive_models_enriched.csv
+  outputs:
+  - predictive_models_dw.csv
+- name: extract_segmentation_results
+  inputs:
+  - customer_segments_dw.csv
+  outputs:
+  - segmentation_results.csv
+- name: clean_segmentation_results
+  inputs:
+  - segmentation_results.csv
+  outputs:
+  - segmentation_results_clean.csv
+- name: enrich_segmentation_results
+  inputs:
+  - segmentation_results_clean.csv
+  outputs:
+  - segmentation_results_enriched.csv
+- name: load_segmentation_results_dw
+  inputs:
+  - segmentation_results_enriched.csv
+  outputs:
+  - segmentation_results_dw.csv
+- name: extract_trend_analysis
+  inputs:
+  - segmentation_results_dw.csv
+  outputs:
+  - trend_analysis.csv
+- name: clean_trend_analysis
+  inputs:
+  - trend_analysis.csv
+  outputs:
+  - trend_analysis_clean.csv
+- name: enrich_trend_analysis
+  inputs:
+  - trend_analysis_clean.csv
+  outputs:
+  - trend_analysis_enriched.csv
+- name: load_trend_analysis_dw
+  inputs:
+  - trend_analysis_enriched.csv
+  outputs:
+  - trend_analysis_dw.csv
+- name: extract_report_configs
+  outputs:
+  - report_configs.csv
+- name: clean_report_configs
+  inputs:
+  - report_configs.csv
+  outputs:
+  - report_configs_clean.csv
+- name: enrich_report_configs
+  inputs:
+  - report_configs_clean.csv
+  outputs:
+  - report_configs_enriched.csv
+- name: load_report_configs_dw
+  inputs:
+  - report_configs_enriched.csv
+  outputs:
+  - report_configs_dw.csv
+- name: extract_tickets
+  outputs:
+  - tickets.csv
+- name: clean_tickets
+  inputs:
+  - tickets.csv
+  outputs:
+  - tickets_clean.csv
+- name: enrich_tickets
+  inputs:
+  - tickets_clean.csv
+  outputs:
+  - tickets_enriched.csv
+- name: load_tickets_dw
+  inputs:
+  - tickets_enriched.csv
+  outputs:
+  - tickets_dw.csv
+- name: extract_ticket_responses
+  inputs:
+  - tickets_dw.csv
+  outputs:
+  - ticket_responses.csv
+- name: clean_ticket_responses
+  inputs:
+  - ticket_responses.csv
+  outputs:
+  - ticket_responses_clean.csv
+- name: enrich_ticket_responses
+  inputs:
+  - ticket_responses_clean.csv
+  outputs:
+  - ticket_responses_enriched.csv
+- name: load_ticket_responses_dw
+  inputs:
+  - ticket_responses_enriched.csv
+  outputs:
+  - ticket_responses_dw.csv
+- name: extract_chat_logs
+  inputs:
+  - ticket_responses_dw.csv
+  outputs:
+  - chat_logs.csv
+- name: clean_chat_logs
+  inputs:
+  - chat_logs.csv
+  outputs:
+  - chat_logs_clean.csv
+- name: enrich_chat_logs
+  inputs:
+  - chat_logs_clean.csv
+  outputs:
+  - chat_logs_enriched.csv
+- name: load_chat_logs_dw
+  inputs:
+  - chat_logs_enriched.csv
+  outputs:
+  - chat_logs_dw.csv
+- name: extract_call_records
+  inputs:
+  - chat_logs_dw.csv
+  outputs:
+  - call_records.csv
+- name: clean_call_records
+  inputs:
+  - call_records.csv
+  outputs:
+  - call_records_clean.csv
+- name: enrich_call_records
+  inputs:
+  - call_records_clean.csv
+  outputs:
+  - call_records_enriched.csv
+- name: load_call_records_dw
+  inputs:
+  - call_records_enriched.csv
+  outputs:
+  - call_records_dw.csv
+- name: extract_satisfaction_surveys
+  inputs:
+  - tickets_dw.csv
+  outputs:
+  - satisfaction_surveys.csv
+- name: clean_satisfaction_surveys
+  inputs:
+  - satisfaction_surveys.csv
+  outputs:
+  - satisfaction_surveys_clean.csv
+- name: enrich_satisfaction_surveys
+  inputs:
+  - satisfaction_surveys_clean.csv
+  outputs:
+  - satisfaction_surveys_enriched.csv
+- name: load_satisfaction_surveys_dw
+  inputs:
+  - satisfaction_surveys_enriched.csv
+  outputs:
+  - satisfaction_surveys_dw.csv
+- name: extract_escalations
+  inputs:
+  - tickets_dw.csv
+  outputs:
+  - escalations.csv
+- name: clean_escalations
+  inputs:
+  - escalations.csv
+  outputs:
+  - escalations_clean.csv
+- name: enrich_escalations
+  inputs:
+  - escalations_clean.csv
+  outputs:
+  - escalations_enriched.csv
+- name: load_escalations_dw
+  inputs:
+  - escalations_enriched.csv
+  outputs:
+  - escalations_dw.csv
+- name: extract_knowledge_base_articles
+  outputs:
+  - knowledge_base_articles.csv
+- name: clean_knowledge_base_articles
+  inputs:
+  - knowledge_base_articles.csv
+  outputs:
+  - knowledge_base_articles_clean.csv
+- name: enrich_knowledge_base_articles
+  inputs:
+  - knowledge_base_articles_clean.csv
+  outputs:
+  - knowledge_base_articles_enriched.csv
+- name: load_knowledge_base_articles_dw
+  inputs:
+  - knowledge_base_articles_enriched.csv
+  outputs:
+  - knowledge_base_articles_dw.csv
+- name: extract_support_agents
+  outputs:
+  - support_agents.csv
+- name: clean_support_agents
+  inputs:
+  - support_agents.csv
+  outputs:
+  - support_agents_clean.csv
+- name: enrich_support_agents
+  inputs:
+  - support_agents_clean.csv
+  outputs:
+  - support_agents_enriched.csv
+- name: load_support_agents_dw
+  inputs:
+  - support_agents_enriched.csv
+  outputs:
+  - support_agents_dw.csv
+- name: extract_faq_hits
+  inputs:
+  - knowledge_base_articles_dw.csv
+  outputs:
+  - faq_hits.csv
+- name: clean_faq_hits
+  inputs:
+  - faq_hits.csv
+  outputs:
+  - faq_hits_clean.csv
+- name: enrich_faq_hits
+  inputs:
+  - faq_hits_clean.csv
+  outputs:
+  - faq_hits_enriched.csv
+- name: load_faq_hits_dw
+  inputs:
+  - faq_hits_enriched.csv
+  outputs:
+  - faq_hits_dw.csv
+- name: extract_resolution_times
+  inputs:
+  - tickets_dw.csv
+  - call_records_dw.csv
+  outputs:
+  - resolution_times.csv
+- name: clean_resolution_times
+  inputs:
+  - resolution_times.csv
+  outputs:
+  - resolution_times_clean.csv
+- name: enrich_resolution_times
+  inputs:
+  - resolution_times_clean.csv
+  outputs:
+  - resolution_times_enriched.csv
+- name: load_resolution_times_dw
+  inputs:
+  - resolution_times_enriched.csv
+  outputs:
+  - resolution_times_dw.csv

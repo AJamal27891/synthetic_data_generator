@@ -1,115 +1,1142 @@
 {
   "tables": {
-    "customers": {
+    "resolution_times": {
+      "row_count": 5432,
+      "domain": "support",
+      "columns": {
+        "record_id": "int64",
+        "ticket_id": "int64",
+        "resolution_seconds": "int64"
+      },
+      "distinct_counts": {
+        "record_id": 5432,
+        "ticket_id": 997,
+        "resolution_seconds": 5432
+      },
+      "null_rates": {
+        "record_id": 0.0,
+        "ticket_id": 0.0,
+        "resolution_seconds": 0.0
+      }
+    },
+    "faq_hits": {
+      "row_count": 6543,
+      "domain": "support",
+      "columns": {
+        "hit_id": "int64",
+        "article_id": "int64",
+        "hit_date": "object"
+      },
+      "distinct_counts": {
+        "hit_id": 6543,
+        "article_id": 999,
+        "hit_date": 365
+      },
+      "null_rates": {
+        "hit_id": 0.0,
+        "article_id": 0.0,
+        "hit_date": 0.0
+      }
+    },
+    "knowledge_base_articles": {
+      "row_count": 8765,
+      "domain": "support",
+      "columns": {
+        "article_id": "int64",
+        "title": "object",
+        "created_at": "object",
+        "content": "object"
+      },
+      "distinct_counts": {
+        "article_id": 8765,
+        "title": 8765,
+        "created_at": 365,
+        "content": 8765
+      },
+      "null_rates": {
+        "article_id": 0.0,
+        "title": 0.0,
+        "created_at": 0.0,
+        "content": 0.0
+      }
+    },
+    "escalations": {
+      "row_count": 9876,
+      "domain": "support",
+      "columns": {
+        "escalation_id": "int64",
+        "ticket_id": "int64",
+        "escalated_to": "object",
+        "date": "object"
+      },
+      "distinct_counts": {
+        "escalation_id": 9876,
+        "ticket_id": 1000,
+        "escalated_to": 9292,
+        "date": 365
+      },
+      "null_rates": {
+        "escalation_id": 0.0,
+        "ticket_id": 0.0,
+        "escalated_to": 0.0,
+        "date": 0.0
+      }
+    },
+    "satisfaction_surveys": {
+      "row_count": 10987,
+      "domain": "support",
+      "columns": {
+        "survey_id": "int64",
+        "ticket_id": "int64",
+        "score": "int64",
+        "comments": "object"
+      },
+      "distinct_counts": {
+        "survey_id": 10987,
+        "ticket_id": 1000,
+        "score": 10987,
+        "comments": 10987
+      },
+      "null_rates": {
+        "survey_id": 0.0,
+        "ticket_id": 0.0,
+        "score": 0.0,
+        "comments": 0.0
+      }
+    },
+    "call_records": {
+      "row_count": 12098,
+      "domain": "support",
+      "columns": {
+        "call_id": "int64",
+        "ticket_id": "int64",
+        "call_time": "datetime64[ns]",
+        "duration_sec": "int64"
+      },
+      "distinct_counts": {
+        "call_id": 12098,
+        "ticket_id": 1000,
+        "call_time": 12068,
+        "duration_sec": 12098
+      },
+      "null_rates": {
+        "call_id": 0.0,
+        "ticket_id": 0.0,
+        "call_time": 0.0,
+        "duration_sec": 0.0
+      }
+    },
+    "chat_logs": {
+      "row_count": 23109,
+      "domain": "support",
+      "columns": {
+        "chat_id": "int64",
+        "customer_id": "int64",
+        "agent_id": "int64",
+        "message": "object",
+        "timestamp": "datetime64[ns]"
+      },
+      "distinct_counts": {
+        "chat_id": 23109,
+        "customer_id": 1000,
+        "agent_id": 1000,
+        "message": 23109,
+        "timestamp": 22691
+      },
+      "null_rates": {
+        "chat_id": 0.0,
+        "customer_id": 0.0,
+        "agent_id": 0.0,
+        "message": 0.0,
+        "timestamp": 0.0
+      }
+    },
+    "support_agents": {
+      "row_count": 7654,
+      "domain": "support",
+      "columns": {
+        "agent_id": "int64",
+        "name": "object",
+        "email": "object"
+      },
+      "distinct_counts": {
+        "agent_id": 7654,
+        "name": 7292,
+        "email": 7523
+      },
+      "null_rates": {
+        "agent_id": 0.0,
+        "name": 0.0,
+        "email": 0.0
+      }
+    },
+    "ticket_responses": {
+      "row_count": 34210,
+      "domain": "support",
+      "columns": {
+        "response_id": "int64",
+        "ticket_id": "int64",
+        "responder": "object",
+        "response_date": "datetime64[ns]"
+      },
+      "distinct_counts": {
+        "response_id": 34210,
+        "ticket_id": 1000,
+        "responder": 28962,
+        "response_date": 33971
+      },
+      "null_rates": {
+        "response_id": 0.0,
+        "ticket_id": 0.0,
+        "responder": 0.0,
+        "response_date": 0.0
+      }
+    },
+    "tickets": {
+      "row_count": 45321,
+      "domain": "support",
+      "columns": {
+        "ticket_id": "int64",
+        "customer_id": "int64",
+        "opened_at": "datetime64[ns]",
+        "status": "object",
+        "priority": "object"
+      },
+      "distinct_counts": {
+        "ticket_id": 45321,
+        "customer_id": 1000,
+        "opened_at": 45291,
+        "status": 3,
+        "priority": 3
+      },
+      "null_rates": {
+        "ticket_id": 0.0,
+        "customer_id": 0.0,
+        "opened_at": 0.0,
+        "status": 0.0,
+        "priority": 0.0
+      }
+    },
+    "report_configs": {
+      "row_count": 9876,
+      "domain": "analytics",
+      "columns": {
+        "report_id": "int64",
+        "report_name": "object",
+        "created_by": "int64"
+      },
+      "distinct_counts": {
+        "report_id": 9876,
+        "report_name": 971,
+        "created_by": 9876
+      },
+      "null_rates": {
+        "report_id": 0.0,
+        "report_name": 0.0,
+        "created_by": 0.0
+      }
+    },
+    "trend_analysis": {
+      "row_count": 10987,
+      "domain": "analytics",
+      "columns": {
+        "analysis_id": "int64",
+        "metric_id": "int64",
+        "period": "object"
+      },
+      "distinct_counts": {
+        "analysis_id": 10987,
+        "metric_id": 1000,
+        "period": 4
+      },
+      "null_rates": {
+        "analysis_id": 0.0,
+        "metric_id": 0.0,
+        "period": 0.0
+      }
+    },
+    "segmentation_results": {
+      "row_count": 21098,
+      "domain": "analytics",
+      "columns": {
+        "segment_id": "int64",
+        "kpi_id": "int64",
+        "result_value": "float64"
+      },
+      "distinct_counts": {
+        "segment_id": 21098,
+        "kpi_id": 1000,
+        "result_value": 21070
+      },
+      "null_rates": {
+        "segment_id": 0.0,
+        "kpi_id": 0.0,
+        "result_value": 0.0
+      }
+    },
+    "predictive_models": {
+      "row_count": 32109,
+      "domain": "analytics",
+      "columns": {
+        "model_id": "int64",
+        "model_name": "object",
+        "created_at": "datetime64[ns]",
+        "accuracy": "float64"
+      },
+      "distinct_counts": {
+        "model_id": 32109,
+        "model_name": 32109,
+        "created_at": 32093,
+        "accuracy": 1001
+      },
+      "null_rates": {
+        "model_id": 0.0,
+        "model_name": 0.0,
+        "created_at": 0.0,
+        "accuracy": 0.0
+      }
+    },
+    "anomaly_detections": {
+      "row_count": 43210,
+      "domain": "analytics",
+      "columns": {
+        "detection_id": "int64",
+        "metric_id": "int64",
+        "detected_at": "datetime64[ns]"
+      },
+      "distinct_counts": {
+        "detection_id": 43210,
+        "metric_id": 1000,
+        "detected_at": 42886
+      },
+      "null_rates": {
+        "detection_id": 0.0,
+        "metric_id": 0.0,
+        "detected_at": 0.0
+      }
+    },
+    "data_quality_metrics": {
+      "row_count": 54321,
+      "domain": "analytics",
+      "columns": {
+        "metric_id": "int64",
+        "table_name": "object",
+        "issue_count": "int64"
+      },
+      "distinct_counts": {
+        "metric_id": 54321,
+        "table_name": 5,
+        "issue_count": 54321
+      },
+      "null_rates": {
+        "metric_id": 0.0,
+        "table_name": 0.0,
+        "issue_count": 0.0
+      }
+    },
+    "session_data": {
+      "row_count": 65432,
+      "domain": "analytics",
+      "columns": {
+        "session_id": "int64",
+        "user_id": "int64",
+        "start_time": "datetime64[ns]",
+        "end_time": "datetime64[ns]"
+      },
+      "distinct_counts": {
+        "session_id": 65432,
+        "user_id": 65432,
+        "start_time": 45872,
+        "end_time": 45908
+      },
+      "null_rates": {
+        "session_id": 0.0,
+        "user_id": 0.0,
+        "start_time": 0.0,
+        "end_time": 0.0
+      }
+    },
+    "event_logs": {
+      "row_count": 76543,
+      "domain": "analytics",
+      "columns": {
+        "event_id": "int64",
+        "user_id": "int64",
+        "event_type": "object",
+        "timestamp": "datetime64[ns]"
+      },
+      "distinct_counts": {
+        "event_id": 76543,
+        "user_id": 76543,
+        "event_type": 971,
+        "timestamp": 46343
+      },
+      "null_rates": {
+        "event_id": 0.0,
+        "user_id": 0.0,
+        "event_type": 0.0,
+        "timestamp": 0.0
+      }
+    },
+    "kpi_definitions": {
+      "row_count": 87654,
+      "domain": "analytics",
+      "columns": {
+        "kpi_id": "int64",
+        "name": "object",
+        "target_value": "float64"
+      },
+      "distinct_counts": {
+        "kpi_id": 87654,
+        "name": 971,
+        "target_value": 87274
+      },
+      "null_rates": {
+        "kpi_id": 0.0,
+        "name": 0.0,
+        "target_value": 0.0
+      }
+    },
+    "dashboard_views": {
+      "row_count": 98765,
+      "domain": "analytics",
+      "columns": {
+        "view_id": "int64",
+        "dashboard_name": "object",
+        "user_id": "int64",
+        "view_date": "datetime64[ns]"
+      },
+      "distinct_counts": {
+        "view_id": 98765,
+        "dashboard_name": 971,
+        "user_id": 98765,
+        "view_date": 96895
+      },
+      "null_rates": {
+        "view_id": 0.0,
+        "dashboard_name": 0.0,
+        "user_id": 0.0,
+        "view_date": 0.0
+      }
+    },
+    "compensation_bands": {
+      "row_count": 2109,
+      "domain": "hr",
+      "columns": {
+        "band_id": "int64",
+        "title": "object",
+        "min_salary": "int64",
+        "max_salary": "int64"
+      },
+      "distinct_counts": {
+        "band_id": 2109,
+        "title": 615,
+        "min_salary": 2109,
+        "max_salary": 2109
+      },
+      "null_rates": {
+        "band_id": 0.0,
+        "title": 0.0,
+        "min_salary": 0.0,
+        "max_salary": 0.0
+      }
+    },
+    "org_chart": {
+      "row_count": 3210,
+      "domain": "hr",
+      "columns": {
+        "node_id": "int64",
+        "manager_id": "int64",
+        "subordinate_id": "int64"
+      },
+      "distinct_counts": {
+        "node_id": 3210,
+        "manager_id": 963,
+        "subordinate_id": 961
+      },
+      "null_rates": {
+        "node_id": 0.0,
+        "manager_id": 0.0,
+        "subordinate_id": 0.0
+      }
+    },
+    "job_postings": {
+      "row_count": 4321,
+      "domain": "hr",
+      "columns": {
+        "posting_id": "int64",
+        "position": "object",
+        "department": "object",
+        "post_date": "object"
+      },
+      "distinct_counts": {
+        "posting_id": 4321,
+        "position": 639,
+        "department": 5,
+        "post_date": 365
+      },
+      "null_rates": {
+        "posting_id": 0.0,
+        "position": 0.0,
+        "department": 0.0,
+        "post_date": 0.0
+      }
+    },
+    "recruitment_applications": {
+      "row_count": 5432,
+      "domain": "hr",
+      "columns": {
+        "application_id": "int64",
+        "candidate_name": "object",
+        "position": "object",
+        "application_date": "object"
+      },
+      "distinct_counts": {
+        "application_id": 5432,
+        "candidate_name": 5234,
+        "position": 639,
+        "application_date": 365
+      },
+      "null_rates": {
+        "application_id": 0.0,
+        "candidate_name": 0.0,
+        "position": 0.0,
+        "application_date": 0.0
+      }
+    },
+    "training_sessions": {
+      "row_count": 6543,
+      "domain": "hr",
+      "columns": {
+        "session_id": "int64",
+        "topic": "object",
+        "trainer": "object",
+        "session_date": "object"
+      },
+      "distinct_counts": {
+        "session_id": 6543,
+        "topic": 6543,
+        "trainer": 6242,
+        "session_date": 365
+      },
+      "null_rates": {
+        "session_id": 0.0,
+        "topic": 0.0,
+        "trainer": 0.0,
+        "session_date": 0.0
+      }
+    },
+    "performance_reviews": {
+      "row_count": 7654,
+      "domain": "hr",
+      "columns": {
+        "review_id": "int64",
+        "employee_id": "int64",
+        "review_date": "object",
+        "rating": "int64"
+      },
+      "distinct_counts": {
+        "review_id": 7654,
+        "employee_id": 999,
+        "review_date": 365,
+        "rating": 7654
+      },
+      "null_rates": {
+        "review_id": 0.0,
+        "employee_id": 0.0,
+        "review_date": 0.0,
+        "rating": 0.0
+      }
+    },
+    "benefits_enrollment": {
+      "row_count": 8456,
+      "domain": "hr",
+      "columns": {
+        "enrollment_id": "int64",
+        "employee_id": "int64",
+        "plan_type": "object",
+        "start_date": "object"
+      },
+      "distinct_counts": {
+        "enrollment_id": 8456,
+        "employee_id": 1000,
+        "plan_type": 4,
+        "start_date": 1811
+      },
+      "null_rates": {
+        "enrollment_id": 0.0,
+        "employee_id": 0.0,
+        "plan_type": 0.0,
+        "start_date": 0.0
+      }
+    },
+    "payroll": {
+      "row_count": 10987,
+      "domain": "hr",
+      "columns": {
+        "payroll_id": "int64",
+        "employee_id": "int64",
+        "pay_date": "object",
+        "gross_amount": "float64",
+        "net_amount": "float64"
+      },
+      "distinct_counts": {
+        "payroll_id": 10987,
+        "employee_id": 1000,
+        "pay_date": 365,
+        "gross_amount": 10947,
+        "net_amount": 10935
+      },
+      "null_rates": {
+        "payroll_id": 0.0,
+        "employee_id": 0.0,
+        "pay_date": 0.0,
+        "gross_amount": 0.0,
+        "net_amount": 0.0
+      }
+    },
+    "attendance_records": {
+      "row_count": 18987,
+      "domain": "hr",
+      "columns": {
+        "record_id": "int64",
+        "employee_id": "int64",
+        "date": "object",
+        "status": "object"
+      },
+      "distinct_counts": {
+        "record_id": 18987,
+        "employee_id": 1000,
+        "date": 365,
+        "status": 4
+      },
+      "null_rates": {
+        "record_id": 0.0,
+        "employee_id": 0.0,
+        "date": 0.0,
+        "status": 0.0
+      }
+    },
+    "customer_segments_marketing": {
+      "row_count": 13459,
+      "domain": "marketing",
+      "columns": {
+        "segment_id": "int64",
+        "name": "object",
+        "description": "object"
+      },
+      "distinct_counts": {
+        "segment_id": 13459,
+        "name": 4,
+        "description": 13459
+      },
+      "null_rates": {
+        "segment_id": 0.0,
+        "name": 0.0,
+        "description": 0.0
+      }
+    },
+    "marketing_targets": {
+      "row_count": 14567,
+      "domain": "marketing",
+      "columns": {
+        "target_id": "int64",
+        "campaign_id": "int64",
+        "goal": "float64",
+        "month": "int64",
+        "year": "int64"
+      },
+      "distinct_counts": {
+        "target_id": 14567,
+        "campaign_id": 1000,
+        "goal": 14552,
+        "month": 12,
+        "year": 1
+      },
+      "null_rates": {
+        "target_id": 0.0,
+        "campaign_id": 0.0,
+        "goal": 0.0,
+        "month": 0.0,
+        "year": 0.0
+      }
+    },
+    "survey_responses": {
+      "row_count": 11234,
+      "domain": "marketing",
+      "columns": {
+        "response_id": "int64",
+        "survey_id": "int64",
+        "respondent": "object",
+        "response_date": "object",
+        "score": "int64"
+      },
+      "distinct_counts": {
+        "response_id": 11234,
+        "survey_id": 11234,
+        "respondent": 10452,
+        "response_date": 365,
+        "score": 11234
+      },
+      "null_rates": {
+        "response_id": 0.0,
+        "survey_id": 0.0,
+        "respondent": 0.0,
+        "response_date": 0.0,
+        "score": 0.0
+      }
+    },
+    "loyalty_programs": {
+      "row_count": 12345,
+      "domain": "marketing",
+      "columns": {
+        "program_id": "int64",
+        "name": "object",
+        "start_date": "object",
+        "tier_levels": "object"
+      },
+      "distinct_counts": {
+        "program_id": 12345,
+        "name": 971,
+        "start_date": 365,
+        "tier_levels": 4
+      },
+      "null_rates": {
+        "program_id": 0.0,
+        "name": 0.0,
+        "start_date": 0.0,
+        "tier_levels": 0.0
+      }
+    },
+    "web_traffic": {
+      "row_count": 15643,
+      "domain": "marketing",
+      "columns": {
+        "visit_id": "int64",
+        "page_url": "object",
+        "visit_date": "datetime64[ns]",
+        "duration_seconds": "int64"
+      },
+      "distinct_counts": {
+        "visit_id": 15643,
+        "page_url": 15643,
+        "visit_date": 15598,
+        "duration_seconds": 15643
+      },
+      "null_rates": {
+        "visit_id": 0.0,
+        "page_url": 0.0,
+        "visit_date": 0.0,
+        "duration_seconds": 0.0
+      }
+    },
+    "email_campaigns": {
+      "row_count": 19876,
+      "domain": "marketing",
+      "columns": {
+        "email_id": "int64",
+        "campaign_id": "int64",
+        "sent_date": "object",
+        "open_rate": "float64"
+      },
+      "distinct_counts": {
+        "email_id": 19876,
+        "campaign_id": 1000,
+        "sent_date": 1,
+        "open_rate": 101
+      },
+      "null_rates": {
+        "email_id": 0.0,
+        "campaign_id": 0.0,
+        "sent_date": 0.0,
+        "open_rate": 0.0
+      }
+    },
+    "seo_keywords": {
+      "row_count": 10987,
+      "domain": "marketing",
+      "columns": {
+        "keyword_id": "int64",
+        "keyword": "object",
+        "search_volume": "int64",
+        "difficulty": "float64"
+      },
+      "distinct_counts": {
+        "keyword_id": 10987,
+        "keyword": 971,
+        "search_volume": 10987,
+        "difficulty": 101
+      },
+      "null_rates": {
+        "keyword_id": 0.0,
+        "keyword": 0.0,
+        "search_volume": 0.0,
+        "difficulty": 0.0
+      }
+    },
+    "social_media_metrics": {
+      "row_count": 17890,
+      "domain": "marketing",
+      "columns": {
+        "metric_id": "int64",
+        "platform": "object",
+        "date": "object",
+        "impressions": "int64",
+        "clicks": "int64"
+      },
+      "distinct_counts": {
+        "metric_id": 17890,
+        "platform": 4,
+        "date": 1,
+        "impressions": 17890,
+        "clicks": 17890
+      },
+      "null_rates": {
+        "metric_id": 0.0,
+        "platform": 0.0,
+        "date": 0.0,
+        "impressions": 0.0,
+        "clicks": 0.0
+      }
+    },
+    "ad_spend": {
+      "row_count": 15678,
+      "domain": "marketing",
+      "columns": {
+        "spend_id": "int64",
+        "campaign_id": "int64",
+        "date": "object",
+        "amount": "float64"
+      },
+      "distinct_counts": {
+        "spend_id": 15678,
+        "campaign_id": 1000,
+        "date": 1,
+        "amount": 15656
+      },
+      "null_rates": {
+        "spend_id": 0.0,
+        "campaign_id": 0.0,
+        "date": 0.0,
+        "amount": 0.0
+      }
+    },
+    "campaigns": {
+      "row_count": 13245,
+      "domain": "marketing",
+      "columns": {
+        "campaign_id": "int64",
+        "name": "object",
+        "start_date": "object",
+        "end_date": "object",
+        "budget": "float64"
+      },
+      "distinct_counts": {
+        "campaign_id": 13245,
+        "name": 13245,
+        "start_date": 365,
+        "end_date": 1,
+        "budget": 13240
+      },
+      "null_rates": {
+        "campaign_id": 0.0,
+        "name": 0.0,
+        "start_date": 0.0,
+        "end_date": 0.0,
+        "budget": 0.0
+      }
+    },
+    "payments_legacy": {
+      "row_count": 17654,
+      "domain": "finance",
+      "columns": {
+        "payment_id": "int64",
+        "old_invoice_ref": "object",
+        "paid_date": "object"
+      },
+      "distinct_counts": {
+        "payment_id": 17654,
+        "old_invoice_ref": 17654,
+        "paid_date": 365
+      },
+      "null_rates": {
+        "payment_id": 0.0,
+        "old_invoice_ref": 0.0,
+        "paid_date": 0.0
+      }
+    },
+    "credit_notes": {
+      "row_count": 13245,
+      "domain": "finance",
+      "columns": {
+        "credit_note_id": "int64",
+        "invoice_id": "int64",
+        "amount": "float64"
+      },
+      "distinct_counts": {
+        "credit_note_id": 13245,
+        "invoice_id": 1000,
+        "amount": 13085
+      },
+      "null_rates": {
+        "credit_note_id": 0.0,
+        "invoice_id": 0.0,
+        "amount": 0.0
+      }
+    },
+    "bank_reconciliations": {
+      "row_count": 14532,
+      "domain": "finance",
+      "columns": {
+        "reconciliation_id": "int64",
+        "date": "object"
+      },
+      "distinct_counts": {
+        "reconciliation_id": 14532,
+        "date": 1
+      },
+      "null_rates": {
+        "reconciliation_id": 0.0,
+        "date": 0.0
+      }
+    },
+    "currency_rates": {
+      "row_count": 16789,
+      "domain": "finance",
+      "columns": {
+        "rate_id": "int64",
+        "currency": "object",
+        "rate": "float64"
+      },
+      "distinct_counts": {
+        "rate_id": 16789,
+        "currency": 5,
+        "rate": 11095
+      },
+      "null_rates": {
+        "rate_id": 0.0,
+        "currency": 0.0,
+        "rate": 0.0
+      }
+    },
+    "profit_centers": {
+      "row_count": 12345,
+      "domain": "finance",
+      "columns": {
+        "center_id": "int64",
+        "center_name": "object"
+      },
+      "distinct_counts": {
+        "center_id": 12345,
+        "center_name": 971
+      },
+      "null_rates": {
+        "center_id": 0.0,
+        "center_name": 0.0
+      }
+    },
+    "cost_centers": {
+      "row_count": 13456,
+      "domain": "finance",
+      "columns": {
+        "center_id": "int64",
+        "center_name": "object"
+      },
+      "distinct_counts": {
+        "center_id": 13456,
+        "center_name": 971
+      },
+      "null_rates": {
+        "center_id": 0.0,
+        "center_name": 0.0
+      }
+    },
+    "accounts_payable": {
+      "row_count": 15234,
+      "domain": "finance",
+      "columns": {
+        "ap_id": "int64",
+        "vendor": "object",
+        "amount": "float64"
+      },
+      "distinct_counts": {
+        "ap_id": 15234,
+        "vendor": 12718,
+        "amount": 15228
+      },
+      "null_rates": {
+        "ap_id": 0.0,
+        "vendor": 0.0,
+        "amount": 0.0
+      }
+    },
+    "accounts_receivable": {
+      "row_count": 16890,
+      "domain": "finance",
+      "columns": {
+        "ar_id": "int64",
+        "customer_id": "int64",
+        "amount_due": "float64"
+      },
+      "distinct_counts": {
+        "ar_id": 16890,
+        "customer_id": 1000,
+        "amount_due": 16874
+      },
+      "null_rates": {
+        "ar_id": 0.0,
+        "customer_id": 0.0,
+        "amount_due": 0.0
+      }
+    },
+    "financial_statements": {
+      "row_count": 14234,
+      "domain": "finance",
+      "columns": {
+        "statement_id": "int64",
+        "ledger_id": "int64",
+        "statement_type": "object",
+        "amount": "float64"
+      },
+      "distinct_counts": {
+        "statement_id": 14234,
+        "ledger_id": 1000,
+        "statement_type": 3,
+        "amount": 14233
+      },
+      "null_rates": {
+        "statement_id": 0.0,
+        "ledger_id": 0.0,
+        "statement_type": 0.0,
+        "amount": 0.0
+      }
+    },
+    "tax_records": {
+      "row_count": 15000,
+      "domain": "finance",
+      "columns": {
+        "record_id": "int64",
+        "invoice_id": "int64",
+        "tax_date": "object",
+        "tax_amount": "float64",
+        "tax_type": "object",
+        "jurisdiction": "object"
+      },
+      "distinct_counts": {
+        "record_id": 15000,
+        "invoice_id": 15000,
+        "tax_date": 365,
+        "tax_amount": 12998,
+        "tax_type": 4,
+        "jurisdiction": 50
+      },
+      "null_rates": {
+        "record_id": 0.0,
+        "invoice_id": 0.0,
+        "tax_date": 0.0,
+        "tax_amount": 0.0,
+        "tax_type": 0.0,
+        "jurisdiction": 0.0
+      }
+    },
+    "invoices_finance": {
+      "row_count": 20000,
+      "domain": "finance",
+      "columns": {
+        "invoice_id": "int64",
+        "invoice_date": "object",
+        "customer_id": "int64",
+        "order_id": "int64",
+        "amount": "float64",
+        "billing_cycle_id": "int64",
+        "status": "object"
+      },
+      "distinct_counts": {
+        "invoice_id": 20000,
+        "invoice_date": 365,
+        "customer_id": 20000,
+        "order_id": 20000,
+        "amount": 19606,
+        "billing_cycle_id": 20000,
+        "status": 3
+      },
+      "null_rates": {
+        "invoice_id": 0.0,
+        "invoice_date": 0.0,
+        "customer_id": 0.0,
+        "order_id": 0.0,
+        "amount": 0.0,
+        "billing_cycle_id": 0.0,
+        "status": 0.0
+      }
+    },
+    "orders": {
       "row_count": 10000,
       "domain": "sales",
       "columns": {
+        "order_id": "int64",
+        "order_date": "object",
         "customer_id": "int64",
-        "first_name": "object",
-        "last_name": "object",
-        "email": "object",
-        "phone": "object",
-        "city": "object",
-        "state": "object",
-        "loyalty_status": "object"
-      },
-      "distinct_counts": {
-        "customer_id": 10000,
-        "first_name": 651,
-        "last_name": 992,
-        "email": 9777,
-        "phone": 10000,
-        "city": 7676,
-        "state": 59,
-        "loyalty_status": 3
-      },
-      "null_rates": {
-        "customer_id": 0.0,
-        "first_name": 0.0,
-        "last_name": 0.0,
-        "email": 0.0,
-        "phone": 0.0,
-        "city": 0.0,
-        "state": 0.0,
-        "loyalty_status": 0.0
-      }
-    },
-    "products": {
-      "row_count": 1000,
-      "domain": "catalog",
-      "columns": {
-        "product_id": "int64",
-        "product_name": "object",
-        "category": "object",
-        "sub_category": "object",
-        "price": "float64",
-        "cost": "float64"
-      },
-      "distinct_counts": {
-        "product_id": 1000,
-        "product_name": 1000,
-        "category": 5,
-        "sub_category": 15,
-        "price": 988,
-        "cost": 986
-      },
-      "null_rates": {
-        "product_id": 0.0,
-        "product_name": 0.0,
-        "category": 0.0,
-        "sub_category": 0.0,
-        "price": 0.0,
-        "cost": 0.0
-      }
-    },
-    "stores": {
-      "row_count": 100,
-      "domain": "ops",
-      "columns": {
         "store_id": "int64",
-        "store_name": "object",
-        "city": "object",
-        "state": "object",
-        "region": "object"
+        "status": "object",
+        "order_total": "float64"
       },
       "distinct_counts": {
-        "store_id": 100,
-        "store_name": 100,
-        "city": 99,
-        "state": 50,
-        "region": 4
+        "order_id": 10000,
+        "order_date": 365,
+        "customer_id": 10000,
+        "store_id": 10000,
+        "status": 3,
+        "order_total": 9516
       },
       "null_rates": {
+        "order_id": 0.0,
+        "order_date": 0.0,
+        "customer_id": 0.0,
         "store_id": 0.0,
-        "store_name": 0.0,
-        "city": 0.0,
-        "state": 0.0,
-        "region": 0.0
+        "status": 0.0,
+        "order_total": 0.0
       }
     },
-    "promotions": {
-      "row_count": 100,
-      "domain": "ops",
+    "ledgers": {
+      "row_count": 18765,
+      "domain": "finance",
       "columns": {
-        "promo_id": "int64",
-        "discount_rate": "float64",
-        "start_date": "object",
-        "end_date": "object",
-        "promo_name": "object"
+        "ledger_id": "int64",
+        "account": "object",
+        "balance": "float64"
       },
       "distinct_counts": {
-        "promo_id": 100,
-        "discount_rate": 43,
-        "start_date": 89,
-        "end_date": 84,
-        "promo_name": 60
+        "ledger_id": 18765,
+        "account": 971,
+        "balance": 18762
       },
       "null_rates": {
-        "promo_id": 0.0,
-        "discount_rate": 0.0,
-        "start_date": 0.0,
-        "end_date": 0.0,
-        "promo_name": 0.0
+        "ledger_id": 0.0,
+        "account": 0.0,
+        "balance": 0.0
+      }
+    },
+    "budgets": {
+      "row_count": 15678,
+      "domain": "finance",
+      "columns": {
+        "budget_id": "int64",
+        "department": "object",
+        "amount": "float64",
+        "fiscal_year": "int64"
+      },
+      "distinct_counts": {
+        "budget_id": 15678,
+        "department": 6,
+        "amount": 15677,
+        "fiscal_year": 15678
+      },
+      "null_rates": {
+        "budget_id": 0.0,
+        "department": 0.0,
+        "amount": 0.0,
+        "fiscal_year": 0.0
       }
     },
     "dates": {
@@ -140,180 +1167,325 @@
         "weekday": 0.0
       }
     },
-    "suppliers": {
-      "row_count": 50,
-      "domain": "ops",
+    "related_products": {
+      "row_count": 2234,
+      "domain": "catalog",
       "columns": {
-        "supplier_id": "int64",
-        "supplier_name": "object",
+        "id": "int64",
+        "product_id": "int64",
+        "related_id": "int64"
+      },
+      "distinct_counts": {
+        "id": 2234,
+        "product_id": 876,
+        "related_id": 882
+      },
+      "null_rates": {
+        "id": 0.0,
+        "product_id": 0.0,
+        "related_id": 0.0
+      }
+    },
+    "brand_partners": {
+      "row_count": 1345,
+      "domain": "catalog",
+      "columns": {
+        "partner_id": "int64",
+        "brand_name": "object",
         "contact_email": "object"
       },
       "distinct_counts": {
-        "supplier_id": 50,
-        "supplier_name": 49,
-        "contact_email": 50
+        "partner_id": 1345,
+        "brand_name": 1299,
+        "contact_email": 1345
       },
       "null_rates": {
-        "supplier_id": 0.0,
-        "supplier_name": 0.0,
+        "partner_id": 0.0,
+        "brand_name": 0.0,
         "contact_email": 0.0
+      }
+    },
+    "product_attributes": {
+      "row_count": 2890,
+      "domain": "catalog",
+      "columns": {
+        "attribute_id": "int64",
+        "product_id": "int64",
+        "attribute_name": "object",
+        "attribute_value": "object"
+      },
+      "distinct_counts": {
+        "attribute_id": 2890,
+        "product_id": 947,
+        "attribute_name": 915,
+        "attribute_value": 917
+      },
+      "null_rates": {
+        "attribute_id": 0.0,
+        "product_id": 0.0,
+        "attribute_name": 0.0,
+        "attribute_value": 0.0
+      }
+    },
+    "inventory_levels": {
+      "row_count": 5678,
+      "domain": "catalog",
+      "columns": {
+        "level_id": "int64",
+        "product_id": "int64",
+        "warehouse_id": "int64",
+        "quantity_on_hand": "int64"
+      },
+      "distinct_counts": {
+        "level_id": 5678,
+        "product_id": 995,
+        "warehouse_id": 993,
+        "quantity_on_hand": 5678
+      },
+      "null_rates": {
+        "level_id": 0.0,
+        "product_id": 0.0,
+        "warehouse_id": 0.0,
+        "quantity_on_hand": 0.0
+      }
+    },
+    "warehouse_locations": {
+      "row_count": 50,
+      "domain": "ops",
+      "columns": {
+        "warehouse_id": "int64",
+        "location_name": "object",
+        "address": "object",
+        "city": "object",
+        "state": "object",
+        "zip_code": "object",
+        "capacity": "int64"
+      },
+      "distinct_counts": {
+        "warehouse_id": 50,
+        "location_name": 50,
+        "address": 50,
+        "city": 50,
+        "state": 37,
+        "zip_code": 50,
+        "capacity": 50
+      },
+      "null_rates": {
+        "warehouse_id": 0.0,
+        "location_name": 0.0,
+        "address": 0.0,
+        "city": 0.0,
+        "state": 0.0,
+        "zip_code": 0.0,
+        "capacity": 0.0
+      }
+    },
+    "pricing_tiers": {
+      "row_count": 3456,
+      "domain": "catalog",
+      "columns": {
+        "tier_id": "int64",
+        "product_id": "int64",
+        "min_qty": "int64",
+        "max_qty": "int64",
+        "price": "float64"
+      },
+      "distinct_counts": {
+        "tier_id": 3456,
+        "product_id": 971,
+        "min_qty": 3456,
+        "max_qty": 3456,
+        "price": 3319
+      },
+      "null_rates": {
+        "tier_id": 0.0,
+        "product_id": 0.0,
+        "min_qty": 0.0,
+        "max_qty": 0.0,
+        "price": 0.0
+      }
+    },
+    "product_images": {
+      "row_count": 6789,
+      "domain": "catalog",
+      "columns": {
+        "image_id": "int64",
+        "product_id": "int64",
+        "url": "object"
+      },
+      "distinct_counts": {
+        "image_id": 6789,
+        "product_id": 1000,
+        "url": 6784
+      },
+      "null_rates": {
+        "image_id": 0.0,
+        "product_id": 0.0,
+        "url": 0.0
+      }
+    },
+    "product_reviews": {
+      "row_count": 9123,
+      "domain": "catalog",
+      "columns": {
+        "review_id": "int64",
+        "product_id": "int64",
+        "rating": "int64",
+        "review_text": "object"
+      },
+      "distinct_counts": {
+        "review_id": 9123,
+        "product_id": 1000,
+        "rating": 9123,
+        "review_text": 9123
+      },
+      "null_rates": {
+        "review_id": 0.0,
+        "product_id": 0.0,
+        "rating": 0.0,
+        "review_text": 0.0
+      }
+    },
+    "subcategories": {
+      "row_count": 4567,
+      "domain": "catalog",
+      "columns": {
+        "subcategory_id": "int64",
+        "category_id": "int64",
+        "subcategory_name": "object"
+      },
+      "distinct_counts": {
+        "subcategory_id": 4567,
+        "category_id": 992,
+        "subcategory_name": 964
+      },
+      "null_rates": {
+        "subcategory_id": 0.0,
+        "category_id": 0.0,
+        "subcategory_name": 0.0
+      }
+    },
+    "categories": {
+      "row_count": 2345,
+      "domain": "catalog",
+      "columns": {
+        "category_id": "int64",
+        "category_name": "object",
+        "description": "object"
+      },
+      "distinct_counts": {
+        "category_id": 2345,
+        "category_name": 874,
+        "description": 2345
+      },
+      "null_rates": {
+        "category_id": 0.0,
+        "category_name": 0.0,
+        "description": 0.0
+      }
+    },
+    "distribution_centers": {
+      "row_count": 1456,
+      "domain": "ops",
+      "columns": {
+        "center_id": "int64",
+        "name": "object",
+        "region": "object",
+        "manager_id": "int64"
+      },
+      "distinct_counts": {
+        "center_id": 1456,
+        "name": 1403,
+        "region": 4,
+        "manager_id": 770
+      },
+      "null_rates": {
+        "center_id": 0.0,
+        "name": 0.0,
+        "region": 0.0,
+        "manager_id": 0.0
       }
     },
     "employees": {
       "row_count": 200,
-      "domain": "ops",
+      "domain": "hr",
       "columns": {
         "employee_id": "int64",
         "first_name": "object",
         "last_name": "object",
         "hire_date": "object",
-        "store_id": "int64"
+        "department": "object"
       },
       "distinct_counts": {
         "employee_id": 200,
-        "first_name": 131,
-        "last_name": 148,
-        "hire_date": 190,
-        "store_id": 83
+        "first_name": 144,
+        "last_name": 162,
+        "hire_date": 191,
+        "department": 5
       },
       "null_rates": {
         "employee_id": 0.0,
         "first_name": 0.0,
         "last_name": 0.0,
         "hire_date": 0.0,
-        "store_id": 0.0
+        "department": 0.0
       }
     },
-    "orders": {
-      "row_count": 10000,
-      "domain": "sales",
-      "columns": {
-        "order_id": "int64",
-        "order_date": "object",
-        "customer_id": "int64",
-        "store_id": "int64",
-        "status": "object",
-        "order_total": "float64"
-      },
-      "distinct_counts": {
-        "order_id": 10000,
-        "order_date": 366,
-        "customer_id": 6326,
-        "store_id": 100,
-        "status": 3,
-        "order_total": 9495
-      },
-      "null_rates": {
-        "order_id": 0.0,
-        "order_date": 0.0,
-        "customer_id": 0.0,
-        "store_id": 0.0,
-        "status": 0.0,
-        "order_total": 0.0
-      }
-    },
-    "transactions": {
-      "row_count": 30000,
-      "domain": "sales",
-      "columns": {
-        "transaction_id": "int64",
-        "order_id": "int64",
-        "product_id": "int64",
-        "quantity": "int64",
-        "promo_id": "float64",
-        "supplier_id": "int64",
-        "price": "float64"
-      },
-      "distinct_counts": {
-        "transaction_id": 30000,
-        "order_id": 9487,
-        "product_id": 1000,
-        "quantity": 30000,
-        "promo_id": 100,
-        "supplier_id": 50,
-        "price": 30000
-      },
-      "null_rates": {
-        "transaction_id": 0.0,
-        "order_id": 0.0,
-        "product_id": 0.0,
-        "quantity": 0.0,
-        "promo_id": 0.7975,
-        "supplier_id": 0.0,
-        "price": 0.0
-      }
-    },
-    "inventory": {
-      "row_count": 10000,
+    "stores": {
+      "row_count": 4123,
       "domain": "ops",
       "columns": {
         "store_id": "int64",
-        "product_id": "int64",
-        "inventory_date": "object",
-        "stock_quantity": "int64"
+        "store_name": "object",
+        "city": "object",
+        "state": "object",
+        "region": "object"
       },
       "distinct_counts": {
-        "store_id": 100,
-        "product_id": 1000,
-        "inventory_date": 30,
-        "stock_quantity": 10000
+        "store_id": 4123,
+        "store_name": 3824,
+        "city": 3606,
+        "state": 59,
+        "region": 5
       },
       "null_rates": {
         "store_id": 0.0,
-        "product_id": 0.0,
-        "inventory_date": 0.0,
-        "stock_quantity": 0.0
+        "store_name": 0.0,
+        "city": 0.0,
+        "state": 0.0,
+        "region": 0.0
       }
     },
-    "returns": {
-      "row_count": 1000,
-      "domain": "sales",
+    "products": {
+      "row_count": 8123,
+      "domain": "catalog",
       "columns": {
-        "return_id": "int64",
-        "order_id": "int64",
         "product_id": "int64",
-        "return_reason": "object",
-        "return_date": "object"
+        "product_name": "object",
+        "category": "object",
+        "sub_category": "object",
+        "price": "float64",
+        "cost": "float64"
       },
       "distinct_counts": {
-        "return_id": 1000,
-        "order_id": 952,
-        "product_id": 635,
-        "return_reason": 3,
-        "return_date": 269
+        "product_id": 8123,
+        "product_name": 8093,
+        "category": 6,
+        "sub_category": 15,
+        "price": 7464,
+        "cost": 7311
       },
       "null_rates": {
-        "return_id": 0.0,
-        "order_id": 0.0,
         "product_id": 0.0,
-        "return_reason": 0.0,
-        "return_date": 0.0
+        "product_name": 0.0,
+        "category": 0.0,
+        "sub_category": 0.0,
+        "price": 0.0,
+        "cost": 0.0
       }
     },
-    "sales_targets": {
-      "row_count": 1200,
-      "domain": "sales",
-      "columns": {
-        "store_id": "int64",
-        "target_amount": "float64",
-        "month": "int64",
-        "year": "int64"
-      },
-      "distinct_counts": {
-        "store_id": 101,
-        "target_amount": 1200,
-        "month": 12,
-        "year": 1
-      },
-      "null_rates": {
-        "store_id": 0.0,
-        "target_amount": 0.0,
-        "month": 0.0,
-        "year": 0.0
-      }
-    },
-    "legacy_customers": {
-      "row_count": 500,
+    "customers": {
+      "row_count": 59229,
       "domain": "sales",
       "columns": {
         "customer_id": "int64",
@@ -323,19 +1495,17 @@
         "phone": "object",
         "city": "object",
         "state": "object",
-        "loyalty_status": "object",
-        "legacy_flag": "bool"
+        "loyalty_status": "object"
       },
       "distinct_counts": {
-        "customer_id": 488,
-        "first_name": 246,
-        "last_name": 326,
-        "email": 500,
-        "phone": 500,
-        "city": 493,
+        "customer_id": 59229,
+        "first_name": 690,
+        "last_name": 1000,
+        "email": 53538,
+        "phone": 59229,
+        "city": 28017,
         "state": 59,
-        "loyalty_status": 3,
-        "legacy_flag": 1
+        "loyalty_status": 4
       },
       "null_rates": {
         "customer_id": 0.0,
@@ -345,8 +1515,7 @@
         "phone": 0.0,
         "city": 0.0,
         "state": 0.0,
-        "loyalty_status": 0.0,
-        "legacy_flag": 0.0
+        "loyalty_status": 0.0
       }
     }
   },
@@ -362,74 +1531,269 @@
       "references": "stores.store_id"
     },
     {
-      "table": "transactions",
+      "table": "order_items",
       "column": "order_id",
       "references": "orders.order_id"
     },
     {
-      "table": "transactions",
+      "table": "order_items",
       "column": "product_id",
       "references": "products.product_id"
     },
     {
-      "table": "transactions",
-      "column": "supplier_id",
-      "references": "suppliers.supplier_id"
-    },
-    {
-      "table": "inventory",
-      "column": "store_id",
-      "references": "stores.store_id"
-    },
-    {
-      "table": "inventory",
-      "column": "product_id",
-      "references": "products.product_id"
-    },
-    {
-      "table": "returns",
+      "table": "invoices",
       "column": "order_id",
       "references": "orders.order_id"
     },
     {
-      "table": "returns",
+      "table": "payments",
+      "column": "invoice_id",
+      "references": "invoices.invoice_id"
+    },
+    {
+      "table": "refunds",
+      "column": "payment_id",
+      "references": "payments.payment_id"
+    },
+    {
+      "table": "sales_pipeline",
+      "column": "customer_id",
+      "references": "customers.customer_id"
+    },
+    {
+      "table": "sales_pipeline",
+      "column": "opportunity_id",
+      "references": "opportunities.opportunity_id"
+    },
+    {
+      "table": "opportunities",
+      "column": "lead_id",
+      "references": "leads.lead_id"
+    },
+    {
+      "table": "commissions",
+      "column": "opportunity_id",
+      "references": "opportunities.opportunity_id"
+    },
+    {
+      "table": "sales_targets",
+      "column": "sales_forecast_id",
+      "references": "sales_forecast.forecast_id"
+    },
+    {
+      "table": "inventory_levels",
       "column": "product_id",
       "references": "products.product_id"
     },
     {
-      "table": "sales_targets",
+      "table": "inventory_levels",
+      "column": "warehouse_id",
+      "references": "warehouse_locations.warehouse_id"
+    },
+    {
+      "table": "inventory_snapshots",
+      "column": "product_id",
+      "references": "products.product_id"
+    },
+    {
+      "table": "inventory_snapshots",
+      "column": "warehouse_id",
+      "references": "warehouse_locations.warehouse_id"
+    },
+    {
+      "table": "shipments",
+      "column": "order_item_id",
+      "references": "order_items.item_id"
+    },
+    {
+      "table": "shipments",
+      "column": "carrier_id",
+      "references": "carriers.carrier_id"
+    },
+    {
+      "table": "maintenance_requests",
+      "column": "equipment_id",
+      "references": "equipment_logs.equipment_id"
+    },
+    {
+      "table": "store_staffing",
       "column": "store_id",
       "references": "stores.store_id"
     },
     {
-      "table": "employees",
+      "table": "store_staffing",
+      "column": "employee_id",
+      "references": "employees.employee_id"
+    },
+    {
+      "table": "schedule_shifts",
       "column": "store_id",
       "references": "stores.store_id"
     },
     {
-      "table": "orders",
-      "column": "order_date",
-      "references": "dates.full_date"
+      "table": "schedule_shifts",
+      "column": "employee_id",
+      "references": "employees.employee_id"
     },
     {
-      "table": "inventory",
-      "column": "inventory_date",
-      "references": "dates.full_date"
+      "table": "facility_inspections",
+      "column": "store_id",
+      "references": "stores.store_id"
     },
     {
-      "table": "returns",
-      "column": "return_date",
-      "references": "dates.full_date"
+      "table": "equipment_logs",
+      "column": "asset_id",
+      "references": "asset_management.asset_id"
     },
     {
-      "table": "sales_targets",
-      "column": "month",
-      "references": "dates.month"
+      "table": "transfer_orders",
+      "column": "from_center",
+      "references": "distribution_centers.center_id"
     },
     {
-      "table": "sales_targets",
-      "column": "year",
-      "references": "dates.year"
+      "table": "transfer_orders",
+      "column": "to_center",
+      "references": "distribution_centers.center_id"
+    },
+    {
+      "table": "packaging",
+      "column": "shipment_id",
+      "references": "shipments.shipment_id"
+    },
+    {
+      "table": "invoices_finance",
+      "column": "billing_cycle_id",
+      "references": "billing_cycles.billing_cycle_id"
+    },
+    {
+      "table": "payments_finance",
+      "column": "invoice_id",
+      "references": "invoices_finance.invoice_id"
+    },
+    {
+      "table": "expense_reports",
+      "column": "employee_id",
+      "references": "employees.employee_id"
+    },
+    {
+      "table": "tax_records",
+      "column": "invoice_id",
+      "references": "invoices_finance.invoice_id"
+    },
+    {
+      "table": "accounts_receivable",
+      "column": "customer_id",
+      "references": "customers.customer_id"
+    },
+    {
+      "table": "credit_notes",
+      "column": "invoice_id",
+      "references": "invoices_finance.invoice_id"
+    },
+    {
+      "table": "ad_spend",
+      "column": "campaign_id",
+      "references": "campaigns.campaign_id"
+    },
+    {
+      "table": "email_campaigns",
+      "column": "campaign_id",
+      "references": "campaigns.campaign_id"
+    },
+    {
+      "table": "marketing_targets",
+      "column": "campaign_id",
+      "references": "campaigns.campaign_id"
+    },
+    {
+      "table": "attendance_records",
+      "column": "employee_id",
+      "references": "employees.employee_id"
+    },
+    {
+      "table": "payroll",
+      "column": "employee_id",
+      "references": "employees.employee_id"
+    },
+    {
+      "table": "benefits_enrollment",
+      "column": "employee_id",
+      "references": "employees.employee_id"
+    },
+    {
+      "table": "performance_reviews",
+      "column": "employee_id",
+      "references": "employees.employee_id"
+    },
+    {
+      "table": "org_chart",
+      "column": "manager_id",
+      "references": "employees.employee_id"
+    },
+    {
+      "table": "org_chart",
+      "column": "subordinate_id",
+      "references": "employees.employee_id"
+    },
+    {
+      "table": "anomaly_detections",
+      "column": "metric_id",
+      "references": "data_quality_metrics.metric_id"
+    },
+    {
+      "table": "segmentation_results",
+      "column": "kpi_id",
+      "references": "kpi_definitions.kpi_id"
+    },
+    {
+      "table": "trend_analysis",
+      "column": "metric_id",
+      "references": "data_quality_metrics.metric_id"
+    },
+    {
+      "table": "tickets",
+      "column": "customer_id",
+      "references": "customers.customer_id"
+    },
+    {
+      "table": "ticket_responses",
+      "column": "ticket_id",
+      "references": "tickets.ticket_id"
+    },
+    {
+      "table": "chat_logs",
+      "column": "customer_id",
+      "references": "customers.customer_id"
+    },
+    {
+      "table": "chat_logs",
+      "column": "agent_id",
+      "references": "support_agents.agent_id"
+    },
+    {
+      "table": "call_records",
+      "column": "ticket_id",
+      "references": "tickets.ticket_id"
+    },
+    {
+      "table": "satisfaction_surveys",
+      "column": "ticket_id",
+      "references": "tickets.ticket_id"
+    },
+    {
+      "table": "escalations",
+      "column": "ticket_id",
+      "references": "tickets.ticket_id"
+    },
+    {
+      "table": "faq_hits",
+      "column": "article_id",
+      "references": "knowledge_base_articles.article_id"
+    },
+    {
+      "table": "resolution_times",
+      "column": "ticket_id",
+      "references": "tickets.ticket_id"
     }
   ]
 }

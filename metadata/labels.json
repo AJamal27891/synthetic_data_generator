@@ -5,7 +5,399 @@
       "label": "normal"
     },
     {
+      "name": "clean_customers",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_customers",
+      "label": "normal"
+    },
+    {
+      "name": "load_customers_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_orders",
+      "label": "normal"
+    },
+    {
+      "name": "clean_orders",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_orders",
+      "label": "normal"
+    },
+    {
+      "name": "load_orders_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_order_items",
+      "label": "normal"
+    },
+    {
+      "name": "clean_order_items",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_order_items",
+      "label": "normal"
+    },
+    {
+      "name": "load_order_items_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_invoices",
+      "label": "normal"
+    },
+    {
+      "name": "clean_invoices",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_invoices",
+      "label": "normal"
+    },
+    {
+      "name": "load_invoices_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_payments",
+      "label": "normal"
+    },
+    {
+      "name": "clean_payments",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_payments",
+      "label": "normal"
+    },
+    {
+      "name": "load_payments_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_refunds",
+      "label": "normal"
+    },
+    {
+      "name": "clean_refunds",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_refunds",
+      "label": "normal"
+    },
+    {
+      "name": "load_refunds_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_sales_pipeline",
+      "label": "normal"
+    },
+    {
+      "name": "clean_sales_pipeline",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_sales_pipeline",
+      "label": "normal"
+    },
+    {
+      "name": "load_sales_pipeline_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_leads",
+      "label": "normal"
+    },
+    {
+      "name": "clean_leads",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_leads",
+      "label": "normal"
+    },
+    {
+      "name": "load_leads_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_opportunities",
+      "label": "normal"
+    },
+    {
+      "name": "clean_opportunities",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_opportunities",
+      "label": "normal"
+    },
+    {
+      "name": "load_opportunities_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_commissions",
+      "label": "normal"
+    },
+    {
+      "name": "clean_commissions",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_commissions",
+      "label": "normal"
+    },
+    {
+      "name": "load_commissions_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_sales_forecast",
+      "label": "normal"
+    },
+    {
+      "name": "clean_sales_forecast",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_sales_forecast",
+      "label": "normal"
+    },
+    {
+      "name": "load_sales_forecast_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_sales_targets",
+      "label": "normal"
+    },
+    {
+      "name": "clean_sales_targets",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_sales_targets",
+      "label": "normal"
+    },
+    {
+      "name": "load_sales_targets_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_sales_regions",
+      "label": "normal"
+    },
+    {
+      "name": "clean_sales_regions",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_sales_regions",
+      "label": "normal"
+    },
+    {
+      "name": "load_sales_regions_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_sales_channels",
+      "label": "normal"
+    },
+    {
+      "name": "clean_sales_channels",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_sales_channels",
+      "label": "normal"
+    },
+    {
+      "name": "load_sales_channels_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_customer_segments",
+      "label": "normal"
+    },
+    {
+      "name": "clean_customer_segments",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_customer_segments",
+      "label": "normal"
+    },
+    {
+      "name": "load_customer_segments_dw",
+      "label": "normal"
+    },
+    {
       "name": "extract_products",
+      "label": "normal"
+    },
+    {
+      "name": "clean_products",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_products",
+      "label": "normal"
+    },
+    {
+      "name": "load_products_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_categories",
+      "label": "normal"
+    },
+    {
+      "name": "clean_categories",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_categories",
+      "label": "normal"
+    },
+    {
+      "name": "load_categories_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_subcategories",
+      "label": "normal"
+    },
+    {
+      "name": "clean_subcategories",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_subcategories",
+      "label": "normal"
+    },
+    {
+      "name": "load_subcategories_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_product_reviews",
+      "label": "normal"
+    },
+    {
+      "name": "clean_product_reviews",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_product_reviews",
+      "label": "normal"
+    },
+    {
+      "name": "load_product_reviews_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_product_images",
+      "label": "normal"
+    },
+    {
+      "name": "clean_product_images",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_product_images",
+      "label": "normal"
+    },
+    {
+      "name": "load_product_images_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_pricing_tiers",
+      "label": "normal"
+    },
+    {
+      "name": "clean_pricing_tiers",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_pricing_tiers",
+      "label": "normal"
+    },
+    {
+      "name": "load_pricing_tiers_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_inventory_levels",
+      "label": "normal"
+    },
+    {
+      "name": "clean_inventory_levels",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_inventory_levels",
+      "label": "normal"
+    },
+    {
+      "name": "load_inventory_levels_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_product_attributes",
+      "label": "normal"
+    },
+    {
+      "name": "clean_product_attributes",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_product_attributes",
+      "label": "normal"
+    },
+    {
+      "name": "load_product_attributes_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_brand_partners",
+      "label": "normal"
+    },
+    {
+      "name": "clean_brand_partners",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_brand_partners",
+      "label": "normal"
+    },
+    {
+      "name": "load_brand_partners_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_related_products",
+      "label": "normal"
+    },
+    {
+      "name": "clean_related_products",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_related_products",
+      "label": "normal"
+    },
+    {
+      "name": "load_related_products_dw",
       "label": "normal"
     },
     {
@@ -13,15 +405,639 @@
       "label": "normal"
     },
     {
-      "name": "extract_promotions",
+      "name": "clean_stores",
       "label": "normal"
     },
     {
-      "name": "extract_dates",
+      "name": "enrich_stores",
       "label": "normal"
     },
     {
-      "name": "extract_suppliers",
+      "name": "load_stores_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_warehouse_locations",
+      "label": "normal"
+    },
+    {
+      "name": "clean_warehouse_locations",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_warehouse_locations",
+      "label": "normal"
+    },
+    {
+      "name": "load_warehouse_locations_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_inventory_snapshots",
+      "label": "normal"
+    },
+    {
+      "name": "clean_inventory_snapshots",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_inventory_snapshots",
+      "label": "normal"
+    },
+    {
+      "name": "load_inventory_snapshots_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_shipments",
+      "label": "normal"
+    },
+    {
+      "name": "clean_shipments",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_shipments",
+      "label": "normal"
+    },
+    {
+      "name": "load_shipments_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_carriers",
+      "label": "normal"
+    },
+    {
+      "name": "clean_carriers",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_carriers",
+      "label": "normal"
+    },
+    {
+      "name": "load_carriers_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_logistics_routes",
+      "label": "normal"
+    },
+    {
+      "name": "clean_logistics_routes",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_logistics_routes",
+      "label": "normal"
+    },
+    {
+      "name": "load_logistics_routes_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_maintenance_requests",
+      "label": "normal"
+    },
+    {
+      "name": "clean_maintenance_requests",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_maintenance_requests",
+      "label": "normal"
+    },
+    {
+      "name": "load_maintenance_requests_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_store_staffing",
+      "label": "normal"
+    },
+    {
+      "name": "clean_store_staffing",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_store_staffing",
+      "label": "normal"
+    },
+    {
+      "name": "load_store_staffing_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_schedule_shifts",
+      "label": "normal"
+    },
+    {
+      "name": "clean_schedule_shifts",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_schedule_shifts",
+      "label": "normal"
+    },
+    {
+      "name": "load_schedule_shifts_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_facility_inspections",
+      "label": "normal"
+    },
+    {
+      "name": "clean_facility_inspections",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_facility_inspections",
+      "label": "normal"
+    },
+    {
+      "name": "load_facility_inspections_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_asset_management",
+      "label": "normal"
+    },
+    {
+      "name": "clean_asset_management",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_asset_management",
+      "label": "normal"
+    },
+    {
+      "name": "load_asset_management_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_equipment_logs",
+      "label": "normal"
+    },
+    {
+      "name": "clean_equipment_logs",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_equipment_logs",
+      "label": "normal"
+    },
+    {
+      "name": "load_equipment_logs_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_distribution_centers",
+      "label": "normal"
+    },
+    {
+      "name": "clean_distribution_centers",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_distribution_centers",
+      "label": "normal"
+    },
+    {
+      "name": "load_distribution_centers_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_transfer_orders",
+      "label": "normal"
+    },
+    {
+      "name": "clean_transfer_orders",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_transfer_orders",
+      "label": "normal"
+    },
+    {
+      "name": "load_transfer_orders_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_packaging",
+      "label": "normal"
+    },
+    {
+      "name": "clean_packaging",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_packaging",
+      "label": "normal"
+    },
+    {
+      "name": "load_packaging_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_invoices_fin",
+      "label": "normal"
+    },
+    {
+      "name": "clean_invoices_fin",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_invoices_fin",
+      "label": "normal"
+    },
+    {
+      "name": "load_invoices_fin_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_payments_fin",
+      "label": "normal"
+    },
+    {
+      "name": "clean_payments_fin",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_payments_fin",
+      "label": "normal"
+    },
+    {
+      "name": "load_payments_fin_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_billing_cycles",
+      "label": "normal"
+    },
+    {
+      "name": "clean_billing_cycles",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_billing_cycles",
+      "label": "normal"
+    },
+    {
+      "name": "load_billing_cycles_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_expense_reports",
+      "label": "normal"
+    },
+    {
+      "name": "clean_expense_reports",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_expense_reports",
+      "label": "normal"
+    },
+    {
+      "name": "load_expense_reports_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_budgets_fin",
+      "label": "normal"
+    },
+    {
+      "name": "clean_budgets_fin",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_budgets_fin",
+      "label": "normal"
+    },
+    {
+      "name": "load_budgets_fin_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_ledgers",
+      "label": "normal"
+    },
+    {
+      "name": "clean_ledgers",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_ledgers",
+      "label": "normal"
+    },
+    {
+      "name": "load_ledgers_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_tax_records",
+      "label": "normal"
+    },
+    {
+      "name": "clean_tax_records",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_tax_records",
+      "label": "normal"
+    },
+    {
+      "name": "load_tax_records_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_financial_statements",
+      "label": "normal"
+    },
+    {
+      "name": "clean_financial_statements",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_financial_statements",
+      "label": "normal"
+    },
+    {
+      "name": "load_financial_statements_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_accounts_receivable",
+      "label": "normal"
+    },
+    {
+      "name": "clean_accounts_receivable",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_accounts_receivable",
+      "label": "normal"
+    },
+    {
+      "name": "load_accounts_receivable_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_accounts_payable",
+      "label": "normal"
+    },
+    {
+      "name": "clean_accounts_payable",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_accounts_payable",
+      "label": "normal"
+    },
+    {
+      "name": "load_accounts_payable_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_cost_centers",
+      "label": "normal"
+    },
+    {
+      "name": "clean_cost_centers",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_cost_centers",
+      "label": "normal"
+    },
+    {
+      "name": "load_cost_centers_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_profit_centers",
+      "label": "normal"
+    },
+    {
+      "name": "clean_profit_centers",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_profit_centers",
+      "label": "normal"
+    },
+    {
+      "name": "load_profit_centers_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_currency_rates",
+      "label": "normal"
+    },
+    {
+      "name": "clean_currency_rates",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_currency_rates",
+      "label": "normal"
+    },
+    {
+      "name": "load_currency_rates_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_bank_reconciliations",
+      "label": "normal"
+    },
+    {
+      "name": "clean_bank_reconciliations",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_bank_reconciliations",
+      "label": "normal"
+    },
+    {
+      "name": "load_bank_reconciliations_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_credit_notes",
+      "label": "normal"
+    },
+    {
+      "name": "clean_credit_notes",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_credit_notes",
+      "label": "normal"
+    },
+    {
+      "name": "load_credit_notes_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_campaigns",
+      "label": "normal"
+    },
+    {
+      "name": "clean_campaigns",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_campaigns",
+      "label": "normal"
+    },
+    {
+      "name": "load_campaigns_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_ad_spend",
+      "label": "normal"
+    },
+    {
+      "name": "clean_ad_spend",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_ad_spend",
+      "label": "normal"
+    },
+    {
+      "name": "load_ad_spend_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_social_media_metrics",
+      "label": "normal"
+    },
+    {
+      "name": "clean_social_media_metrics",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_social_media_metrics",
+      "label": "normal"
+    },
+    {
+      "name": "load_social_media_metrics_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_seo_keywords",
+      "label": "normal"
+    },
+    {
+      "name": "clean_seo_keywords",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_seo_keywords",
+      "label": "normal"
+    },
+    {
+      "name": "load_seo_keywords_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_email_campaigns",
+      "label": "normal"
+    },
+    {
+      "name": "clean_email_campaigns",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_email_campaigns",
+      "label": "normal"
+    },
+    {
+      "name": "load_email_campaigns_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_web_traffic",
+      "label": "normal"
+    },
+    {
+      "name": "clean_web_traffic",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_web_traffic",
+      "label": "normal"
+    },
+    {
+      "name": "load_web_traffic_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_customer_segments_marketing",
+      "label": "normal"
+    },
+    {
+      "name": "clean_customer_segments_marketing",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_customer_segments_marketing",
+      "label": "normal"
+    },
+    {
+      "name": "load_customer_segments_marketing_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_loyalty_programs",
+      "label": "normal"
+    },
+    {
+      "name": "clean_loyalty_programs",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_loyalty_programs",
+      "label": "normal"
+    },
+    {
+      "name": "load_loyalty_programs_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_survey_responses",
+      "label": "normal"
+    },
+    {
+      "name": "clean_survey_responses",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_survey_responses",
+      "label": "normal"
+    },
+    {
+      "name": "load_survey_responses_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_marketing_targets",
+      "label": "normal"
+    },
+    {
+      "name": "clean_marketing_targets",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_marketing_targets",
+      "label": "normal"
+    },
+    {
+      "name": "load_marketing_targets_dw",
       "label": "normal"
     },
     {
@@ -29,53 +1045,724 @@
       "label": "normal"
     },
     {
-      "name": "load_orders",
+      "name": "clean_employees",
       "label": "normal"
     },
     {
-      "name": "load_transactions",
+      "name": "enrich_employees",
       "label": "normal"
     },
     {
-      "name": "transform_inventory",
+      "name": "load_employees_dw",
       "label": "normal"
     },
     {
-      "name": "load_returns",
+      "name": "extract_attendance_records",
       "label": "normal"
     },
     {
-      "name": "load_sales_targets",
+      "name": "clean_attendance_records",
       "label": "normal"
     },
     {
-      "name": "archive_orders",
-      "label": "partial_write"
+      "name": "enrich_attendance_records",
+      "label": "normal"
     },
     {
-      "name": "transform_sales_data",
-      "label": "job_failure"
+      "name": "load_attendance_records_dw",
+      "label": "normal"
     },
     {
-      "name": "merge_legacy_customers",
-      "label": "mixed_operation"
+      "name": "extract_payroll",
+      "label": "normal"
+    },
+    {
+      "name": "clean_payroll",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_payroll",
+      "label": "normal"
+    },
+    {
+      "name": "load_payroll_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_benefits_enrollment",
+      "label": "normal"
+    },
+    {
+      "name": "clean_benefits_enrollment",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_benefits_enrollment",
+      "label": "normal"
+    },
+    {
+      "name": "load_benefits_enrollment_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_performance_reviews",
+      "label": "normal"
+    },
+    {
+      "name": "clean_performance_reviews",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_performance_reviews",
+      "label": "normal"
+    },
+    {
+      "name": "load_performance_reviews_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_training_sessions",
+      "label": "normal"
+    },
+    {
+      "name": "clean_training_sessions",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_training_sessions",
+      "label": "normal"
+    },
+    {
+      "name": "load_training_sessions_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_recruitment_applications",
+      "label": "normal"
+    },
+    {
+      "name": "clean_recruitment_applications",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_recruitment_applications",
+      "label": "normal"
+    },
+    {
+      "name": "load_recruitment_applications_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_job_postings",
+      "label": "normal"
+    },
+    {
+      "name": "clean_job_postings",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_job_postings",
+      "label": "normal"
+    },
+    {
+      "name": "load_job_postings_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_org_chart",
+      "label": "normal"
+    },
+    {
+      "name": "clean_org_chart",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_org_chart",
+      "label": "normal"
+    },
+    {
+      "name": "load_org_chart_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_compensation_bands",
+      "label": "normal"
+    },
+    {
+      "name": "clean_compensation_bands",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_compensation_bands",
+      "label": "normal"
+    },
+    {
+      "name": "load_compensation_bands_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_dashboard_views",
+      "label": "normal"
+    },
+    {
+      "name": "clean_dashboard_views",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_dashboard_views",
+      "label": "normal"
+    },
+    {
+      "name": "load_dashboard_views_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_kpi_definitions",
+      "label": "normal"
+    },
+    {
+      "name": "clean_kpi_definitions",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_kpi_definitions",
+      "label": "normal"
+    },
+    {
+      "name": "load_kpi_definitions_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_event_logs",
+      "label": "normal"
+    },
+    {
+      "name": "clean_event_logs",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_event_logs",
+      "label": "normal"
+    },
+    {
+      "name": "load_event_logs_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_session_data",
+      "label": "normal"
+    },
+    {
+      "name": "clean_session_data",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_session_data",
+      "label": "normal"
+    },
+    {
+      "name": "load_session_data_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_data_quality_metrics",
+      "label": "normal"
+    },
+    {
+      "name": "clean_data_quality_metrics",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_data_quality_metrics",
+      "label": "normal"
+    },
+    {
+      "name": "load_data_quality_metrics_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_anomaly_detections",
+      "label": "normal"
+    },
+    {
+      "name": "clean_anomaly_detections",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_anomaly_detections",
+      "label": "normal"
+    },
+    {
+      "name": "load_anomaly_detections_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_predictive_models",
+      "label": "normal"
+    },
+    {
+      "name": "clean_predictive_models",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_predictive_models",
+      "label": "normal"
+    },
+    {
+      "name": "load_predictive_models_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_segmentation_results",
+      "label": "normal"
+    },
+    {
+      "name": "clean_segmentation_results",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_segmentation_results",
+      "label": "normal"
+    },
+    {
+      "name": "load_segmentation_results_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_trend_analysis",
+      "label": "normal"
+    },
+    {
+      "name": "clean_trend_analysis",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_trend_analysis",
+      "label": "normal"
+    },
+    {
+      "name": "load_trend_analysis_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_report_configs",
+      "label": "normal"
+    },
+    {
+      "name": "clean_report_configs",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_report_configs",
+      "label": "normal"
+    },
+    {
+      "name": "load_report_configs_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_tickets",
+      "label": "normal"
+    },
+    {
+      "name": "clean_tickets",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_tickets",
+      "label": "normal"
+    },
+    {
+      "name": "load_tickets_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_ticket_responses",
+      "label": "normal"
+    },
+    {
+      "name": "clean_ticket_responses",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_ticket_responses",
+      "label": "normal"
+    },
+    {
+      "name": "load_ticket_responses_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_chat_logs",
+      "label": "normal"
+    },
+    {
+      "name": "clean_chat_logs",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_chat_logs",
+      "label": "normal"
+    },
+    {
+      "name": "load_chat_logs_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_call_records",
+      "label": "normal"
+    },
+    {
+      "name": "clean_call_records",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_call_records",
+      "label": "normal"
+    },
+    {
+      "name": "load_call_records_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_satisfaction_surveys",
+      "label": "normal"
+    },
+    {
+      "name": "clean_satisfaction_surveys",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_satisfaction_surveys",
+      "label": "normal"
+    },
+    {
+      "name": "load_satisfaction_surveys_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_escalations",
+      "label": "normal"
+    },
+    {
+      "name": "clean_escalations",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_escalations",
+      "label": "normal"
+    },
+    {
+      "name": "load_escalations_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_knowledge_base_articles",
+      "label": "normal"
+    },
+    {
+      "name": "clean_knowledge_base_articles",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_knowledge_base_articles",
+      "label": "normal"
+    },
+    {
+      "name": "load_knowledge_base_articles_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_support_agents",
+      "label": "normal"
+    },
+    {
+      "name": "clean_support_agents",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_support_agents",
+      "label": "normal"
+    },
+    {
+      "name": "load_support_agents_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_faq_hits",
+      "label": "normal"
+    },
+    {
+      "name": "clean_faq_hits",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_faq_hits",
+      "label": "normal"
+    },
+    {
+      "name": "load_faq_hits_dw",
+      "label": "normal"
+    },
+    {
+      "name": "extract_resolution_times",
+      "label": "normal"
+    },
+    {
+      "name": "clean_resolution_times",
+      "label": "normal"
+    },
+    {
+      "name": "enrich_resolution_times",
+      "label": "normal"
+    },
+    {
+      "name": "load_resolution_times_dw",
+      "label": "normal"
     }
   ],
   "anomalies": [
     {
       "type": "missing_fk",
-      "table": "transactions",
-      "column": "order_id"
+      "table": "stores",
+      "column": "region"
     },
     {
       "type": "missing_fk",
-      "table": "sales_targets",
-      "column": "store_id"
+      "table": "products",
+      "column": "category"
+    },
+    {
+      "type": "missing_fk",
+      "table": "customers",
+      "column": "loyalty_status"
     },
     {
       "type": "ghost_output",
       "step": "archive_orders",
       "output": "ghost.csv"
+    },
+    {
+      "type": "job_failure",
+      "step": "transform_sales_data"
+    },
+    {
+      "type": "partial_write",
+      "step": "archive_orders",
+      "outputs": [
+        "orders_backup.csv"
+      ]
+    },
+    {
+      "type": "mixed_operation",
+      "step": "merge_legacy_customers",
+      "outputs": [
+        "customers.csv"
+      ]
+    },
+    {
+      "type": "circular_dependency",
+      "table": "resolution_times",
+      "column": "ticket_id",
+      "references": "tickets"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "faq_hits",
+      "column": "article_id",
+      "references": "knowledge_base_articles"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "escalations",
+      "column": "ticket_id",
+      "references": "tickets"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "satisfaction_surveys",
+      "column": "ticket_id",
+      "references": "tickets"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "call_records",
+      "column": "ticket_id",
+      "references": "tickets"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "chat_logs",
+      "column": "customer_id",
+      "references": "customers"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "chat_logs",
+      "column": "agent_id",
+      "references": "support_agents"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "ticket_responses",
+      "column": "ticket_id",
+      "references": "tickets"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "tickets",
+      "column": "customer_id",
+      "references": "customers"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "trend_analysis",
+      "column": "metric_id",
+      "references": "data_quality_metrics"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "segmentation_results",
+      "column": "kpi_id",
+      "references": "kpi_definitions"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "anomaly_detections",
+      "column": "metric_id",
+      "references": "data_quality_metrics"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "org_chart",
+      "column": "manager_id",
+      "references": "employees"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "org_chart",
+      "column": "subordinate_id",
+      "references": "employees"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "performance_reviews",
+      "column": "employee_id",
+      "references": "employees"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "benefits_enrollment",
+      "column": "employee_id",
+      "references": "employees"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "payroll",
+      "column": "employee_id",
+      "references": "employees"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "attendance_records",
+      "column": "employee_id",
+      "references": "employees"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "marketing_targets",
+      "column": "campaign_id",
+      "references": "campaigns"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "email_campaigns",
+      "column": "campaign_id",
+      "references": "campaigns"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "ad_spend",
+      "column": "campaign_id",
+      "references": "campaigns"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "credit_notes",
+      "column": "invoice_id",
+      "references": "invoices_finance"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "accounts_receivable",
+      "column": "customer_id",
+      "references": "customers"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "financial_statements",
+      "column": "ledger_id",
+      "references": "ledgers"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "related_products",
+      "column": "product_id",
+      "references": "products"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "related_products",
+      "column": "related_id",
+      "references": "products"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "product_attributes",
+      "column": "product_id",
+      "references": "products"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "inventory_levels",
+      "column": "product_id",
+      "references": "products"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "inventory_levels",
+      "column": "warehouse_id",
+      "references": "warehouse_locations"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "pricing_tiers",
+      "column": "product_id",
+      "references": "products"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "product_images",
+      "column": "product_id",
+      "references": "products"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "product_reviews",
+      "column": "product_id",
+      "references": "products"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "subcategories",
+      "column": "category_id",
+      "references": "categories"
+    },
+    {
+      "type": "circular_dependency",
+      "table": "distribution_centers",
+      "column": "manager_id",
+      "references": "employees"
     }
   ]
 }

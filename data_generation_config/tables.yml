@@ -1,5 +1,9 @@
+# tables.yml
 seed: 123
 
+# ───────────────────────────────────────────────────────────
+# Domains + their tables
+# ───────────────────────────────────────────────────────────
 domains:
   sales:
     - customers
@@ -8,24 +12,129 @@ domains:
     - returns
     - sales_targets
     - legacy_customers
+    - invoices
+    - payments
+    - refunds
+    - quotes
+    - leads
+    - opportunities
+    - commissions
+    - sales_pipeline
+    - customer_segments
   catalog:
     - products
+    - categories
+    - subcategories
+    - product_reviews
+    - product_images
+    - pricing_tiers
+    - inventory_levels
+    - product_attributes
+    - brand_partners
+    - related_products
   ops:
     - stores
-    - inventory
-    - promotions
-    - suppliers
+    - warehouse_locations
+    - inventory_snapshots
+    - shipments
+    - carriers
+    - logistics_routes
+    - maintenance_requests
+    - store_staffing
+    - schedule_shifts
+    - facility_inspections
+    - asset_management
+    - equipment_logs
+    - distribution_centers
+    - transfer_orders
+    - packaging
+  finance:
+    - billing_cycles
+    - expense_reports
+    - budgets
+    - ledgers
+    - tax_records
+    - financial_statements
+    - accounts_receivable
+    - accounts_payable
+    - cost_centers
+    - profit_centers
+    - currency_rates
+    - bank_reconciliations
+    - credit_notes
+    - invoices       # overlapping name—but domain logic can handle
+    - payments       # same
+  marketing:
+    - campaigns
+    - ad_spend
+    - social_media_metrics
+    - seo_keywords
+    - email_campaigns
+    - web_traffic
+    - loyalty_programs
+    - survey_responses
+    - marketing_targets
+    - customer_segments  # overlapping
+  hr:
     - employees
-    - dates
+    - attendance_records
+    - payroll
+    - benefits_enrollment
+    - performance_reviews
+    - training_sessions
+    - recruitment_applications
+    - job_postings
+    - org_chart
+    - compensation_bands
+  analytics:
+    - dashboard_views
+    - kpi_definitions
+    - event_logs
+    - session_data
+    - data_quality_metrics
+    - anomaly_detections
+    - predictive_models
+    - segmentation_results
+    - trend_analysis
+    - report_configs
+  support:
+    - tickets
+    - ticket_responses
+    - chat_logs
+    - call_records
+    - satisfaction_surveys
+    - escalations
+    - knowledge_base_articles
+    - support_agents
+    - faq_hits
+    - resolution_times
+
+# ───────────────────────────────────────────────────────────
+# “defaults” anchor for a minimal single‑column schema
+# you can expand it later if you want richer schemas per‑table
+# ───────────────────────────────────────────────────────────
+defaults: &defaults
+  columns:
+    id:
+      type: int
+      range: [1, 100000]
+
+# ───────────────────────────────────────────────────────────
+# Table definitions (100 total).  Each re‑uses &defaults.
+# ───────────────────────────────────────────────────────────
+# tables.yml — full “tables:” section with realistic columns for 96 tables
 
 tables:
+  # ───── INDEPENDENT / LOOKUP‑TARGETS ─────
+
   customers:
-    row_count: 10000
+    <<: *defaults
+    row_count: 59229
     domain: sales
     columns:
       customer_id:
         type: int
-        range: [1, 10000]
+        range: [1, 59229]
       first_name:
         type: faker
         method: first_name
@@ -46,30 +155,31 @@ tables:
         method: state_abbr
       loyalty_status:
         type: choice
-        choices: ["Bronze", "Silver", "Gold"]
+        choices: ["Bronze","Silver","Gold"]
 
   products:
-    row_count: 1000
+    <<: *defaults
+    row_count: 8123
     domain: catalog
     columns:
       product_id:
         type: int
-        range: [1, 1000]
+        range: [1, 8123]
       product_name:
         type: faker
         method: catch_phrase
       category:
         type: choice
-        choices: ["Electronics", "Clothing", "Home", "Sports", "Toys"]
+        choices: ["Electronics","Clothing","Home","Sports","Toys"]
       sub_category:
         type: lookup
         from: category
         map:
-          Electronics: ["Mobile", "Laptop", "Camera"]
-          Clothing:   ["Men", "Women", "Kids"]
-          Home:       ["Furniture", "Kitchen", "Decor"]
-          Sports:     ["Fitness", "Outdoor", "Team"]
-          Toys:       ["Educational", "Action", "Puzzle"]
+          Electronics: ["Mobile","Laptop","Camera"]
+          Clothing:   ["Men","Women","Kids"]
+          Home:       ["Furniture","Kitchen","Decor"]
+          Sports:     ["Fitness","Outdoor","Team"]
+          Toys:       ["Educational","Action","Puzzle"]
       price:
         type: float
         range: [5.0, 500.0]
@@ -80,12 +190,13 @@ tables:
         precision: 2
 
   stores:
-    row_count: 100
+    <<: *defaults
+    row_count: 4123
     domain: ops
     columns:
       store_id:
         type: int
-        range: [1, 100]
+        range: [1, 4123]
       store_name:
         type: faker
         method: company
@@ -97,38 +208,185 @@ tables:
         method: state_abbr
       region:
         type: choice
-        choices: ["North", "South", "East", "West"]
+        choices: ["North","South","East","West"]
 
-  promotions:
-    row_count: 100
+  distribution_centers:
+    <<: *defaults
+    row_count: 1456
     domain: ops
     columns:
-      promo_id:
+      center_id:
         type: int
-        range: [1, 100]
-      promo_name:
-        type: derived
-        expr: '"Promo %d" % random.randint(1, 100)'
-      discount_rate:
+        range: [1, 1456]
+      name:
+        type: faker
+        method: company
+      region:
+        type: choice
+        choices: ["North","South","East","West"]
+      manager_id:
+        type: lookup
+        reference: employees.employee_id
+
+  categories:
+    <<: *defaults
+    row_count: 2345
+    domain: catalog
+    columns:
+      category_id:
+        type: int
+        range: [1, 2345]
+      category_name:
+        type: faker
+        method: word
+      description:
+        type: faker
+        method: sentence
+
+  subcategories:
+    <<: *defaults
+    row_count: 4567
+    domain: catalog
+    columns:
+      subcategory_id:
+        type: int
+        range: [1, 4567]
+      category_id:
+        type: lookup
+        reference: categories.category_id
+      subcategory_name:
+        type: faker
+        method: word
+
+  product_reviews:
+    <<: *defaults
+    row_count: 9123
+    domain: catalog
+    columns:
+      review_id:
+        type: int
+        range: [1, 9123]
+      product_id:
+        type: lookup
+        reference: products.product_id
+      rating:
+        type: int
+        range: [1,5]
+      review_text:
+        type: faker
+        method: paragraph
+
+  product_images:
+    <<: *defaults
+    row_count: 6789
+    domain: catalog
+    columns:
+      image_id:
+        type: int
+        range: [1, 6789]
+      product_id:
+        type: lookup
+        reference: products.product_id
+      url:
+        type: faker
+        method: image_url
+
+  pricing_tiers:
+    <<: *defaults
+    row_count: 3456
+    domain: catalog
+    columns:
+      tier_id:
+        type: int
+        range: [1, 3456]
+      product_id:
+        type: lookup
+        reference: products.product_id
+      min_qty:
+        type: int
+        range: [1,100]
+      max_qty:
+        type: int
+        range: [101,1000]
+      price:
         type: float
-        range: [0.05, 0.5]
+        range: [1.0, 400.0]
         precision: 2
-      start_date:
+
+  inventory_levels:
+    <<: *defaults
+    row_count: 5678
+    domain: catalog
+    columns:
+      level_id:
+        type: int
+        range: [1, 5678]
+      product_id:
+        type: lookup
+        reference: products.product_id
+      warehouse_id:
+        type: lookup
+        reference: warehouse_locations.location_id
+      quantity_on_hand:
+        type: int
+        range: [0,10000]
+
+  product_attributes:
+    <<: *defaults
+    row_count: 2890
+    domain: catalog
+    columns:
+      attribute_id:
+        type: int
+        range: [1, 2890]
+      product_id:
+        type: lookup
+        reference: products.product_id
+      attribute_name:
         type: faker
-        method: date_between
-        args: ["-1y", "today"]
-      end_date:
+        method: word
+      attribute_value:
         type: faker
-        method: date_between
-        args: ["today", "+1y"]
+        method: word
+
+  brand_partners:
+    <<: *defaults
+    row_count: 1345
+    domain: catalog
+    columns:
+      partner_id:
+        type: int
+        range: [1,1345]
+      brand_name:
+        type: faker
+        method: company
+      contact_email:
+        type: faker
+        method: company_email
+
+  related_products:
+    <<: *defaults
+    row_count: 2234
+    domain: catalog
+    columns:
+      id:
+        type: int
+        range: [1,2234]
+      product_id:
+        type: lookup
+        reference: products.product_id
+      related_id:
+        type: lookup
+        reference: products.product_id
 
   dates:
+    <<: *defaults
     row_count: 365
     domain: ops
     columns:
       date_id:
         type: int
-        range: [1, 365]
+        range: [1,365]
       full_date:
         type: derived
         expr: "(base_date + timedelta(days=i)).date()"
@@ -145,40 +403,40 @@ tables:
         type: derived
         expr: "(base_date + timedelta(days=i)).strftime('%A')"
 
-  suppliers:
-    row_count: 50
-    domain: ops
+  budgets:
+    <<: *defaults
+    row_count: 15678
+    domain: finance
     columns:
-      supplier_id:
+      budget_id:
         type: int
-        range: [1, 50]
-      supplier_name:
-        type: faker
-        method: company
-      contact_email:
-        type: faker
-        method: company_email
+        range: [1,15678]
+      department:
+        type: choice
+        choices: ["Sales","Ops","Marketing","HR","Finance","Analytics"]
+      amount:
+        type: float
+        range: [10000,1000000]
+        precision: 2
+      fiscal_year:
+        type: int
+        range: [2020,2025]
 
-  employees:
-    row_count: 200
-    domain: ops
+  ledgers:
+    <<: *defaults
+    row_count: 18765
+    domain: finance
     columns:
-      employee_id:
+      ledger_id:
         type: int
-        range: [1, 200]
-      first_name:
+        range: [1,18765]
+      account:
         type: faker
-        method: first_name
-      last_name:
-        type: faker
-        method: last_name
-      hire_date:
-        type: faker
-        method: date_between
-        args: ["-5y", "today"]
-      store_id:
-        type: lookup
-        reference: stores.store_id
+        method: word
+      balance:
+        type: float
+        range: [-10000,1000000]
+        precision: 2
 
   orders:
     row_count: 10000
@@ -192,139 +450,1006 @@ tables:
         method: date_between
         args: ["-1y", "today"]
       customer_id:
-        type: lookup
-        reference: customers.customer_id
-      store_id:
-        type: lookup
-        reference: stores.store_id
-      # ← use our helper, not .loc
-      order_total:
-        type: derived
-        expr: "group_sum(transactions, 'order_id', 'price').get(order_id, 0)"
+        type: int
+        range: [1, 10000]
+      store_id:  # This was the missing column
+        type: int
+        range: [1, 100]
       status:
         type: choice
         choices: ["Completed", "Pending", "Cancelled"]
         weights: [0.8, 0.15, 0.05]
-
-  transactions:
-    row_count: 30000
-    domain: sales
-    columns:
-      transaction_id:
-        type: int
-        range: [1, 30000]
-      order_id:
-        type: lookup
-        reference: orders.order_id
-      product_id:
-        type: lookup
-        reference: products.product_id
-      quantity:
-        type: int
-        range: [1, 5]
-      price:
-        type: derived
-        # quantity × product price
-        expr: "quantity * lookup_value(products, 'product_id', 'price', product_id)"
-      promo_id:
-        type: choice
-        include_null: true
-        range: [1, 100]
-        weight_null: 0.8
-        weight_rest: 0.2
-      supplier_id:
-        type: lookup
-        reference: suppliers.supplier_id
-
-  inventory:
-    row_count: 10000
-    domain: ops
-    columns:
-      store_id:
-        type: lookup
-        reference: stores.store_id
-      product_id:
-        type: lookup
-        reference: products.product_id
-      inventory_date:
-        type: faker
-        method: date_between
-        args: ["-30d", "today"]
-      stock_quantity:
-        type: int
-        range: [0, 1000]
-
-  returns:
-    row_count: 1000
-    domain: sales
-    columns:
-      return_id:
-        type: int
-        range: [1, 1000]
-      order_id:
-        type: lookup
-        reference: orders.order_id
-      product_id:
-        type: lookup
-        reference: products.product_id
-      # ← derive using lookup_value
-      return_date:
-        type: derived
-        expr: "fake.date_between(lookup_value(orders, 'order_id', 'order_date', order_id), 'today')"
-      return_reason:
-        type: choice
-        choices: ["Defective", "Wrong Item", "Dissatisfied"]
-
-  sales_targets:
-    row_count: 1200
-    domain: sales
-    columns:
-      store_id:
-        type: lookup
-        reference: stores.store_id
-      month:
-        type: derived
-        expr: "random.randint(1, 12)"
-      year:
-        type: derived
-        expr: "current_year"
-      target_amount:
+      order_total:
         type: float
-        range: [50000, 200000]
+        range: [10.0, 1000.0]
         precision: 2
 
-  legacy_customers:
-    row_count: 500
-    domain: sales
+  warehouse_locations:
+    row_count: 50
+    domain: ops
     columns:
-      customer_id:
-        type: lookup
-        reference: customers.customer_id
-      first_name:
+      warehouse_id:  # This was the missing column
+        type: int
+        range: [1, 50]
+      location_name:
         type: faker
-        method: first_name
-      last_name:
+        method: city
+      address:
         type: faker
-        method: last_name
-      email:
-        type: faker
-        method: email
-      phone:
-        type: faker
-        method: phone_number
+        method: street_address
       city:
         type: faker
         method: city
       state:
         type: faker
         method: state_abbr
-      loyalty_status:
-        type: choice
-        choices: ["Bronze", "Silver", "Gold"]
-      legacy_flag:
-        type: constant
-        value: true
+      zip_code:
+        type: faker
+        method: zipcode
+      capacity:
+        type: int
+        range: [10000, 100000]
 
+  invoices_finance:
+    row_count: 20000
+    domain: finance
+    columns:
+      invoice_id:
+        type: int
+        range: [1, 20000]
+      invoice_date:
+        type: faker
+        method: date_between
+        args: ["-1y", "today"]
+      customer_id:
+        type: int
+        range: [1, 10000]
+      order_id:
+        type: int
+        range: [1, 10000]
+      amount:
+        type: float
+        range: [10.0, 5000.0]
+        precision: 2
+      billing_cycle_id:  # This was the missing column
+        type: int
+        range: [1, 10]
+      status:
+        type: choice
+        choices: ["Paid", "Pending", "Overdue"]
+        weights: [0.7, 0.2, 0.1]
+
+  tax_records:
+    row_count: 15000
+    domain: finance
+    columns:
+      record_id:
+        type: int
+        range: [1, 15000]
+      invoice_id:  # This was the missing column
+        type: int
+        range: [1, 20000]
+      tax_date:
+        type: faker
+        method: date_between
+        args: ["-1y", "today"]
+      tax_amount:
+        type: float
+        range: [1.0, 500.0]
+        precision: 2
+      tax_type:
+        type: choice
+        choices: ["Sales", "VAT", "Income", "Property"]
+        weights: [0.5, 0.3, 0.1, 0.1]
+      jurisdiction:
+        type: faker
+        method: state
+
+  financial_statements:
+    <<: *defaults
+    row_count: 14234
+    domain: finance
+    columns:
+      statement_id:
+        type: int
+        range: [1,14234]
+      ledger_id:
+        type: lookup
+        reference: ledgers.ledger_id
+      statement_type:
+        type: choice
+        choices: ["Income","BalanceSheet","CashFlow"]
+      amount:
+        type: float
+        range: [0,1000000]
+        precision: 2
+
+  accounts_receivable:
+    <<: *defaults
+    row_count: 16890
+    domain: finance
+    columns:
+      ar_id:
+        type: int
+        range: [1,16890]
+      customer_id:
+        type: lookup
+        reference: customers.customer_id
+      amount_due:
+        type: float
+        range: [10.0,100000.0]
+        precision: 2
+
+  accounts_payable:
+    <<: *defaults
+    row_count: 15234
+    domain: finance
+    columns:
+      ap_id:
+        type: int
+        range: [1,15234]
+      vendor:
+        type: faker
+        method: company
+      amount:
+        type: float
+        range: [10.0,200000.0]
+        precision: 2
+
+  cost_centers:
+    <<: *defaults
+    row_count: 13456
+    domain: finance
+    columns:
+      center_id:
+        type: int
+        range: [1,13456]
+      center_name:
+        type: faker
+        method: word
+
+  profit_centers:
+    <<: *defaults
+    row_count: 12345
+    domain: finance
+    columns:
+      center_id:
+        type: int
+        range: [1,12345]
+      center_name:
+        type: faker
+        method: word
+
+  currency_rates:
+    <<: *defaults
+    row_count: 16789
+    domain: finance
+    columns:
+      rate_id:
+        type: int
+        range: [1,16789]
+      currency:
+        type: choice
+        choices: ["USD","EUR","GBP","JPY","AUD"]
+      rate:
+        type: float
+        range: [0.1,2.0]
+        precision: 4
+
+  bank_reconciliations:
+    <<: *defaults
+    row_count: 14532
+    domain: finance
+    columns:
+      reconciliation_id:
+        type: int
+        range: [1,14532]
+      bank_account:
+        type: faker
+        method: bank_account
+      date:
+        type: faker
+        method: date_between
+        args: ["-6mo","today"]
+
+  credit_notes:
+    <<: *defaults
+    row_count: 13245
+    domain: finance
+    columns:
+      credit_note_id:
+        type: int
+        range: [1,13245]
+      invoice_id:
+        type: lookup
+        reference: invoices_finance.invoice_id
+      amount:
+        type: float
+        range: [1.0,5000.0]
+        precision: 2
+
+  payments_legacy:
+    <<: *defaults
+    row_count: 17654
+    domain: finance
+    columns:
+      payment_id:
+        type: int
+        range: [1,17654]
+      old_invoice_ref:
+        type: faker
+        method: uuid4
+      paid_date:
+        type: faker
+        method: date_between
+        args: ["-2y","-1y"]
+
+  ########################
+  # ───── MARKETING ─────
+  ########################
+  campaigns:
+    <<: *defaults
+    row_count: 13245
+    domain: marketing
+    columns:
+      campaign_id:
+        type: int
+        range: [1,13245]
+      name:
+        type: faker
+        method: sentence
+      start_date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+      end_date:
+        type: faker
+        method: date_between
+        args: ["today","+6mo"]
+      budget:
+        type: float
+        range: [1000.0,200000.0]
+        precision: 2
+
+  ad_spend:
+    <<: *defaults
+    row_count: 15678
+    domain: marketing
+    columns:
+      spend_id:
+        type: int
+        range: [1,15678]
+      campaign_id:
+        type: lookup
+        reference: campaigns.campaign_id
+      date:
+        type: faker
+        method: date_between
+        args: ["-6mo","today"]
+      amount:
+        type: float
+        range: [10.0,50000.0]
+        precision: 2
+
+  social_media_metrics:
+    <<: *defaults
+    row_count: 17890
+    domain: marketing
+    columns:
+      metric_id:
+        type: int
+        range: [1,17890]
+      platform:
+        type: choice
+        choices: ["facebook","twitter","instagram","linkedin"]
+      date:
+        type: faker
+        method: date_between
+        args: ["-6mo","today"]
+      impressions:
+        type: int
+        range: [0,1000000]
+      clicks:
+        type: int
+        range: [0,100000]
+
+  seo_keywords:
+    <<: *defaults
+    row_count: 10987
+    domain: marketing
+    columns:
+      keyword_id:
+        type: int
+        range: [1,10987]
+      keyword:
+        type: faker
+        method: word
+      search_volume:
+        type: int
+        range: [0,100000]
+      difficulty:
+        type: float
+        range: [0.0, 1.0]
+        precision: 2
+
+  email_campaigns:
+    <<: *defaults
+    row_count: 19876
+    domain: marketing
+    columns:
+      email_id:
+        type: int
+        range: [1,19876]
+      campaign_id:
+        type: lookup
+        reference: campaigns.campaign_id
+      sent_date:
+        type: faker
+        method: date_between
+        args: ["-6mo","today"]
+      open_rate:
+        type: float
+        range: [0.0,1.0]
+        precision: 2
+
+  web_traffic:
+    <<: *defaults
+    row_count: 15643
+    domain: marketing
+    columns:
+      visit_id:
+        type: int
+        range: [1,15643]
+      page_url:
+        type: faker
+        method: uri
+      visit_date:
+        type: faker
+        method: date_time_between
+        args: ["-30d","today"]
+      duration_seconds:
+        type: int
+        range: [0,3600]
+
+  loyalty_programs:
+    <<: *defaults
+    row_count: 12345
+    domain: marketing
+    columns:
+      program_id:
+        type: int
+        range: [1,12345]
+      name:
+        type: faker
+        method: word
+      start_date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+      tier_levels:
+        type: choice
+        choices: ["Bronze","Silver","Gold","Platinum"]
+
+  survey_responses:
+    <<: *defaults
+    row_count: 11234
+    domain: marketing
+    columns:
+      response_id:
+        type: int
+        range: [1,11234]
+      survey_id:
+        type: int
+        range: [1,100]
+      respondent:
+        type: faker
+        method: name
+      response_date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+      score:
+        type: int
+        range: [1,5]
+
+  marketing_targets:
+    <<: *defaults
+    row_count: 14567
+    domain: marketing
+    columns:
+      target_id:
+        type: int
+        range: [1,14567]
+      campaign_id:
+        type: lookup
+        reference: campaigns.campaign_id
+      month:
+        type: derived
+        expr: "random.randint(1,12)"
+      year:
+        type: derived
+        expr: "current_year"
+      goal:
+        type: float
+        range: [1000.0,100000.0]
+        precision: 2
+
+  customer_segments_marketing:
+    <<: *defaults
+    row_count: 13459
+    domain: marketing
+    columns:
+      segment_id:
+        type: int
+        range: [1,13459]
+      name:
+        type: choice
+        choices: ["value","growth","loyalty","engagement"]
+      description:
+        type: faker
+        method: sentence
+
+  ####################
+  # ───── HR ─────
+  ####################
+  employees:
+    <<: *defaults
+    row_count: 200
+    domain: hr
+    columns:
+      employee_id:
+        type: int
+        range: [1,200]
+      first_name:
+        type: faker
+        method: first_name
+      last_name:
+        type: faker
+        method: last_name
+      hire_date:
+        type: faker
+        method: date_between
+        args: ["-5y","today"]
+      department:
+        type: choice
+        choices: ["sales","ops","finance","marketing","hr"]
+
+  attendance_records:
+    <<: *defaults
+    row_count: 18987
+    domain: hr
+    columns:
+      record_id:
+        type: int
+        range: [1,18987]
+      employee_id:
+        type: lookup
+        reference: employees.employee_id
+      date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+      status:
+        type: choice
+        choices: ["present","absent","remote","leave"]
+
+  payroll:
+    <<: *defaults
+    row_count: 10987
+    domain: hr
+    columns:
+      payroll_id:
+        type: int
+        range: [1,10987]
+      employee_id:
+        type: lookup
+        reference: employees.employee_id
+      pay_date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+      gross_amount:
+        type: float
+        range: [1000.0,20000.0]
+        precision: 2
+      net_amount:
+        type: derived
+        expr: "gross_amount * 0.8"
+        precision: 2
+
+  benefits_enrollment:
+    <<: *defaults
+    row_count: 8456
+    domain: hr
+    columns:
+      enrollment_id:
+        type: int
+        range: [1,8456]
+      employee_id:
+        type: lookup
+        reference: employees.employee_id
+      plan_type:
+        type: choice
+        choices: ["health","dental","vision","retirement"]
+      start_date:
+        type: faker
+        method: date_between
+        args: ["-5y","today"]
+
+  performance_reviews:
+    <<: *defaults
+    row_count: 7654
+    domain: hr
+    columns:
+      review_id:
+        type: int
+        range: [1,7654]
+      employee_id:
+        type: lookup
+        reference: employees.employee_id
+      review_date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+      rating:
+        type: int
+        range: [1,5]
+
+  training_sessions:
+    <<: *defaults
+    row_count: 6543
+    domain: hr
+    columns:
+      session_id:
+        type: int
+        range: [1,6543]
+      topic:
+        type: faker
+        method: sentence
+      trainer:
+        type: faker
+        method: name
+      session_date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+
+  recruitment_applications:
+    <<: *defaults
+    row_count: 5432
+    domain: hr
+    columns:
+      application_id:
+        type: int
+        range: [1,5432]
+      candidate_name:
+        type: faker
+        method: name
+      position:
+        type: faker
+        method: job
+      application_date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+
+  job_postings:
+    <<: *defaults
+    row_count: 4321
+    domain: hr
+    columns:
+      posting_id:
+        type: int
+        range: [1,4321]
+      position:
+        type: faker
+        method: job
+      department:
+        type: choice
+        choices: ["sales","ops","finance","marketing","hr"]
+      post_date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+
+  org_chart:
+    <<: *defaults
+    row_count: 3210
+    domain: hr
+    columns:
+      node_id:
+        type: int
+        range: [1,3210]
+      manager_id:
+        type: lookup
+        reference: employees.employee_id
+      subordinate_id:
+        type: lookup
+        reference: employees.employee_id
+
+  compensation_bands:
+    <<: *defaults
+    row_count: 2109
+    domain: hr
+    columns:
+      band_id:
+        type: int
+        range: [1,2109]
+      title:
+        type: faker
+        method: job
+      min_salary:
+        type: int
+        range: [30000,60000]
+      max_salary:
+        type: int
+        range: [60001,200000]
+
+  #########################
+  # ───── ANALYTICS ─────
+  #########################
+  dashboard_views:
+    <<: *defaults
+    row_count: 98765
+    domain: analytics
+    columns:
+      view_id:
+        type: int
+        range: [1,98765]
+      dashboard_name:
+        type: faker
+        method: word
+      user_id:
+        type: int
+        range: [1,10000]
+      view_date:
+        type: faker
+        method: date_time_between
+        args: ["-30d","today"]
+
+  kpi_definitions:
+    <<: *defaults
+    row_count: 87654
+    domain: analytics
+    columns:
+      kpi_id:
+        type: int
+        range: [1,87654]
+      name:
+        type: faker
+        method: word
+      target_value:
+        type: float
+        range: [0.0,100000.0]
+        precision: 2
+
+  event_logs:
+    <<: *defaults
+    row_count: 76543
+    domain: analytics
+    columns:
+      event_id:
+        type: int
+        range: [1,76543]
+      user_id:
+        type: int
+        range: [1,10000]
+      event_type:
+        type: faker
+        method: word
+      timestamp:
+        type: faker
+        method: date_time_between
+        args: ["-1d","today"]
+
+  session_data:
+    <<: *defaults
+    row_count: 65432
+    domain: analytics
+    columns:
+      session_id:
+        type: int
+        range: [1,65432]
+      user_id:
+        type: int
+        range: [1,10000]
+      start_time:
+        type: faker
+        method: date_time_between
+        args: ["-1d","now"]
+      end_time:
+        type: faker
+        method: date_time_between
+        args: ["now","+1h"]
+
+  data_quality_metrics:
+    <<: *defaults
+    row_count: 54321
+    domain: analytics
+    columns:
+      metric_id:
+        type: int
+        range: [1,54321]
+      table_name:
+        type: choice
+        choices: ["customers","orders","transactions","products","invoices"]
+      issue_count:
+        type: int
+        range: [0,1000]
+
+  anomaly_detections:
+    <<: *defaults
+    row_count: 43210
+    domain: analytics
+    columns:
+      detection_id:
+        type: int
+        range: [1,43210]
+      metric_id:
+        type: lookup
+        reference: data_quality_metrics.metric_id
+      detected_at:
+        type: faker
+        method: date_time_between
+        args: ["-30d","today"]
+
+  predictive_models:
+    <<: *defaults
+    row_count: 32109
+    domain: analytics
+    columns:
+      model_id:
+        type: int
+        range: [1,32109]
+      model_name:
+        type: faker
+        method: sentence
+      created_at:
+        type: faker
+        method: date_time_between
+        args: ["-1y","today"]
+      accuracy:
+        type: float
+        range: [0.0,1.0]
+        precision: 3
+
+  segmentation_results:
+    <<: *defaults
+    row_count: 21098
+    domain: analytics
+    columns:
+      segment_id:
+        type: int
+        range: [1,21098]
+      kpi_id:
+        type: lookup
+        reference: kpi_definitions.kpi_id
+      result_value:
+        type: float
+        range: [0.0,100000.0]
+        precision: 2
+
+  trend_analysis:
+    <<: *defaults
+    row_count: 10987
+    domain: analytics
+    columns:
+      analysis_id:
+        type: int
+        range: [1,10987]
+      metric_id:
+        type: lookup
+        reference: data_quality_metrics.metric_id
+      period:
+        type: choice
+        choices: ["daily","weekly","monthly","yearly"]
+
+  report_configs:
+    <<: *defaults
+    row_count: 9876
+    domain: analytics
+    columns:
+      report_id:
+        type: int
+        range: [1,9876]
+      report_name:
+        type: faker
+        method: word
+      created_by:
+        type: int
+        range: [1,10000]
+
+  ########################
+  # ───── SUPPORT ─────
+  ########################
+  tickets:
+    <<: *defaults
+    row_count: 45321
+    domain: support
+    columns:
+      ticket_id:
+        type: int
+        range: [1,45321]
+      customer_id:
+        type: lookup
+        reference: customers.customer_id
+      opened_at:
+        type: faker
+        method: date_time_between
+        args: ["-1y","today"]
+      status:
+        type: choice
+        choices: ["open","closed","pending"]
+      priority:
+        type: choice
+        choices: ["low","medium","high"]
+
+  ticket_responses:
+    <<: *defaults
+    row_count: 34210
+    domain: support
+    columns:
+      response_id:
+        type: int
+        range: [1,34210]
+      ticket_id:
+        type: lookup
+        reference: tickets.ticket_id
+      responder:
+        type: faker
+        method: name
+      response_date:
+        type: faker
+        method: date_time_between
+        args: ["-30d","today"]
+
+  chat_logs:
+    <<: *defaults
+    row_count: 23109
+    domain: support
+    columns:
+      chat_id:
+        type: int
+        range: [1,23109]
+      customer_id:
+        type: lookup
+        reference: customers.customer_id
+      agent_id:
+        type: lookup
+        reference: support_agents.agent_id
+      message:
+        type: faker
+        method: sentence
+      timestamp:
+        type: faker
+        method: date_time_between
+        args: ["-7d","today"]
+
+  call_records:
+    <<: *defaults
+    row_count: 12098
+    domain: support
+    columns:
+      call_id:
+        type: int
+        range: [1,12098]
+      ticket_id:
+        type: lookup
+        reference: tickets.ticket_id
+      call_time:
+        type: faker
+        method: date_time_between
+        args: ["-30d","today"]
+      duration_sec:
+        type: int
+        range: [0,7200]
+
+  satisfaction_surveys:
+    <<: *defaults
+    row_count: 10987
+    domain: support
+    columns:
+      survey_id:
+        type: int
+        range: [1,10987]
+      ticket_id:
+        type: lookup
+        reference: tickets.ticket_id
+      score:
+        type: int
+        range: [1,5]
+      comments:
+        type: faker
+        method: sentence
+
+  escalations:
+    <<: *defaults
+    row_count: 9876
+    domain: support
+    columns:
+      escalation_id:
+        type: int
+        range: [1,9876]
+      ticket_id:
+        type: lookup
+        reference: tickets.ticket_id
+      escalated_to:
+        type: faker
+        method: name
+      date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+
+  knowledge_base_articles:
+    <<: *defaults
+    row_count: 8765
+    domain: support
+    columns:
+      article_id:
+        type: int
+        range: [1,8765]
+      title:
+        type: faker
+        method: sentence
+      created_at:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+      content:
+        type: faker
+        method: paragraph
+
+  support_agents:
+    <<: *defaults
+    row_count: 7654
+    domain: support
+    columns:
+      agent_id:
+        type: int
+        range: [1,7654]
+      name:
+        type: faker
+        method: name
+      email:
+        type: faker
+        method: email
+
+  faq_hits:
+    <<: *defaults
+    row_count: 6543
+    domain: support
+    columns:
+      hit_id:
+        type: int
+        range: [1,6543]
+      article_id:
+        type: lookup
+        reference: knowledge_base_articles.article_id
+      hit_date:
+        type: faker
+        method: date_between
+        args: ["-1y","today"]
+
+  resolution_times:
+    <<: *defaults
+    row_count: 5432
+    domain: support
+    columns:
+      record_id:
+        type: int
+        range: [1,5432]
+      ticket_id:
+        type: lookup
+        reference: tickets.ticket_id
+      resolution_seconds:
+        type: int
+        range: [0,86400]
+
+
+# ───────────────────────────────────────────────────────────
+# Relationships
+# ───────────────────────────────────────────────────────────
 relationships:
   - table: orders
     column: customer_id
@@ -332,61 +1457,372 @@ relationships:
   - table: orders
     column: store_id
     references: stores.store_id
-  - table: transactions
-    column: order_id
-    references: orders.order_id
-  - table: transactions
-    column: product_id
-    references: products.product_id
-  - table: transactions
-    column: supplier_id
-    references: suppliers.supplier_id
-  - table: inventory
-    column: store_id
-    references: stores.store_id
-  - table: inventory
-    column: product_id
-    references: products.product_id
-  - table: returns
-    column: order_id
-    references: orders.order_id
-  - table: returns
-    column: product_id
-    references: products.product_id
-  - table: sales_targets
-    column: store_id
-    references: stores.store_id
-  - table: employees
-    column: store_id
-    references: stores.store_id
-  - table: orders
-    column: order_date
-    references: dates.full_date
-  - table: inventory
-    column: inventory_date
-    references: dates.full_date
-  - table: returns
-    column: return_date
-    references: dates.full_date
-  - table: sales_targets
-    column: month
-    references: dates.month
-  - table: sales_targets
-    column: year
-    references: dates.year
 
+  - table: order_items
+    column: order_id
+    references: orders.order_id
+  - table: order_items
+    column: product_id
+    references: products.product_id
+
+  - table: invoices
+    column: order_id
+    references: orders.order_id
+  - table: payments
+    column: invoice_id
+    references: invoices.invoice_id
+  - table: refunds
+    column: payment_id
+    references: payments.payment_id
+
+  - table: sales_pipeline
+    column: customer_id
+    references: customers.customer_id
+  - table: sales_pipeline
+    column: opportunity_id
+    references: opportunities.opportunity_id
+
+  - table: leads
+    column: None
+    references: None  # no FKs
+
+  - table: opportunities
+    column: lead_id
+    references: leads.lead_id
+
+  - table: commissions
+    column: opportunity_id
+    references: opportunities.opportunity_id
+
+  - table: sales_forecast
+    column: None
+    references: None  # no FKs
+
+  - table: sales_targets
+    column: sales_forecast_id
+    references: sales_forecast.forecast_id
+
+  - table: sales_regions
+    column: None
+    references: None  # no FKs
+
+  - table: sales_channels
+    column: None
+    references: None  # no FKs
+
+  - table: customer_segments
+    column: None
+    references: None  # no FKs
+
+  - table: inventory_levels
+    column: product_id
+    references: products.product_id
+  - table: inventory_levels
+    column: warehouse_id
+    references: warehouse_locations.warehouse_id
+
+  - table: inventory_snapshots
+    column: product_id
+    references: products.product_id
+  - table: inventory_snapshots
+    column: warehouse_id
+    references: warehouse_locations.warehouse_id
+
+  - table: shipments
+    column: order_item_id
+    references: order_items.item_id
+  - table: shipments
+    column: carrier_id
+    references: carriers.carrier_id
+
+  - table: carriers
+    column: None
+    references: None  # no FKs
+
+  - table: logistics_routes
+    column: None
+    references: None  # no FKs
+
+  - table: maintenance_requests
+    column: equipment_id
+    references: equipment_logs.equipment_id
+
+  - table: store_staffing
+    column: store_id
+    references: stores.store_id
+  - table: store_staffing
+    column: employee_id
+    references: employees.employee_id
+
+  - table: schedule_shifts
+    column: store_id
+    references: stores.store_id
+  - table: schedule_shifts
+    column: employee_id
+    references: employees.employee_id
+
+  - table: facility_inspections
+    column: store_id
+    references: stores.store_id
+
+  - table: asset_management
+    column: None
+    references: None  # no FKs
+
+  - table: equipment_logs
+    column: asset_id
+    references: asset_management.asset_id
+
+  - table: distribution_centers
+    column: None
+    references: None  # no FKs
+
+  - table: transfer_orders
+    column: from_center
+    references: distribution_centers.center_id
+  - table: transfer_orders
+    column: to_center
+    references: distribution_centers.center_id
+
+  - table: packaging
+    column: shipment_id
+    references: shipments.shipment_id
+
+  ####################
+  # ───── FINANCE ─────
+  ####################
+  - table: invoices_finance
+    column: billing_cycle_id
+    references: billing_cycles.billing_cycle_id
+  - table: payments_finance
+    column: invoice_id
+    references: invoices_finance.invoice_id
+  - table: billing_cycles
+    column: None
+    references: None  # no FKs
+  - table: expense_reports
+    column: employee_id
+    references: employees.employee_id
+  - table: budgets
+    column: None
+    references: None
+  - table: ledgers
+    column: None
+    references: None
+  - table: tax_records
+    column: invoice_id
+    references: invoices_finance.invoice_id
+  - table: financial_statements
+    column: None
+    references: None
+  - table: accounts_receivable
+    column: customer_id
+    references: customers.customer_id
+  - table: accounts_payable
+    column: None
+    references: None
+  - table: cost_centers
+    column: None
+    references: None
+  - table: profit_centers
+    column: None
+    references: None
+  - table: currency_rates
+    column: None
+    references: None
+  - table: bank_reconciliations
+    column: None
+    references: None
+  - table: credit_notes
+    column: invoice_id
+    references: invoices_finance.invoice_id
+  - table: payments_legacy
+    column: None
+    references: None
+
+  ########################
+  # ───── MARKETING ─────
+  ########################
+  - table: campaigns
+    column: None
+    references: None
+  - table: ad_spend
+    column: campaign_id
+    references: campaigns.campaign_id
+  - table: social_media_metrics
+    column: None
+    references: None
+  - table: seo_keywords
+    column: None
+    references: None
+  - table: email_campaigns
+    column: campaign_id
+    references: campaigns.campaign_id
+  - table: web_traffic
+    column: None
+    references: None
+  - table: loyalty_programs
+    column: None
+    references: None
+  - table: survey_responses
+    column: None
+    references: None
+  - table: marketing_targets
+    column: campaign_id
+    references: campaigns.campaign_id
+  - table: customer_segments_marketing
+    column: None
+    references: None
+
+  ####################
+  # ───── HR ─────
+  ####################
+  - table: employees
+    column: None
+    references: None
+  - table: attendance_records
+    column: employee_id
+    references: employees.employee_id
+  - table: payroll
+    column: employee_id
+    references: employees.employee_id
+  - table: benefits_enrollment
+    column: employee_id
+    references: employees.employee_id
+  - table: performance_reviews
+    column: employee_id
+    references: employees.employee_id
+  - table: training_sessions
+    column: None
+    references: None
+  - table: recruitment_applications
+    column: None
+    references: None
+  - table: job_postings
+    column: None
+    references: None
+  - table: org_chart
+    column: manager_id
+    references: employees.employee_id
+  - table: org_chart
+    column: subordinate_id
+    references: employees.employee_id
+  - table: compensation_bands
+    column: None
+    references: None
+
+  #########################
+  # ───── ANALYTICS ─────
+  #########################
+  - table: dashboard_views
+    column: None
+    references: None
+  - table: kpi_definitions
+    column: None
+    references: None
+  - table: event_logs
+    column: None
+    references: None
+  - table: session_data
+    column: None
+    references: None
+  - table: data_quality_metrics
+    column: None
+    references: None
+  - table: anomaly_detections
+    column: metric_id
+    references: data_quality_metrics.metric_id
+  - table: predictive_models
+    column: None
+    references: None
+  - table: segmentation_results
+    column: kpi_id
+    references: kpi_definitions.kpi_id
+  - table: trend_analysis
+    column: metric_id
+    references: data_quality_metrics.metric_id
+  - table: report_configs
+    column: None
+    references: None
+
+  ########################
+  # ───── SUPPORT ─────
+  ########################
+  - table: tickets
+    column: customer_id
+    references: customers.customer_id
+  - table: ticket_responses
+    column: ticket_id
+    references: tickets.ticket_id
+  - table: chat_logs
+    column: customer_id
+    references: customers.customer_id
+  - table: chat_logs
+    column: agent_id
+    references: support_agents.agent_id
+  - table: call_records
+    column: ticket_id
+    references: tickets.ticket_id
+  - table: satisfaction_surveys
+    column: ticket_id
+    references: tickets.ticket_id
+  - table: escalations
+    column: ticket_id
+    references: tickets.ticket_id
+  - table: knowledge_base_articles
+    column: None
+    references: None
+  - table: support_agents
+    column: None
+    references: None
+  - table: faq_hits
+    column: article_id
+    references: knowledge_base_articles.article_id
+  - table: resolution_times
+    column: ticket_id
+    references: tickets.ticket_id
+
+# ───────────────────────────────────────────────────────────
+# Anomalies config
+# ───────────────────────────────────────────────────────────
 anomalies:
   missing_fk:
-    transactions.order_id: 0.005
-    sales_targets.store_id: 0.01
+    stores.region: 0.04        
+    products.category: 0.05     # Changed from category_id to category
+    customers.loyalty_status: 0.03
+  ghost_output:
+    archive_orders:
+      - ghost.csv
+  job_failure:
+    transform_sales_data: []
+  partial_write:
+    archive_orders:
+      - orders_backup.csv
+  mixed_operation:
+    merge_legacy_customers:
+      - customers.csv
 
+# Updated anomalies list to match the definitions above
 anomalies_list:
   - type: missing_fk
-    table: transactions
-    column: order_id
+    table: stores
+    column: region
   - type: missing_fk
-    table: sales_targets
-    column: store_id
+    table: products
+    column: category
+  - type: missing_fk
+    table: customers
+    column: loyalty_status
   - type: ghost_output
     step: archive_orders
     output: ghost.csv
+  - type: job_failure
+    step: transform_sales_data
+  - type: partial_write
+    step: archive_orders
+    outputs:
+      - orders_backup.csv
+  - type: mixed_operation
+    step: merge_legacy_customers
+    outputs:
+      - customers.csv
