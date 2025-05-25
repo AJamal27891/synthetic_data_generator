@@ -6,108 +6,124 @@ seed: 123
 # ───────────────────────────────────────────────────────────
 domains:
   sales:
-    - customers
-    - orders
-    - transactions
-    - returns
-    - sales_targets
-    - legacy_customers
-    - invoices
-    - payments
-    - refunds
-    - quotes
-    - leads
-    - opportunities
-    - commissions
-    - sales_pipeline
-    - customer_segments
+    description: "Contains all tables related to revenue generation and sales processes, from customer profiles to orders, transactions, and revenue adjustments."
+    tables:
+      - customers
+      - orders
+      - transactions
+      - returns
+      - sales_targets
+      - legacy_customers
+      - invoices
+      - payments
+      - refunds
+      - quotes
+      - leads
+      - opportunities
+      - commissions
+      - sales_pipeline
+      - customer_segments
   catalog:
-    - products
-    - categories
-    - subcategories
-    - product_reviews
-    - product_images
-    - pricing_tiers
-    - inventory_levels
-    - product_attributes
-    - brand_partners
-    - related_products
+    description: "Holds product master data, hierarchical categories, pricing tiers, inventory levels, and supporting metadata for the product catalog."
+    tables:
+      - products
+      - categories
+      - subcategories
+      - product_reviews
+      - product_images
+      - pricing_tiers
+      - inventory_levels
+      - product_attributes
+      - brand_partners
+      - related_products
   ops:
-    - stores
-    - warehouse_locations
-    - inventory_snapshots
-    - shipments
-    - carriers
-    - logistics_routes
-    - maintenance_requests
-    - store_staffing
-    - schedule_shifts
-    - facility_inspections
-    - asset_management
-    - equipment_logs
-    - distribution_centers
-    - transfer_orders
-    - packaging
+    description: "Captures the operational footprint of the business—store locations, warehouse logistics, asset maintenance, and staffing schedules."
+    tables:
+      - stores
+      - warehouse_locations
+      - inventory_snapshots
+      - shipments
+      - carriers
+      - logistics_routes
+      - maintenance_requests
+      - store_staffing
+      - schedule_shifts
+      - facility_inspections
+      - asset_management
+      - equipment_logs
+      - distribution_centers
+      - transfer_orders
+      - packaging
   finance:
-    - billing_cycles
-    - expense_reports
-    - budgets
-    - ledgers
-    - tax_records
-    - financial_statements
-    - accounts_receivable
-    - accounts_payable
-    - cost_centers
-    - profit_centers
-    - currency_rates
-    - bank_reconciliations
-    - credit_notes
-    - invoices       # overlapping name—but domain logic can handle
-    - payments       # same
+    description: "Manages financial transactions and reporting, including billing cycles, expense tracking, budgets, and core accounting ledgers."
+    tables:
+      - billing_cycles
+      - expense_reports
+      - budgets
+      - ledgers
+      - tax_records
+      - financial_statements
+      - accounts_receivable
+      - accounts_payable
+      - cost_centers
+      - profit_centers
+      - currency_rates
+      - bank_reconciliations
+      - credit_notes
+      - invoices
+      - payments
   marketing:
-    - campaigns
-    - ad_spend
-    - social_media_metrics
-    - seo_keywords
-    - email_campaigns
-    - web_traffic
-    - loyalty_programs
-    - survey_responses
-    - marketing_targets
-    - customer_segments  # overlapping
+    description: "Tracks marketing initiatives and digital engagement metrics—from campaign launches and ad spend to web traffic and customer surveys."
+    tables:
+      - campaigns
+      - ad_spend
+      - social_media_metrics
+      - seo_keywords
+      - email_campaigns
+      - web_traffic
+      - loyalty_programs
+      - survey_responses
+      - marketing_targets
+      - customer_segments
   hr:
-    - employees
-    - attendance_records
-    - payroll
-    - benefits_enrollment
-    - performance_reviews
-    - training_sessions
-    - recruitment_applications
-    - job_postings
-    - org_chart
-    - compensation_bands
+    description: "Stores human resources information, including employee records, payroll, benefits enrollment, performance reviews, and hiring pipelines."
+    tables:
+      - employees
+      - attendance_records
+      - payroll
+      - benefits_enrollment
+      - performance_reviews
+      - training_sessions
+      - recruitment_applications
+      - job_postings
+      - org_chart
+      - compensation_bands
   analytics:
-    - dashboard_views
-    - kpi_definitions
-    - event_logs
-    - session_data
-    - data_quality_metrics
-    - anomaly_detections
-    - predictive_models
-    - segmentation_results
-    - trend_analysis
-    - report_configs
+    description: "Houses analytical and reporting configurations—dashboards, KPI definitions, event logs, data quality metrics, and predictive outputs."
+    tables:
+      - dashboard_views
+      - kpi_definitions
+      - event_logs
+      - session_data
+      - data_quality_metrics
+      - anomaly_detections
+      - predictive_models
+      - segmentation_results
+      - trend_analysis
+      - report_configs
   support:
-    - tickets
-    - ticket_responses
-    - chat_logs
-    - call_records
-    - satisfaction_surveys
-    - escalations
-    - knowledge_base_articles
-    - support_agents
-    - faq_hits
-    - resolution_times
+    description: "Encompasses customer support and service tracking—ticketing, agent interactions, survey feedback, and resolution metrics."
+    tables:
+      - tickets
+      - ticket_responses
+      - chat_logs
+      - call_records
+      - satisfaction_surveys
+      - escalations
+      - knowledge_base_articles
+      - support_agents
+      - faq_hits
+      - resolution_times
 
 # ───────────────────────────────────────────────────────────
 # “defaults” anchor for a minimal single‑column schema
@@ -125,52 +141,65 @@ defaults: &defaults
 # tables.yml — full “tables:” section with realistic columns for 96 tables
 
 tables:
-  # ───── INDEPENDENT / LOOKUP‑TARGETS ─────
+  # ───── INDEPENDENT / LOOKUP-TARGETS ─────
 
   customers:
     <<: *defaults
+    description: "Contains unique customer profiles and contact details used throughout the sales process."
     row_count: 59229
     domain: sales
     columns:
       customer_id:
         type: int
         range: [1, 59229]
+        description: "Primary key uniquely identifying each customer."
       first_name:
         type: faker
         method: first_name
+        description: "Customer’s given name."
       last_name:
         type: faker
         method: last_name
+        description: "Customer’s family name."
       email:
         type: faker
         method: email
+        description: "Customer’s email address for communication."
       phone:
         type: faker
         method: phone_number
+        description: "Customer’s phone number for contact."
       city:
         type: faker
         method: city
+        description: "City where the customer resides."
       state:
         type: faker
         method: state_abbr
+        description: "Two-letter state abbreviation for the customer’s address."
       loyalty_status:
         type: choice
         choices: ["Bronze","Silver","Gold"]
+        description: "Tier in the loyalty program reflecting purchase history."
 
   products:
     <<: *defaults
+    description: "Master catalog of products sold, including categorization and pricing information."
     row_count: 8123
     domain: catalog
     columns:
       product_id:
         type: int
         range: [1, 8123]
+        description: "Unique identifier for each product."
       product_name:
         type: faker
         method: catch_phrase
+        description: "Official product name or marketing title."
       category:
         type: choice
         choices: ["Electronics","Clothing","Home","Sports","Toys"]
+        description: "High-level classification of the product."
       sub_category:
         type: lookup
         from: category
@@ -180,1271 +209,1603 @@ tables:
           Home:       ["Furniture","Kitchen","Decor"]
           Sports:     ["Fitness","Outdoor","Team"]
           Toys:       ["Educational","Action","Puzzle"]
+        description: "More specific grouping within the chosen category."
       price:
         type: float
         range: [5.0, 500.0]
         precision: 2
+        description: "Retail price customers pay for the product."
       cost:
         type: derived
         expr: "price * random.uniform(0.5, 0.9)"
         precision: 2
+        description: "Internal cost or procurement price of the product."
 
   stores:
     <<: *defaults
+    description: "Locations where products are sold or picked up, with geographic details."
     row_count: 4123
     domain: ops
     columns:
       store_id:
         type: int
         range: [1, 4123]
+        description: "Unique identifier for each store location."
       store_name:
         type: faker
         method: company
+        description: "Name of the retail store or outlet."
       city:
         type: faker
         method: city
+        description: "City where the store is located."
       state:
         type: faker
         method: state_abbr
+        description: "State abbreviation for the store’s location."
       region:
         type: choice
         choices: ["North","South","East","West"]
+        description: "Broad geographic region grouping for reporting."
 
   distribution_centers:
     <<: *defaults
+    description: "Warehousing hubs used to distribute inventory to stores and customers."
     row_count: 1456
     domain: ops
     columns:
       center_id:
         type: int
         range: [1, 1456]
+        description: "Unique ID for each distribution center."
       name:
         type: faker
         method: company
+        description: "Facility name or operator of the distribution center."
       region:
         type: choice
         choices: ["North","South","East","West"]
+        description: "Geographic region the center serves."
       manager_id:
         type: lookup
         reference: employees.employee_id
+        description: "Employee ID of the center’s manager."
 
   categories:
     <<: *defaults
+    description: "High-level groupings for products to organize browsing and reporting."
     row_count: 2345
     domain: catalog
     columns:
       category_id:
         type: int
         range: [1, 2345]
+        description: "Unique identifier for each product category."
       category_name:
         type: faker
         method: word
+        description: "Human-readable name of the category."
       description:
         type: faker
         method: sentence
+        description: "Short summary of what products in this category represent."
 
   subcategories:
     <<: *defaults
+    description: "More granular product groupings under each category."
     row_count: 4567
     domain: catalog
     columns:
       subcategory_id:
         type: int
         range: [1, 4567]
+        description: "Unique ID for each subcategory."
       category_id:
         type: lookup
         reference: categories.category_id
+        description: "Foreign key to the parent category."
       subcategory_name:
         type: faker
         method: word
+        description: "Name of the subcategory."
 
   product_reviews:
     <<: *defaults
+    description: "Customer feedback on products, including rating and free-text review."
     row_count: 9123
     domain: catalog
     columns:
       review_id:
         type: int
         range: [1, 9123]
+        description: "Unique identifier for each product review."
       product_id:
         type: lookup
         reference: products.product_id
+        description: "Foreign key to the reviewed product."
       rating:
         type: int
         range: [1,5]
+        description: "Numerical rating from 1 (worst) to 5 (best)."
       review_text:
         type: faker
         method: paragraph
+        description: "Customer’s written feedback about the product."
 
   product_images:
     <<: *defaults
+    description: "URLs linking to images showcasing each product."
     row_count: 6789
     domain: catalog
     columns:
       image_id:
         type: int
         range: [1, 6789]
+        description: "Unique identifier for each product image."
       product_id:
         type: lookup
         reference: products.product_id
+        description: "Foreign key to the associated product."
       url:
         type: faker
         method: image_url
+        description: "Web address where the image is hosted."
 
   pricing_tiers:
     <<: *defaults
+    description: "Volume-based pricing rules for products, specifying discounted rates."
     row_count: 3456
     domain: catalog
     columns:
       tier_id:
         type: int
         range: [1, 3456]
+        description: "Unique ID for each pricing tier."
       product_id:
         type: lookup
         reference: products.product_id
+        description: "Product to which this tier applies."
       min_qty:
         type: int
         range: [1,100]
+        description: "Minimum quantity to qualify for this tier."
       max_qty:
         type: int
         range: [101,1000]
+        description: "Maximum quantity covered by this tier."
       price:
         type: float
         range: [1.0, 400.0]
         precision: 2
+        description: "Discounted unit price for the quantity range."
 
   inventory_levels:
     <<: *defaults
+    description: "Tracks current stock on hand per product and warehouse."
     row_count: 5678
     domain: catalog
     columns:
       level_id:
         type: int
         range: [1, 5678]
+        description: "Unique identifier for each inventory record."
       product_id:
         type: lookup
         reference: products.product_id
+        description: "Product for which inventory is tracked."
       warehouse_id:
         type: lookup
         reference: warehouse_locations.location_id
+        description: "Warehouse where the stock is stored."
       quantity_on_hand:
         type: int
         range: [0,10000]
+        description: "Number of units currently available."
 
   product_attributes:
     <<: *defaults
+    description: "Arbitrary key-value metadata about products (e.g. color, size)."
     row_count: 2890
     domain: catalog
     columns:
       attribute_id:
         type: int
         range: [1, 2890]
+        description: "Unique ID for the attribute entry."
       product_id:
         type: lookup
         reference: products.product_id
+        description: "Product this attribute describes."
       attribute_name:
         type: faker
         method: word
+        description: "Name of the attribute (e.g. 'Color')."
       attribute_value:
         type: faker
         method: word
+        description: "Value of the attribute (e.g. 'Red')."
 
   brand_partners:
     <<: *defaults
+    description: "External brands or vendors supplying products."
     row_count: 1345
     domain: catalog
     columns:
       partner_id:
         type: int
         range: [1,1345]
+        description: "Unique identifier for the partner."
       brand_name:
         type: faker
         method: company
+        description: "Name of the partner brand."
       contact_email:
         type: faker
         method: company_email
+        description: "Partner’s official contact email."
 
   related_products:
     <<: *defaults
+    description: "Associative table linking products commonly bought or viewed together."
     row_count: 2234
     domain: catalog
     columns:
       id:
         type: int
         range: [1,2234]
+        description: "Unique identifier for the relationship record."
       product_id:
         type: lookup
         reference: products.product_id
+        description: "Primary product in the related pair."
       related_id:
         type: lookup
         reference: products.product_id
+        description: "Product considered related to the primary product."
 
   dates:
     <<: *defaults
+    description: "Calendar dimension table with derived date parts for temporal analyses."
     row_count: 365
     domain: ops
     columns:
       date_id:
         type: int
         range: [1,365]
+        description: "Surrogate key for each calendar date."
       full_date:
         type: derived
         expr: "(base_date + timedelta(days=i)).date()"
+        description: "Actual date value."
       day:
         type: derived
         expr: "(base_date + timedelta(days=i)).day"
+        description: "Day of the month."
       month:
         type: derived
         expr: "(base_date + timedelta(days=i)).month"
+        description: "Month number (1–12)."
       year:
         type: derived
         expr: "(base_date + timedelta(days=i)).year"
+        description: "Four-digit year."
       weekday:
         type: derived
         expr: "(base_date + timedelta(days=i)).strftime('%A')"
+        description: "Day of the week name."
 
   budgets:
     <<: *defaults
+    description: "Departmental budgets allocated per fiscal year."
     row_count: 15678
     domain: finance
     columns:
       budget_id:
         type: int
         range: [1,15678]
+        description: "Unique identifier for each budget entry."
       department:
         type: choice
         choices: ["Sales","Ops","Marketing","HR","Finance","Analytics"]
+        description: "Organizational unit receiving the budget."
       amount:
         type: float
         range: [10000,1000000]
         precision: 2
+        description: "Budget amount allocated."
       fiscal_year:
         type: int
         range: [2020,2025]
+        description: "Fiscal year for which the budget applies."
 
   ledgers:
     <<: *defaults
+    description: "General ledger entries tracking account balances."
     row_count: 18765
     domain: finance
     columns:
       ledger_id:
         type: int
         range: [1,18765]
+        description: "Unique ID for each ledger record."
       account:
         type: faker
         method: word
+        description: "Ledger account name or code."
       balance:
         type: float
         range: [-10000,1000000]
         precision: 2
+        description: "Current balance of the ledger account."
 
   orders:
     row_count: 10000
     domain: sales
+    description: "Fact table of customer orders, linking customers, stores, and pricing."
     columns:
       order_id:
         type: int
         range: [1, 10000]
+        description: "Unique identifier for each order."
       order_date:
         type: faker
         method: date_between
         args: ["-1y", "today"]
+        description: "Date when the order was placed."
       customer_id:
         type: int
         range: [1, 10000]
-      store_id:  # This was the missing column
+        description: "Foreign key to the customer who placed the order."
+      store_id:
         type: int
         range: [1, 100]
+        description: "Identifier of the store fulfilling the order."
       status:
         type: choice
         choices: ["Completed", "Pending", "Cancelled"]
         weights: [0.8, 0.15, 0.05]
+        description: "Current lifecycle status of the order."
       order_total:
         type: float
         range: [10.0, 1000.0]
         precision: 2
+        description: "Total monetary value of the order."
 
   warehouse_locations:
     row_count: 50
     domain: ops
+    description: "Lookup table of physical warehouse sites for inventory staging."
     columns:
-      warehouse_id:  # This was the missing column
+      warehouse_id:
         type: int
         range: [1, 50]
+        description: "Surrogate key for each warehouse."
       location_name:
         type: faker
         method: city
+        description: "Name of the city where the warehouse is located."
       address:
         type: faker
         method: street_address
+        description: "Street address of the warehouse facility."
       city:
         type: faker
         method: city
+        description: "City municipality of the warehouse."
       state:
         type: faker
         method: state_abbr
+        description: "State abbreviation for the warehouse location."
       zip_code:
         type: faker
         method: zipcode
+        description: "Postal code for the warehouse address."
       capacity:
         type: int
         range: [10000, 100000]
+        description: "Maximum storage capacity (in units) of the warehouse."
 
   invoices_finance:
     row_count: 20000
     domain: finance
+    description: "Financial invoices generated for customer orders, tracking billing status."
     columns:
       invoice_id:
         type: int
         range: [1, 20000]
+        description: "Unique identifier for each invoice."
       invoice_date:
         type: faker
         method: date_between
         args: ["-1y", "today"]
+        description: "Date when the invoice was issued."
       customer_id:
         type: int
         range: [1, 10000]
+        description: "Foreign key to the billed customer."
       order_id:
         type: int
         range: [1, 10000]
+        description: "Reference to the related sales order."
       amount:
         type: float
         range: [10.0, 5000.0]
         precision: 2
-      billing_cycle_id:  # This was the missing column
+        description: "Total amount billed on the invoice."
+      billing_cycle_id:
         type: int
         range: [1, 10]
+        description: "Identifier for the billing cycle used."
       status:
         type: choice
         choices: ["Paid", "Pending", "Overdue"]
         weights: [0.7, 0.2, 0.1]
-
+        description: "Payment status of the invoice."
   tax_records:
+    description: "Records of tax charges applied to customer invoices, including type, amount, and jurisdiction."
     row_count: 15000
     domain: finance
     columns:
       record_id:
         type: int
         range: [1, 15000]
-      invoice_id:  # This was the missing column
+        description: "Primary key for each tax record."
+      invoice_id:
         type: int
         range: [1, 20000]
+        description: "Identifier of the invoice to which the tax applies."
       tax_date:
         type: faker
         method: date_between
         args: ["-1y", "today"]
+        description: "Date on which the tax was assessed."
       tax_amount:
         type: float
         range: [1.0, 500.0]
         precision: 2
+        description: "Monetary value of the tax charged."
       tax_type:
         type: choice
         choices: ["Sales", "VAT", "Income", "Property"]
         weights: [0.5, 0.3, 0.1, 0.1]
+        description: "Category of tax applied."
       jurisdiction:
         type: faker
         method: state
+        description: "State or region governing the tax."
 
   financial_statements:
     <<: *defaults
+    description: "Summarized financial statements derived from ledger entries (income, balance sheet, cash flow)."
     row_count: 14234
     domain: finance
     columns:
       statement_id:
         type: int
         range: [1,14234]
+        description: "Unique identifier for each statement record."
       ledger_id:
         type: lookup
         reference: ledgers.ledger_id
+        description: "Foreign key to the ledger account summarized."
       statement_type:
         type: choice
         choices: ["Income","BalanceSheet","CashFlow"]
+        description: "Type of financial statement."
       amount:
         type: float
         range: [0,1000000]
         precision: 2
+        description: "Reported amount for this statement entry."
 
   accounts_receivable:
     <<: *defaults
+    description: "Amounts owed by customers for goods or services delivered."
     row_count: 16890
     domain: finance
     columns:
       ar_id:
         type: int
         range: [1,16890]
+        description: "Primary key for each accounts receivable record."
       customer_id:
         type: lookup
         reference: customers.customer_id
+        description: "Foreign key to the billed customer."
       amount_due:
         type: float
         range: [10.0,100000.0]
         precision: 2
+        description: "Outstanding balance owed by the customer."
 
   accounts_payable:
     <<: *defaults
+    description: "Amounts the company owes to its suppliers and vendors."
     row_count: 15234
     domain: finance
     columns:
       ap_id:
         type: int
         range: [1,15234]
+        description: "Primary key for each accounts payable record."
       vendor:
         type: faker
         method: company
+        description: "Name of the vendor or supplier."
       amount:
         type: float
         range: [10.0,200000.0]
         precision: 2
+        description: "Liability amount owed to the vendor."
 
   cost_centers:
     <<: *defaults
+    description: "Organizational units for tracking expenses and budgeting."
     row_count: 13456
     domain: finance
     columns:
       center_id:
         type: int
         range: [1,13456]
+        description: "Unique identifier for each cost center."
       center_name:
         type: faker
         method: word
+        description: "Name of the cost center (e.g., department or project)."
 
   profit_centers:
     <<: *defaults
+    description: "Units or divisions tracked for revenue and profitability analysis."
     row_count: 12345
     domain: finance
     columns:
       center_id:
         type: int
         range: [1,12345]
+        description: "Unique identifier for each profit center."
       center_name:
         type: faker
         method: word
+        description: "Name of the profit center (e.g., region or product line)."
 
   currency_rates:
     <<: *defaults
+    description: "Exchange rates for supported currencies against the base currency."
     row_count: 16789
     domain: finance
     columns:
       rate_id:
         type: int
         range: [1,16789]
+        description: "Unique identifier for each rate entry."
       currency:
         type: choice
         choices: ["USD","EUR","GBP","JPY","AUD"]
+        description: "Currency code for the exchange rate."
       rate:
         type: float
         range: [0.1,2.0]
         precision: 4
+        description: "Exchange rate value relative to the base currency."
 
   bank_reconciliations:
     <<: *defaults
+    description: "Matches company ledger entries against bank statements to identify discrepancies."
     row_count: 14532
     domain: finance
     columns:
       reconciliation_id:
         type: int
         range: [1,14532]
+        description: "Primary key for each reconciliation record."
       bank_account:
         type: faker
         method: bank_account
+        description: "Bank account number used in reconciliation."
       date:
         type: faker
         method: date_between
         args: ["-6mo","today"]
+        description: "Date when reconciliation was performed."
 
   credit_notes:
     <<: *defaults
+    description: "Documents issued to credit customer accounts, often to correct invoices."
     row_count: 13245
     domain: finance
     columns:
       credit_note_id:
         type: int
         range: [1,13245]
+        description: "Unique identifier for each credit note."
       invoice_id:
         type: lookup
         reference: invoices_finance.invoice_id
+        description: "Invoice being credited."
       amount:
         type: float
         range: [1.0,5000.0]
         precision: 2
+        description: "Credit amount applied to the invoice."
 
   payments_legacy:
     <<: *defaults
+    description: "Historical payment records from the legacy system prior to migration."
     row_count: 17654
     domain: finance
     columns:
       payment_id:
         type: int
         range: [1,17654]
+        description: "Primary key for each legacy payment record."
       old_invoice_ref:
         type: faker
         method: uuid4
+        description: "Legacy invoice identifier referenced in the old system."
       paid_date:
         type: faker
         method: date_between
         args: ["-2y","-1y"]
+        description: "Date when the legacy payment was made."
 
   ########################
   # ───── MARKETING ─────
   ########################
   campaigns:
     <<: *defaults
+    description: "High-level marketing campaigns with budget and scheduling details."
     row_count: 13245
     domain: marketing
     columns:
       campaign_id:
         type: int
         range: [1,13245]
+        description: "Unique identifier for each campaign."
       name:
         type: faker
         method: sentence
+        description: "Descriptive title of the marketing campaign."
       start_date:
         type: faker
         method: date_between
         args: ["-1y","today"]
+        description: "Launch date of the campaign."
       end_date:
         type: faker
         method: date_between
         args: ["today","+6mo"]
+        description: "Scheduled end date of the campaign."
       budget:
         type: float
         range: [1000.0,200000.0]
         precision: 2
+        description: "Total budget allocated for the campaign."
 
   ad_spend:
     <<: *defaults
+    description: "Daily advertising expenditures tied to specific campaigns."
     row_count: 15678
     domain: marketing
     columns:
       spend_id:
         type: int
         range: [1,15678]
+        description: "Primary key for each ad spend entry."
       campaign_id:
         type: lookup
         reference: campaigns.campaign_id
+        description: "Campaign associated with this ad spend."
       date:
         type: faker
         method: date_between
         args: ["-6mo","today"]
+        description: "Date on which the ad spend occurred."
       amount:
         type: float
         range: [10.0,50000.0]
         precision: 2
+        description: "Amount spent on advertising that day."
 
   social_media_metrics:
     <<: *defaults
+    description: "Engagement metrics from social platforms for marketing analysis."
     row_count: 17890
     domain: marketing
     columns:
       metric_id:
         type: int
         range: [1,17890]
+        description: "Unique identifier for each social metric record."
       platform:
         type: choice
         choices: ["facebook","twitter","instagram","linkedin"]
+        description: "Social media platform tracked."
       date:
         type: faker
         method: date_between
         args: ["-6mo","today"]
+        description: "Date of the metric capture."
       impressions:
         type: int
         range: [0,1000000]
+        description: "Number of times content was displayed."
       clicks:
         type: int
         range: [0,100000]
+        description: "Number of user clicks recorded."
 
   seo_keywords:
     <<: *defaults
+    description: "Search keywords tracked for SEO performance and difficulty."
     row_count: 10987
     domain: marketing
     columns:
       keyword_id:
         type: int
         range: [1,10987]
+        description: "Unique ID for each keyword record."
       keyword:
         type: faker
         method: word
+        description: "Search term being tracked."
       search_volume:
         type: int
         range: [0,100000]
+        description: "Estimated monthly search volume."
       difficulty:
         type: float
         range: [0.0, 1.0]
         precision: 2
+        description: "SEO difficulty score (0 = easy, 1 = very hard)."
 
   email_campaigns:
     <<: *defaults
+    description: "Records of email sends and engagement rates per marketing campaign."
     row_count: 19876
     domain: marketing
     columns:
       email_id:
         type: int
         range: [1,19876]
+        description: "Unique identifier for each email send."
       campaign_id:
         type: lookup
         reference: campaigns.campaign_id
+        description: "Campaign associated with the email."
       sent_date:
         type: faker
         method: date_between
         args: ["-6mo","today"]
+        description: "Date the email was dispatched."
       open_rate:
         type: float
         range: [0.0,1.0]
         precision: 2
+        description: "Fraction of recipients who opened the email."
 
   web_traffic:
     <<: *defaults
+    description: "Website visit logs capturing user navigation and session duration."
     row_count: 15643
     domain: marketing
     columns:
       visit_id:
         type: int
         range: [1,15643]
+        description: "Unique key for each web visit."
       page_url:
         type: faker
         method: uri
+        description: "URL of the page visited."
       visit_date:
         type: faker
         method: date_time_between
         args: ["-30d","today"]
+        description: "Timestamp of the visit."
       duration_seconds:
         type: int
         range: [0,3600]
+        description: "Length of the session in seconds."
 
   loyalty_programs:
     <<: *defaults
+    description: "Customer loyalty programs and membership tiers."
     row_count: 12345
     domain: marketing
     columns:
       program_id:
         type: int
         range: [1,12345]
+        description: "Unique identifier for each loyalty program."
       name:
         type: faker
         method: word
+        description: "Name of the loyalty program."
       start_date:
         type: faker
         method: date_between
         args: ["-1y","today"]
+        description: "Date the program became available."
       tier_levels:
         type: choice
         choices: ["Bronze","Silver","Gold","Platinum"]
+        description: "Available membership tiers."
 
   survey_responses:
     <<: *defaults
+    description: "Responses collected from customer surveys with satisfaction scores."
     row_count: 11234
     domain: marketing
     columns:
       response_id:
         type: int
         range: [1,11234]
+        description: "Primary key for each survey response."
       survey_id:
         type: int
         range: [1,100]
+        description: "Identifier of the survey template used."
       respondent:
         type: faker
         method: name
+        description: "Name of the person responding."
       response_date:
         type: faker
         method: date_between
         args: ["-1y","today"]
+        description: "Date the response was submitted."
       score:
         type: int
         range: [1,5]
+        description: "Numeric satisfaction rating."
 
   marketing_targets:
     <<: *defaults
+    description: "Monthly performance goals set for each campaign."
     row_count: 14567
     domain: marketing
     columns:
       target_id:
         type: int
         range: [1,14567]
+        description: "Unique identifier for each target record."
       campaign_id:
         type: lookup
         reference: campaigns.campaign_id
+        description: "Campaign tied to this target."
       month:
         type: derived
         expr: "random.randint(1,12)"
+        description: "Target month (1–12)."
       year:
         type: derived
         expr: "current_year"
+        description: "Target year."
       goal:
         type: float
         range: [1000.0,100000.0]
         precision: 2
+        description: "Monetary goal for the campaign in that period."
 
   customer_segments_marketing:
     <<: *defaults
+    description: "Defined customer segments for targeted marketing efforts."
     row_count: 13459
     domain: marketing
     columns:
       segment_id:
         type: int
         range: [1,13459]
+        description: "Unique ID for each customer segment."
       name:
         type: choice
         choices: ["value","growth","loyalty","engagement"]
+        description: "Label of the segment type."
       description:
         type: faker
         method: sentence
+        description: "Textual explanation of the segment criteria."
 
   ####################
   # ───── HR ─────
   ####################
   employees:
     <<: *defaults
+    description: "Master list of employees, their departments, and hire dates."
     row_count: 200
     domain: hr
     columns:
       employee_id:
         type: int
         range: [1,200]
+        description: "Unique identifier for each employee."
       first_name:
         type: faker
         method: first_name
+        description: "Employee’s given name."
       last_name:
         type: faker
         method: last_name
+        description: "Employee’s family name."
       hire_date:
         type: faker
         method: date_between
         args: ["-5y","today"]
+        description: "Date the employee was hired."
       department:
         type: choice
         choices: ["sales","ops","finance","marketing","hr"]
+        description: "Department to which the employee belongs."
 
   attendance_records:
     <<: *defaults
+    description: "Daily attendance status for each employee."
     row_count: 18987
     domain: hr
     columns:
       record_id:
         type: int
         range: [1,18987]
+        description: "Primary key for each attendance entry."
       employee_id:
         type: lookup
         reference: employees.employee_id
+        description: "Employee for whom attendance is recorded."
       date:
         type: faker
         method: date_between
         args: ["-1y","today"]
+        description: "Date of the attendance record."
       status:
         type: choice
         choices: ["present","absent","remote","leave"]
+        description: "Attendance status for that date."
 
   payroll:
     <<: *defaults
+    description: "Payroll transactions showing gross and net pay per employee."
     row_count: 10987
     domain: hr
     columns:
       payroll_id:
         type: int
         range: [1,10987]
+        description: "Unique pay run identifier."
       employee_id:
         type: lookup
         reference: employees.employee_id
+        description: "Employee receiving the pay."
       pay_date:
         type: faker
         method: date_between
         args: ["-1y","today"]
+        description: "Date the payment was issued."
       gross_amount:
         type: float
         range: [1000.0,20000.0]
         precision: 2
+        description: "Total earnings before deductions."
       net_amount:
         type: derived
         expr: "gross_amount * 0.8"
         precision: 2
+        description: "Take-home pay after deductions."
 
   benefits_enrollment:
     <<: *defaults
+    description: "Employee enrollments in benefit plans over time."
     row_count: 8456
     domain: hr
     columns:
       enrollment_id:
         type: int
         range: [1,8456]
+        description: "Unique identifier for each enrollment record."
       employee_id:
         type: lookup
         reference: employees.employee_id
+        description: "Employee enrolling in the benefit."
       plan_type:
         type: choice
         choices: ["health","dental","vision","retirement"]
+        description: "Type of benefit plan selected."
       start_date:
         type: faker
         method: date_between
         args: ["-5y","today"]
+        description: "Date enrollment became effective."
 
   performance_reviews:
     <<: *defaults
+    description: "Periodic performance evaluations for employees."
     row_count: 7654
     domain: hr
     columns:
       review_id:
         type: int
         range: [1,7654]
+        description: "Unique ID for each review."
       employee_id:
         type: lookup
         reference: employees.employee_id
+        description: "Employee being reviewed."
       review_date:
         type: faker
         method: date_between
         args: ["-1y","today"]
+        description: "Date the review took place."
       rating:
         type: int
         range: [1,5]
+        description: "Performance score assigned."
 
   training_sessions:
     <<: *defaults
+    description: "Records of training events and attendee details."
     row_count: 6543
     domain: hr
     columns:
       session_id:
         type: int
         range: [1,6543]
+        description: "Unique identifier for each session."
       topic:
         type: faker
         method: sentence
+        description: "Title or topic of the training."
       trainer:
         type: faker
         method: name
+        description: "Name of the session instructor."
       session_date:
         type: faker
         method: date_between
         args: ["-1y","today"]
+        description: "Date the session was held."
 
   recruitment_applications:
     <<: *defaults
+    description: "Job applications submitted by candidates."
     row_count: 5432
     domain: hr
     columns:
       application_id:
         type: int
         range: [1,5432]
+        description: "Unique key for each application."
       candidate_name:
         type: faker
         method: name
+        description: "Name of the job candidate."
       position:
         type: faker
         method: job
+        description: "Role applied for."
       application_date:
         type: faker
         method: date_between
         args: ["-1y","today"]
+        description: "Date the application was submitted."
 
   job_postings:
     <<: *defaults
+    description: "Open positions advertised to potential candidates."
     row_count: 4321
     domain: hr
     columns:
       posting_id:
         type: int
         range: [1,4321]
+        description: "Unique identifier for each job posting."
       position:
         type: faker
         method: job
+        description: "Title of the job opening."
       department:
         type: choice
         choices: ["sales","ops","finance","marketing","hr"]
+        description: "Department offering the position."
       post_date:
         type: faker
         method: date_between
         args: ["-1y","today"]
+        description: "Date the job was posted."
 
   org_chart:
     <<: *defaults
+    description: "Hierarchy relationships between managers and subordinates."
     row_count: 3210
     domain: hr
     columns:
       node_id:
         type: int
         range: [1,3210]
+        description: "Unique ID for each org chart entry."
       manager_id:
         type: lookup
         reference: employees.employee_id
+        description: "Employee ID of the manager."
       subordinate_id:
         type: lookup
         reference: employees.employee_id
+        description: "Employee ID of the subordinate."
 
   compensation_bands:
     <<: *defaults
+    description: "Salary range bands associated with different job titles."
     row_count: 2109
     domain: hr
     columns:
       band_id:
         type: int
         range: [1,2109]
+        description: "Unique identifier for each compensation band."
       title:
         type: faker
         method: job
+        description: "Job title associated with the band."
       min_salary:
         type: int
         range: [30000,60000]
+        description: "Minimum salary for the band."
       max_salary:
         type: int
         range: [60001,200000]
+        description: "Maximum salary for the band."
+#########################
+# ───── ANALYTICS ─────
+#########################
+dashboard_views:
+  <<: *defaults
+  description: "Records each time a user opens or refreshes a dashboard for reporting and auditing."
+  row_count: 98765
+  domain: analytics
+  columns:
+    view_id:
+      type: int
+      range: [1,98765]
+      description: "Unique identifier for each dashboard view event."
+    dashboard_name:
+      type: faker
+      method: word
+      description: "Name of the dashboard that was viewed."
+    user_id:
+      type: int
+      range: [1,10000]
+      description: "Identifier of the user who viewed the dashboard."
+    view_date:
+      type: faker
+      method: date_time_between
+      args: ["-30d","today"]
+      description: "Date and time when the dashboard view occurred."
 
-  #########################
-  # ───── ANALYTICS ─────
-  #########################
-  dashboard_views:
-    <<: *defaults
-    row_count: 98765
-    domain: analytics
-    columns:
-      view_id:
-        type: int
-        range: [1,98765]
-      dashboard_name:
-        type: faker
-        method: word
-      user_id:
-        type: int
-        range: [1,10000]
-      view_date:
-        type: faker
-        method: date_time_between
-        args: ["-30d","today"]
+kpi_definitions:
+  <<: *defaults
+  description: "Definitions of key performance indicators tracked across the business."
+  row_count: 87654
+  domain: analytics
+  columns:
+    kpi_id:
+      type: int
+      range: [1,87654]
+      description: "Unique identifier for each KPI definition."
+    name:
+      type: faker
+      method: word
+      description: "Descriptive name of the KPI."
+    target_value:
+      type: float
+      range: [0.0,100000.0]
+      precision: 2
+      description: "The target numeric value set for this KPI."
 
-  kpi_definitions:
-    <<: *defaults
-    row_count: 87654
-    domain: analytics
-    columns:
-      kpi_id:
-        type: int
-        range: [1,87654]
-      name:
-        type: faker
-        method: word
-      target_value:
-        type: float
-        range: [0.0,100000.0]
-        precision: 2
+event_logs:
+  <<: *defaults
+  description: "Low-level application or user events captured for audit and usage analysis."
+  row_count: 76543
+  domain: analytics
+  columns:
+    event_id:
+      type: int
+      range: [1,76543]
+      description: "Unique identifier for each logged event."
+    user_id:
+      type: int
+      range: [1,10000]
+      description: "Identifier of the user or system that generated the event."
+    event_type:
+      type: faker
+      method: word
+      description: "Categorical label for the type of event (e.g. click, error)."
+    timestamp:
+      type: faker
+      method: date_time_between
+      args: ["-1d","today"]
+      description: "Exact date and time when the event was recorded."
 
-  event_logs:
-    <<: *defaults
-    row_count: 76543
-    domain: analytics
-    columns:
-      event_id:
-        type: int
-        range: [1,76543]
-      user_id:
-        type: int
-        range: [1,10000]
-      event_type:
-        type: faker
-        method: word
-      timestamp:
-        type: faker
-        method: date_time_between
-        args: ["-1d","today"]
+session_data:
+  <<: *defaults
+  description: "Details of user sessions, from login to logout, for behavioral analysis."
+  row_count: 65432
+  domain: analytics
+  columns:
+    session_id:
+      type: int
+      range: [1,65432]
+      description: "Unique identifier for each user session."
+    user_id:
+      type: int
+      range: [1,10000]
+      description: "Identifier of the user in the session."
+    start_time:
+      type: faker
+      method: date_time_between
+      args: ["-1d","now"]
+      description: "Timestamp when the session began."
+    end_time:
+      type: faker
+      method: date_time_between
+      args: ["now","+1h"]
+      description: "Timestamp when the session ended."
 
-  session_data:
-    <<: *defaults
-    row_count: 65432
-    domain: analytics
-    columns:
-      session_id:
-        type: int
-        range: [1,65432]
-      user_id:
-        type: int
-        range: [1,10000]
-      start_time:
-        type: faker
-        method: date_time_between
-        args: ["-1d","now"]
-      end_time:
-        type: faker
-        method: date_time_between
-        args: ["now","+1h"]
+data_quality_metrics:
+  <<: *defaults
+  description: "Aggregated counts of data quality issues detected per table."
+  row_count: 54321
+  domain: analytics
+  columns:
+    metric_id:
+      type: int
+      range: [1,54321]
+      description: "Unique identifier for each quality metric entry."
+    table_name:
+      type: choice
+      choices: ["customers","orders","transactions","products","invoices"]
+      description: "Name of the table to which this metric applies."
+    issue_count:
+      type: int
+      range: [0,1000]
+      description: "Number of data issues found (e.g. nulls, outliers)."
 
-  data_quality_metrics:
-    <<: *defaults
-    row_count: 54321
-    domain: analytics
-    columns:
-      metric_id:
-        type: int
-        range: [1,54321]
-      table_name:
-        type: choice
-        choices: ["customers","orders","transactions","products","invoices"]
-      issue_count:
-        type: int
-        range: [0,1000]
+anomaly_detections:
+  <<: *defaults
+  description: "Records of specific anomalies detected in data pipelines or tables."
+  row_count: 43210
+  domain: analytics
+  columns:
+    detection_id:
+      type: int
+      range: [1,43210]
+      description: "Unique ID for each anomaly detection event."
+    metric_id:
+      type: lookup
+      reference: data_quality_metrics.metric_id
+      description: "Foreign key linking to the data quality metric that triggered this detection."
+    detected_at:
+      type: faker
+      method: date_time_between
+      args: ["-30d","today"]
+      description: "Timestamp when the anomaly was identified."
 
-  anomaly_detections:
-    <<: *defaults
-    row_count: 43210
-    domain: analytics
-    columns:
-      detection_id:
-        type: int
-        range: [1,43210]
-      metric_id:
-        type: lookup
-        reference: data_quality_metrics.metric_id
-      detected_at:
-        type: faker
-        method: date_time_between
-        args: ["-30d","today"]
+predictive_models:
+  <<: *defaults
+  description: "Catalog of machine learning models with performance metadata."
+  row_count: 32109
+  domain: analytics
+  columns:
+    model_id:
+      type: int
+      range: [1,32109]
+      description: "Unique identifier for each predictive model."
+    model_name:
+      type: faker
+      method: sentence
+      description: "Human-readable name or description of the model."
+    created_at:
+      type: faker
+      method: date_time_between
+      args: ["-1y","today"]
+      description: "Date when the model was trained or registered."
+    accuracy:
+      type: float
+      range: [0.0,1.0]
+      precision: 3
+      description: "Performance accuracy metric (e.g. AUC, F1) on validation data."
 
-  predictive_models:
-    <<: *defaults
-    row_count: 32109
-    domain: analytics
-    columns:
-      model_id:
-        type: int
-        range: [1,32109]
-      model_name:
-        type: faker
-        method: sentence
-      created_at:
-        type: faker
-        method: date_time_between
-        args: ["-1y","today"]
-      accuracy:
-        type: float
-        range: [0.0,1.0]
-        precision: 3
+segmentation_results:
+  <<: *defaults
+  description: "Outcomes of customer or market segmentation analyses tied to specific KPIs."
+  row_count: 21098
+  domain: analytics
+  columns:
+    segment_id:
+      type: int
+      range: [1,21098]
+      description: "Unique identifier for each segmentation result."
+    kpi_id:
+      type: lookup
+      reference: kpi_definitions.kpi_id
+      description: "Foreign key to the KPI used in the segmentation."
+    result_value:
+      type: float
+      range: [0.0,100000.0]
+      precision: 2
+      description: "Numeric value representing the segment’s performance on the KPI."
 
-  segmentation_results:
-    <<: *defaults
-    row_count: 21098
-    domain: analytics
-    columns:
-      segment_id:
-        type: int
-        range: [1,21098]
-      kpi_id:
-        type: lookup
-        reference: kpi_definitions.kpi_id
-      result_value:
-        type: float
-        range: [0.0,100000.0]
-        precision: 2
+trend_analysis:
+  <<: *defaults
+  description: "Detected trends over time for various data quality or performance metrics."
+  row_count: 10987
+  domain: analytics
+  columns:
+    analysis_id:
+      type: int
+      range: [1,10987]
+      description: "Unique ID for each trend analysis record."
+    metric_id:
+      type: lookup
+      reference: data_quality_metrics.metric_id
+      description: "Foreign key to the metric being trended."
+    period:
+      type: choice
+      choices: ["daily","weekly","monthly","yearly"]
+      description: "Time granularity of the trend analysis."
 
-  trend_analysis:
-    <<: *defaults
-    row_count: 10987
-    domain: analytics
-    columns:
-      analysis_id:
-        type: int
-        range: [1,10987]
-      metric_id:
-        type: lookup
-        reference: data_quality_metrics.metric_id
-      period:
-        type: choice
-        choices: ["daily","weekly","monthly","yearly"]
+report_configs:
+  <<: *defaults
+  description: "Saved report configurations and schedules for automated reporting."
+  row_count: 9876
+  domain: analytics
+  columns:
+    report_id:
+      type: int
+      range: [1,9876]
+      description: "Unique identifier for each report configuration."
+    report_name:
+      type: faker
+      method: word
+      description: "Name of the saved report."
+    created_by:
+      type: int
+      range: [1,10000]
+      description: "User ID of the person who created the report."
 
-  report_configs:
-    <<: *defaults
-    row_count: 9876
-    domain: analytics
-    columns:
-      report_id:
-        type: int
-        range: [1,9876]
-      report_name:
-        type: faker
-        method: word
-      created_by:
-        type: int
-        range: [1,10000]
+########################
+# ───── SUPPORT ─────
+########################
+tickets:
+  <<: *defaults
+  description: "Customer support tickets tracking issues and resolutions."
+  row_count: 45321
+  domain: support
+  columns:
+    ticket_id:
+      type: int
+      range: [1,45321]
+      description: "Unique identifier for each support ticket."
+    customer_id:
+      type: lookup
+      reference: customers.customer_id
+      description: "Foreign key to the customer who opened the ticket."
+    opened_at:
+      type: faker
+      method: date_time_between
+      args: ["-1y","today"]
+      description: "Timestamp when the ticket was created."
+    status:
+      type: choice
+      choices: ["open","closed","pending"]
+      description: "Current state of the ticket."
+    priority:
+      type: choice
+      choices: ["low","medium","high"]
+      description: "Urgency level assigned to the ticket."
 
-  ########################
-  # ───── SUPPORT ─────
-  ########################
-  tickets:
-    <<: *defaults
-    row_count: 45321
-    domain: support
-    columns:
-      ticket_id:
-        type: int
-        range: [1,45321]
-      customer_id:
-        type: lookup
-        reference: customers.customer_id
-      opened_at:
-        type: faker
-        method: date_time_between
-        args: ["-1y","today"]
-      status:
-        type: choice
-        choices: ["open","closed","pending"]
-      priority:
-        type: choice
-        choices: ["low","medium","high"]
+ticket_responses:
+  <<: *defaults
+  description: "Responses from support agents or automated systems to customer tickets."
+  row_count: 34210
+  domain: support
+  columns:
+    response_id:
+      type: int
+      range: [1,34210]
+      description: "Unique identifier for each response entry."
+    ticket_id:
+      type: lookup
+      reference: tickets.ticket_id
+      description: "Foreign key to the related support ticket."
+    responder:
+      type: faker
+      method: name
+      description: "Name of the agent or system that issued the response."
+    response_date:
+      type: faker
+      method: date_time_between
+      args: ["-30d","today"]
+      description: "Timestamp when the response was sent."
 
-  ticket_responses:
-    <<: *defaults
-    row_count: 34210
-    domain: support
-    columns:
-      response_id:
-        type: int
-        range: [1,34210]
-      ticket_id:
-        type: lookup
-        reference: tickets.ticket_id
-      responder:
-        type: faker
-        method: name
-      response_date:
-        type: faker
-        method: date_time_between
-        args: ["-30d","today"]
+chat_logs:
+  <<: *defaults
+  description: "Logged chat messages between customers and support agents."
+  row_count: 23109
+  domain: support
+  columns:
+    chat_id:
+      type: int
+      range: [1,23109]
+      description: "Unique identifier for each chat message."
+    customer_id:
+      type: lookup
+      reference: customers.customer_id
+      description: "Foreign key to the customer participant."
+    agent_id:
+      type: lookup
+      reference: support_agents.agent_id
+      description: "Foreign key to the support agent participant."
+    message:
+      type: faker
+      method: sentence
+      description: "Text content of the chat message."
+    timestamp:
+      type: faker
+      method: date_time_between
+      args: ["-7d","today"]
+      description: "Date and time the message was sent."
 
-  chat_logs:
-    <<: *defaults
-    row_count: 23109
-    domain: support
-    columns:
-      chat_id:
-        type: int
-        range: [1,23109]
-      customer_id:
-        type: lookup
-        reference: customers.customer_id
-      agent_id:
-        type: lookup
-        reference: support_agents.agent_id
-      message:
-        type: faker
-        method: sentence
-      timestamp:
-        type: faker
-        method: date_time_between
-        args: ["-7d","today"]
+call_records:
+  <<: *defaults
+  description: "Records of voice calls between customers and support agents."
+  row_count: 12098
+  domain: support
+  columns:
+    call_id:
+      type: int
+      range: [1,12098]
+      description: "Unique identifier for each call record."
+    ticket_id:
+      type: lookup
+      reference: tickets.ticket_id
+      description: "Foreign key to the support ticket associated with the call."
+    call_time:
+      type: faker
+      method: date_time_between
+      args: ["-30d","today"]
+      description: "Timestamp when the call took place."
+    duration_sec:
+      type: int
+      range: [0,7200]
+      description: "Length of the call in seconds."
 
-  call_records:
-    <<: *defaults
-    row_count: 12098
-    domain: support
-    columns:
-      call_id:
-        type: int
-        range: [1,12098]
-      ticket_id:
-        type: lookup
-        reference: tickets.ticket_id
-      call_time:
-        type: faker
-        method: date_time_between
-        args: ["-30d","today"]
-      duration_sec:
-        type: int
-        range: [0,7200]
+satisfaction_surveys:
+  <<: *defaults
+  description: "Customer feedback surveys completed after ticket resolution."
+  row_count: 10987
+  domain: support
+  columns:
+    survey_id:
+      type: int
+      range: [1,10987]
+      description: "Unique identifier for each survey response."
+    ticket_id:
+      type: lookup
+      reference: tickets.ticket_id
+      description: "Foreign key to the related support ticket."
+    score:
+      type: int
+      range: [1,5]
+      description: "Customer satisfaction rating (1=lowest, 5=highest)."
+    comments:
+      type: faker
+      method: sentence
+      description: "Free-text feedback from the customer."
 
-  satisfaction_surveys:
-    <<: *defaults
-    row_count: 10987
-    domain: support
-    columns:
-      survey_id:
-        type: int
-        range: [1,10987]
-      ticket_id:
-        type: lookup
-        reference: tickets.ticket_id
-      score:
-        type: int
-        range: [1,5]
-      comments:
-        type: faker
-        method: sentence
+escalations:
+  <<: *defaults
+  description: "Records when tickets are escalated to higher support levels."
+  row_count: 9876
+  domain: support
+  columns:
+    escalation_id:
+      type: int
+      range: [1,9876]
+      description: "Primary key for each escalation event."
+    ticket_id:
+      type: lookup
+      reference: tickets.ticket_id
+      description: "Foreign key to the escalated ticket."
+    escalated_to:
+      type: faker
+      method: name
+      description: "Name of the support agent or team handling the escalation."
+    date:
+      type: faker
+      method: date_between
+      args: ["-1y","today"]
+      description: "Date when the escalation occurred."
 
-  escalations:
-    <<: *defaults
-    row_count: 9876
-    domain: support
-    columns:
-      escalation_id:
-        type: int
-        range: [1,9876]
-      ticket_id:
-        type: lookup
-        reference: tickets.ticket_id
-      escalated_to:
-        type: faker
-        method: name
-      date:
-        type: faker
-        method: date_between
-        args: ["-1y","today"]
+knowledge_base_articles:
+  <<: *defaults
+  description: "Articles in the self-service knowledge base for common issues."
+  row_count: 8765
+  domain: support
+  columns:
+    article_id:
+      type: int
+      range: [1,8765]
+      description: "Unique identifier for each article."
+    title:
+      type: faker
+      method: sentence
+      description: "Headline or title of the knowledge base article."
+    created_at:
+      type: faker
+      method: date_between
+      args: ["-1y","today"]
+      description: "Date the article was published."
+    content:
+      type: faker
+      method: paragraph
+      description: "Body text explaining the solution or guidance."
 
-  knowledge_base_articles:
-    <<: *defaults
-    row_count: 8765
-    domain: support
-    columns:
-      article_id:
-        type: int
-        range: [1,8765]
-      title:
-        type: faker
-        method: sentence
-      created_at:
-        type: faker
-        method: date_between
-        args: ["-1y","today"]
-      content:
-        type: faker
-        method: paragraph
+support_agents:
+  <<: *defaults
+  description: "Profiles of customer support staff handling tickets and chats."
+  row_count: 7654
+  domain: support
+  columns:
+    agent_id:
+      type: int
+      range: [1,7654]
+      description: "Unique identifier for each support agent."
+    name:
+      type: faker
+      method: name
+      description: "Full name of the support agent."
+    email:
+      type: faker
+      method: email
+      description: "Agent’s official email address."
 
-  support_agents:
-    <<: *defaults
-    row_count: 7654
-    domain: support
-    columns:
-      agent_id:
-        type: int
-        range: [1,7654]
-      name:
-        type: faker
-        method: name
-      email:
-        type: faker
-        method: email
+faq_hits:
+  <<: *defaults
+  description: "Counts of how often FAQ articles are accessed by users."
+  row_count: 6543
+  domain: support
+  columns:
+    hit_id:
+      type: int
+      range: [1,6543]
+      description: "Unique record ID for each FAQ access."
+    article_id:
+      type: lookup
+      reference: knowledge_base_articles.article_id
+      description: "Foreign key to the FAQ article viewed."
+    hit_date:
+      type: faker
+      method: date_between
+      args: ["-1y","today"]
+      description: "Date when the FAQ was accessed."
 
-  faq_hits:
-    <<: *defaults
-    row_count: 6543
-    domain: support
-    columns:
-      hit_id:
-        type: int
-        range: [1,6543]
-      article_id:
-        type: lookup
-        reference: knowledge_base_articles.article_id
-      hit_date:
-        type: faker
-        method: date_between
-        args: ["-1y","today"]
+resolution_times:
+  <<: *defaults
+  description: "Metrics tracking how long tickets take to resolve."
+  row_count: 5432
+  domain: support
+  columns:
+    record_id:
+      type: int
+      range: [1,5432]
+      description: "Primary key for each resolution time record."
+    ticket_id:
+      type: lookup
+      reference: tickets.ticket_id
+      description: "Foreign key to the resolved ticket."
+    resolution_seconds:
+      type: int
+      range: [0,86400]
+      description: "Time taken to resolve the ticket, in seconds."
 
-  resolution_times:
-    <<: *defaults
-    row_count: 5432
-    domain: support
-    columns:
-      record_id:
-        type: int
-        range: [1,5432]
-      ticket_id:
-        type: lookup
-        reference: tickets.ticket_id
-      resolution_seconds:
-        type: int
-        range: [0,86400]
 
 
 # ───────────────────────────────────────────────────────────
